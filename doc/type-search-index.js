@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"de.fherfurt.fetcher","l":"Message.Builder"},{"p":"de.fherfurt.fetcher","l":"Main"},{"p":"de.fherfurt.fetcher","l":"Message"},{"p":"de.fherfurt.fetcher","l":"MessageTest"}];updateSearchResults();
