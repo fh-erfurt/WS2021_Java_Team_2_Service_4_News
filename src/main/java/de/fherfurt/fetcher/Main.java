@@ -32,12 +32,6 @@ public class Main {
 
         JSONArray messages = jsonMessages.getJSONArray("Messages");
 
-        messages.forEach(item -> {
-                    Message message = JsonMessageParser.parseSingleMessage((JSONObject) item);
-
-                    System.out.println(message);
-                });
-
         Feed feed = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/916640084823011378/news.json"));
         feed.fetch();
         feed.buildFeed();

@@ -12,6 +12,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Optional;
 
 public class JsonMessageParser {
     private String author;
@@ -71,16 +72,16 @@ public class JsonMessageParser {
         }
     }
 
-    public static Message parseSingleMessage(JSONObject jsonObject) {
+    public static Optional<Message> parseSingleMessage(JSONObject jsonObject) {
         if (!jsonObject.has("author") || !jsonObject.has("title") ||!jsonObject.has("content")) {
-            return null;
+            return Optional.empty();
         } else {
             String author = jsonObject.getString("author");
             String title = jsonObject.getString("title");
             String content = jsonObject.getString("content");
 
             if (Objects.equals(author, "") || Objects.equals(title, "") || Objects.equals(content, "")) {
-                return null;
+                return Optional.empty();
             }
 
             String description = jsonObject.has("description") ? jsonObject.getString("description") : "Unknown";
@@ -99,7 +100,7 @@ public class JsonMessageParser {
 
             LocalDateTime appointmentLocalDateTime = LocalDateTime.parse(appointmentDateTime, dateTimeFormatter);
 
-            return new Message(
+            return Optional.of(new Message(
                     author,
                     title,
                     description,
@@ -109,7 +110,7 @@ public class JsonMessageParser {
                     content,
                     topic,
                     appointmentName,
-                    appointmentLocalDateTime);
+                    appointmentLocalDateTime));
         }
     }
 }

@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Optional;
 
 public class Feed {
     List<Message> entries = new ArrayList<Message>();
@@ -42,9 +43,9 @@ public class Feed {
         JSONArray messages = jsonObject.getJSONArray("Messages");
 
         messages.forEach(item-> {
-            Message message = JsonMessageParser.parseSingleMessage((JSONObject) item);
+            Optional<Message> message = JsonMessageParser.parseSingleMessage((JSONObject) item);
 
-            entries.add(message);
+            message.ifPresent(value -> entries.add(value));
         });
 
         System.out.println(entries.size());
