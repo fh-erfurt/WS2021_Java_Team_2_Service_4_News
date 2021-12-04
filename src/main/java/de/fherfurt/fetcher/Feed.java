@@ -12,23 +12,15 @@ public class Feed {
     final List<Message> entries = new ArrayList<Message>();
 
     public Feed(URL url) {
-        
+
+
+
     }
 
+
+
     public Feed(JSONObject jsonObject) {
-        if (jsonObject.has("Messages")) {
-            JSONArray messages = jsonObject.getJSONArray("Messages");
 
-            messages.forEach(item -> {
-                JsonMessageParser jsonMessageParser = new JsonMessageParser((JSONObject) item);
-
-                Message message = jsonMessageParser.constructMessage();
-
-                entries.add(message);
-            });
-        } else {
-            System.out.println("Could not parse Messages!");
-        }
     }
 
     public void print() {

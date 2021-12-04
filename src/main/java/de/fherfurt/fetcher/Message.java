@@ -1,15 +1,7 @@
 package de.fherfurt.fetcher;
 
-import netscape.javascript.JSObject;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.lang.reflect.Array;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 
 // Person getPersonByName(String name)
@@ -20,8 +12,7 @@ import java.util.Objects;
  * @author Benjamin Ehnes
  */
 public class Message {
-    private String author;
-    private String source;
+    private String author;  // Interface?! // String oder Id?!
     private String title;
     private String description;
     private String url;
@@ -29,39 +20,57 @@ public class Message {
     private LocalDateTime publishedAt;
     private String content;
 
-    private ArrayList<String> tags;
-    private ArrayList<Faculty> faculties;
+    private String topic;
+    private ArrayList<Faculty> faculties;   // Interface?!
 
-    private String appointmentName;
+    private String appointmentName;     // AppointmentService: createAppointment(String name, LocalDateTime appointDateTime);
     private LocalDateTime appointmentDateTime;
 
-    public Message(String source,
+    public Message(String author,
                    String title,
                    String description,
                    String url,
                    String urlToImage,
                    LocalDateTime publishedAt,
                    String content,
-                   ArrayList<String> tags,
+                   String topic,
                    ArrayList<Faculty> faculties,
                    String appointmentName,
                    LocalDateTime appointmentDateTime) {
-        this.source = source;
+        this.author = author;
         this.title = title;
         this.description = description;
         this.url = url;
         this.urlToImage = urlToImage;
         this.publishedAt = publishedAt;
         this.content = content;
-        this.tags = tags;
+        this.topic = topic;
         this.faculties = faculties;
         this.appointmentName = appointmentName;
         this.appointmentDateTime = appointmentDateTime;
     }
 
-    public Message(String author, String title) {
+    public Message(String author,
+                   String title,
+                   String description,
+                   String url,
+                   String urlToImage,
+                   LocalDateTime publishedAt,
+                   String content,
+                   String topic,
+                   String appointmentName,
+                   LocalDateTime appointmentDateTime
+                   ) {
         this.author = author;
         this.title = title;
+        this.description = description;
+        this.url = url;
+        this.urlToImage = urlToImage;
+        this.publishedAt = publishedAt;
+        this.content = content;
+        this.topic = topic;
+        this.appointmentName = appointmentName;
+        this.appointmentDateTime = appointmentDateTime;
     }
 
     public String getAuthor() {
@@ -70,14 +79,6 @@ public class Message {
 
     public void setAuthor(String author) {
         this.author = author;
-    }
-
-    public String getSource() {
-        return source;
-    }
-
-    public void setSource(String source) {
-        this.source = source;
     }
 
     public String getTitle() {
@@ -128,12 +129,12 @@ public class Message {
         this.content = content;
     }
 
-    public ArrayList<String> getTags() {
-        return tags;
+    public String getTopic() {
+        return topic;
     }
 
-    public void setTags(ArrayList<String> tags) {
-        this.tags = tags;
+    public void setTopic(String topic) {
+        this.topic = topic;
     }
 
     public ArrayList<Faculty> getFaculties() {
@@ -162,7 +163,19 @@ public class Message {
 
     @Override
     public String toString() {
-        return "Author: " + author + "Title: " + title;
+        return "Message{" +
+                "author: '" + author + '\'' +
+                ", title: '" + title + '\'' +
+                ", description: '" + description + '\'' +
+                ", url: '" + url + '\'' +
+                ", urlToImage='" + urlToImage + '\'' +
+                ", publishedAt=" + publishedAt.toString() +
+                ", content='" + content + '\'' +
+                ", topic='" + topic + '\'' +
+                ", faculties=" + faculties +
+                ", appointmentName='" + appointmentName + '\'' +
+                ", appointmentDateTime=" + appointmentDateTime.toString() +
+                '}';
     }
 
     @Override
@@ -171,14 +184,13 @@ public class Message {
         if (o == null || getClass() != o.getClass()) return false;
         Message message = (Message) o;
         return Objects.equals(author, message.author)
-                && Objects.equals(source, message.source)
                 && Objects.equals(title, message.title)
                 && Objects.equals(description, message.description)
                 && Objects.equals(url, message.url)
                 && Objects.equals(urlToImage, message.urlToImage)
                 && Objects.equals(publishedAt, message.publishedAt)
                 && Objects.equals(content, message.content)
-                && Objects.equals(tags, message.tags)
+                && Objects.equals(topic, message.topic)
                 && Objects.equals(faculties, message.faculties)
                 && Objects.equals(appointmentName, message.appointmentName)
                 && Objects.equals(appointmentDateTime, message.appointmentDateTime);
@@ -188,14 +200,13 @@ public class Message {
     public int hashCode() {
         return Objects.hash(
                 author,
-                source,
                 title,
                 description,
                 url,
                 urlToImage,
                 publishedAt,
                 content,
-                tags,
+                topic,
                 faculties,
                 appointmentName,
                 appointmentDateTime);
