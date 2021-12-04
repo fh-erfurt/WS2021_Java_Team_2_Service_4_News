@@ -37,6 +37,13 @@ public class Main {
 
                     System.out.println(message);
                 });
+
+        Feed feed = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/916640084823011378/news.json"));
+        feed.fetch();
+        feed.buildFeed();
+
+
+
         /*
         JSONObject jsonMessages = new JSONObject(jsonContent);
 
@@ -44,7 +51,6 @@ public class Main {
 
         Feed feed = new Feed(jsonMessages);
 
-        feed.print();
 
         feed.printHashCodes();
 
