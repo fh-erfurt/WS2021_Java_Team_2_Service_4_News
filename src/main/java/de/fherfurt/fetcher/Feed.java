@@ -43,6 +43,8 @@ public class Feed {
         JSONArray messages = jsonObject.getJSONArray("Messages");
 
         messages.forEach(item-> {
+            System.out.println("Trying to parse Message");
+
             Optional<Message> message = JsonMessageParser.parseSingleMessage((JSONObject) item);
 
             message.ifPresent(value -> entries.add(value));

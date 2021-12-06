@@ -2,6 +2,7 @@ package de.fherfurt.fetcher;
 
 import org.json.JSONObject;
 
+import javax.swing.text.html.Option;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -42,7 +43,7 @@ public class JsonMessageParser {
                 stringBuilder.append(line).append(System.lineSeparator());
             }
         } finally {
-             inputStream.close();
+            inputStream.close();
         }
 
         String content = stringBuilder.toString();
@@ -58,7 +59,7 @@ public class JsonMessageParser {
         FAILED_TO_PARSE_NECESSARY_FIELD
     }
 
-    public static boolean hasValidDateTimeFormat(String format, String value) {
+    public static boolean hasValidDateTimeFormat(String value) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
         try {
@@ -67,50 +68,81 @@ public class JsonMessageParser {
             String result = localDateTime.format(dateTimeFormatter);
 
             return result.equals(value);
-        } catch(DateTimeParseException exception) {
+        } catch (DateTimeParseException exception) {
             return false;
         }
     }
 
+    public static Optional<LocalDateTime> convertStringToOptionalLocalDateTime(String value) {
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        try {
+            LocalDateTime localDateTime = LocalDateTime.parse(value, dateTimeFormatter);
+
+            return Optional.of(localDateTime);
+        } catch (DateTimeParseException exception) {
+            return Optional.empty();
+        }
+    }
+
+    /**
+     * Function extracts all necessary fields from a JSON-file and builds a Message.
+     *
+     * @param jsonObject Represents an Object extracted from a JSON-file
+     * @return Returns an Optional of Message. If properly parsed contains a value
+     */
     public static Optional<Message> parseSingleMessage(JSONObject jsonObject) {
-        if (!jsonObject.has("author") || !jsonObject.has("title") ||!jsonObject.has("content")) {
+        // necessary objects
+        if (!jsonObject.has("author") || !jsonObject.has("title") || !jsonObject.has("content") || !jsonObject.has("publishedAt")) {
+            // if not present, return an empty
             return Optional.empty();
         } else {
+            // extract necessary objects
             String author = jsonObject.getString("author");
             String title = jsonObject.getString("title");
             String content = jsonObject.getString("content");
 
+            // if not properly present, return an empty
             if (Objects.equals(author, "") || Objects.equals(title, "") || Objects.equals(content, "")) {
                 return Optional.empty();
             }
 
+            // extract other fields // if not present, default them to "Unknown"
             String description = jsonObject.has("description") ? jsonObject.getString("description") : "Unknown";
             String url = jsonObject.has("url") ? jsonObject.getString("url") : "Unknown";
             String urlToImage = jsonObject.has("urlToImage") ? jsonObject.getString("urlToImage") : "Unknown";
 
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-            String publishedAt = jsonObject.has("publishedAt") ? jsonObject.getString("publishedAt") : "Unknown";   // LocalDateTime
+            String publishedAt = jsonObject.has("publishedAt") ? jsonObject.getString("publishedAt") : "INVALID";   // LocalDateTime
 
+            // if the publishedAt-Date is not in valid format we return an empty
+            if (!hasValidDateTimeFormat(publishedAt)) {
+                return Optional.empty();
+            }
+            
             LocalDateTime publishedAtLocalDateTime = LocalDateTime.parse(publishedAt, dateTimeFormatter);
 
             String topic = jsonObject.has("topic") ? jsonObject.getString("topic") : "Unknown";
             String appointmentName = jsonObject.has("appointmentName") ? jsonObject.getString("appointmentName") : "Unknown";
             String appointmentDateTime = jsonObject.has("appointmentDateTime") ? jsonObject.getString("appointmentDateTime") : "0000-00-00 00:00";
 
-            LocalDateTime appointmentLocalDateTime = LocalDateTime.parse(appointmentDateTime, dateTimeFormatter);
+            Optional<LocalDateTime> appointmentLocalDateTime = convertStringToOptionalLocalDateTime(appointmentDateTime);
 
-            return Optional.of(new Message(
-                    author,
-                    title,
-                    description,
-                    url,
-                    urlToImage,
-                    publishedAtLocalDateTime,
-                    content,
-                    topic,
-                    appointmentName,
-                    appointmentLocalDateTime));
+            // return new Optional with value
+            return Optional.of(
+                    new Message(
+                            author,
+                            title,
+                            description,
+                            url,
+                            urlToImage,
+                            publishedAtLocalDateTime,
+                            content,
+                            topic,
+                            appointmentName,
+                            appointmentLocalDateTime)
+            );
         }
     }
 }

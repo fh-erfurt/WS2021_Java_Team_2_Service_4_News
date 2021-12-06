@@ -3,6 +3,7 @@ package de.fherfurt.fetcher;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Objects;
+import java.util.Optional;
 
 // Person getPersonByName(String name)
 
@@ -24,7 +25,7 @@ public class Message {
     private ArrayList<Faculty> faculties;   // Interface?!
 
     private String appointmentName;     // AppointmentService: createAppointment(String name, LocalDateTime appointDateTime);
-    private LocalDateTime appointmentDateTime;
+    private Optional<LocalDateTime> appointmentDateTime;
 
     public Message(String author,
                    String title,
@@ -47,7 +48,7 @@ public class Message {
         this.topic = topic;
         this.faculties = faculties;
         this.appointmentName = appointmentName;
-        this.appointmentDateTime = appointmentDateTime;
+        this.appointmentDateTime = Optional.of(appointmentDateTime);
     }
 
     public Message(String author,
@@ -60,7 +61,7 @@ public class Message {
                    String topic,
                    String appointmentName,
                    LocalDateTime appointmentDateTime
-                   ) {
+    ) {
         this.author = author;
         this.title = title;
         this.description = description;
@@ -70,7 +71,29 @@ public class Message {
         this.content = content;
         this.topic = topic;
         this.appointmentName = appointmentName;
-        this.appointmentDateTime = appointmentDateTime;
+        this.appointmentDateTime = Optional.of(appointmentDateTime);
+    }
+
+    public Message(String author,
+                   String title,
+                   String description,
+                   String url,
+                   String urlToImage,
+                   LocalDateTime publishedAtLocalDateTime,
+                   String content,
+                   String topic,
+                   String appointmentName,
+                   Optional<LocalDateTime> appointmentLocalDateTime) {
+        this.author = author;
+        this.title = title;
+        this.description = description;
+        this.url = url;
+        this.urlToImage = urlToImage;
+        this.publishedAt = publishedAtLocalDateTime;
+        this.content = content;
+        this.topic = topic;
+        this.appointmentName = appointmentName;
+        this.appointmentDateTime = appointmentLocalDateTime;
     }
 
     public String getAuthor() {
@@ -153,12 +176,16 @@ public class Message {
         this.appointmentName = appointmentName;
     }
 
-    public LocalDateTime getAppointmentDateTime() {
+    public Optional<LocalDateTime> getAppointmentDateTime() {
         return appointmentDateTime;
     }
 
-    public void setAppointmentDateTime(LocalDateTime appointmentDateTime) {
+    public void setAppointmentDateTime(Optional<LocalDateTime> appointmentDateTime) {
         this.appointmentDateTime = appointmentDateTime;
+    }
+
+    public boolean hasAppointmentAssociated() {
+        return this.appointmentDateTime.isPresent();
     }
 
     @Override

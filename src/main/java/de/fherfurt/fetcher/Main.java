@@ -32,7 +32,7 @@ public class Main {
 
         JSONArray messages = jsonMessages.getJSONArray("Messages");
 
-        Feed feed = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/916640084823011378/news.json"));
+        Feed feed = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/916683041127141386/news.json"));
         feed.fetch();
         feed.buildFeed();
 
