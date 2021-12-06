@@ -26,7 +26,7 @@ public class Feed {
         String line;
 
         InputStream inputStream = url.openStream();
-
+        
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             while ((line = reader.readLine()) != null) {
@@ -38,22 +38,14 @@ public class Feed {
 
         String content = stringBuilder.toString();
 
+        // json file could fail
         JSONObject jsonObject = new JSONObject(content);
 
-        JSONArray messages = jsonObject.getJSONArray("Messages");
-
-        messages.forEach(item-> {
-            System.out.println("Trying to parse Message");
-
-            Optional<Message> message = JsonMessageParser.parseSingleMessage((JSONObject) item);
-
-            message.ifPresent(value -> entries.add(value));
-        });
-
-        System.out.println(entries.size());
+        entries = JsonMessageParser.parseJsonFile(jsonObject);
     }
 
     public void buildFeed() {
         System.out.println(entries);
     }
 }
+

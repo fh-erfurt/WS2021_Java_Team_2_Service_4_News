@@ -180,8 +180,8 @@ public class Message {
         return appointmentDateTime;
     }
 
-    public void setAppointmentDateTime(Optional<LocalDateTime> appointmentDateTime) {
-        this.appointmentDateTime = appointmentDateTime;
+    public void setAppointmentDateTime(LocalDateTime appointmentDateTime) {
+        this.appointmentDateTime = Optional.of(appointmentDateTime);
     }
 
     public boolean hasAppointmentAssociated() {

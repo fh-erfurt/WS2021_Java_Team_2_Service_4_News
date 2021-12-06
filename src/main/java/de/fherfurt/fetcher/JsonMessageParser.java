@@ -1,5 +1,6 @@
 package de.fherfurt.fetcher;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 import javax.swing.text.html.Option;
@@ -7,6 +8,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.lang.reflect.Array;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -144,5 +146,42 @@ public class JsonMessageParser {
                             appointmentLocalDateTime)
             );
         }
+    }
+
+    /**
+     *
+     *
+     * @param messageArray
+     * @return
+     *
+     * author: Antonia Geschke
+     */
+    public static ArrayList<Message> parseMessages(JSONArray messageArray) {
+        ArrayList<Message> messages = new ArrayList<Message>();
+
+        if (messageArray != null) {
+            messageArray.forEach((item)->{
+                Optional<Message> message = JsonMessageParser.parseSingleMessage((JSONObject)item);
+                message.ifPresent((value) -> {
+                    messages.add(value);
+                });
+            });
+        }
+
+        return messages;
+    }
+
+    public static ArrayList<Message> parseJsonFile(JSONObject jsonFile) {
+        ArrayList<Message> messages = new ArrayList<Message>();
+
+        if (jsonFile.has("Messages")) {
+            JSONArray jsonMessages = jsonFile.getJSONArray("Messages");
+
+            ArrayList<Message> extractedMessages = parseMessages(jsonMessages);
+
+            messages.addAll(extractedMessages);
+        }
+
+        return messages;
     }
 }

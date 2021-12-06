@@ -1,4 +1,5 @@
 {
+  "status": "done",
   "Messages": [
     {
       "author": "Max Müller",
@@ -11,17 +12,6 @@
       "topic": "Veranstaltungen",
       "appointmentName": "Tag der Mobilität",
       "appointmentDateTime": "2022-07-30 10:30"
-    },
-    {
-      "author": "Max Müller",
-      "title": "Tolle Neuigkeiten",
-      "description": "Wir haben tolle Neuigkeiten",
-      "url": "https://www.fh-erfurt.de/news/detailansicht/fh-erfurt-macht-mobil",
-      "urlToImage": "https://www.fh-erfurt.de/news/detailansicht/fh-erfurt-macht-mobil",
-      "content": "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.",
-      "topic": "Veranstaltungen",
-      "appointmentName": "Tag der Mobilität",
-      "appointmentDateTime": "NON_VALID"
     }
   ]
 }
