@@ -15,7 +15,7 @@ import java.util.Optional;
 
 public class Feed {
     List<Message> entries = new ArrayList<Message>();
-    URL url = null;
+    URL url;
 
     public Feed(URL url) {
         this.url = url;
@@ -41,11 +41,15 @@ public class Feed {
         // json file could fail
         JSONObject jsonObject = new JSONObject(content);
 
-        entries = JsonMessageParser.parseJsonFile(jsonObject);
+        List<Message> messages = JsonMessageParser.parseJsonFile(jsonObject);
+
+        entries = Filter.filterMessageByAuthor(messages, "Max Müller");
     }
 
     public void buildFeed() {
         System.out.println(entries);
     }
+
+    public void sortByDate() { Sort.sortByDateAsc(entries); }
 }
 

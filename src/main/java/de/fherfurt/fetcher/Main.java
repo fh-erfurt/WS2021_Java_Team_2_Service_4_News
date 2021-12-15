@@ -36,6 +36,13 @@ public class Main {
         feed.fetch();
         feed.buildFeed();
 
+        Feed feed2 = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/920660153483800586/messages.json"));
+        feed2.fetch();
+        feed2.buildFeed();
+
+        feed2.sortByDate();
+        feed2.buildFeed();
+
 
 
         /*
