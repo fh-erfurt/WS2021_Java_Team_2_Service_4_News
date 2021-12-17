@@ -25,76 +25,9 @@ public class Message {
     private ArrayList<Faculty> faculties;   // Interface?!
 
     private String appointmentName;     // AppointmentService: createAppointment(String name, LocalDateTime appointDateTime);
-    private Optional<LocalDateTime> appointmentDateTime;
+    private LocalDateTime appointmentDateTime;
 
-    public Message(String author,
-                   String title,
-                   String description,
-                   String url,
-                   String urlToImage,
-                   LocalDateTime publishedAt,
-                   String content,
-                   String topic,
-                   ArrayList<Faculty> faculties,
-                   String appointmentName,
-                   LocalDateTime appointmentDateTime) {
-        this.author = author;
-        this.title = title;
-        this.description = description;
-        this.url = url;
-        this.urlToImage = urlToImage;
-        this.publishedAt = publishedAt;
-        this.content = content;
-        this.topic = topic;
-        this.faculties = faculties;
-        this.appointmentName = appointmentName;
-        this.appointmentDateTime = Optional.of(appointmentDateTime);
-    }
-
-    public Message(String author,
-                   String title,
-                   String description,
-                   String url,
-                   String urlToImage,
-                   LocalDateTime publishedAt,
-                   String content,
-                   String topic,
-                   String appointmentName,
-                   LocalDateTime appointmentDateTime
-    ) {
-        this.author = author;
-        this.title = title;
-        this.description = description;
-        this.url = url;
-        this.urlToImage = urlToImage;
-        this.publishedAt = publishedAt;
-        this.content = content;
-        this.topic = topic;
-        this.appointmentName = appointmentName;
-        this.appointmentDateTime = Optional.of(appointmentDateTime);
-    }
-
-    public Message(String author,
-                   String title,
-                   String description,
-                   String url,
-                   String urlToImage,
-                   LocalDateTime publishedAtLocalDateTime,
-                   String content,
-                   String topic,
-                   String appointmentName,
-                   Optional<LocalDateTime> appointmentLocalDateTime) {
-        this.author = author;
-        this.title = title;
-        this.description = description;
-        this.url = url;
-        this.urlToImage = urlToImage;
-        this.publishedAt = publishedAtLocalDateTime;
-        this.content = content;
-        this.topic = topic;
-        this.appointmentName = appointmentName;
-        this.appointmentDateTime = appointmentLocalDateTime;
-    }
+    public boolean hasAuthor(String author) { return this.author.equals(author); }
 
     public String getAuthor() {
         return author;
@@ -176,16 +109,29 @@ public class Message {
         this.appointmentName = appointmentName;
     }
 
-    public Optional<LocalDateTime> getAppointmentDateTime() {
+    public LocalDateTime getAppointmentDateTime() {
         return appointmentDateTime;
     }
 
     public void setAppointmentDateTime(LocalDateTime appointmentDateTime) {
-        this.appointmentDateTime = Optional.of(appointmentDateTime);
+        this.appointmentDateTime = appointmentDateTime;
+    }
+
+    public Message(String author, String title, String description, String url, String urlToImage, LocalDateTime publishedAt, String content, String topic, String appointmentName, LocalDateTime appointmentDateTime) {
+        this.author = author;
+        this.title = title;
+        this.description = description;
+        this.url = url;
+        this.urlToImage = urlToImage;
+        this.publishedAt = publishedAt;
+        this.content = content;
+        this.topic = topic;
+        this.appointmentName = appointmentName;
+        this.appointmentDateTime = appointmentDateTime;
     }
 
     public boolean hasAppointmentAssociated() {
-        return this.appointmentDateTime.isPresent();
+        return this.appointmentDateTime!=null;
     }
 
     @Override
@@ -218,7 +164,7 @@ public class Message {
                 && Objects.equals(publishedAt, message.publishedAt)
                 && Objects.equals(content, message.content)
                 && Objects.equals(topic, message.topic)
-                && Objects.equals(faculties, message.faculties)
+                //&& Objects.equals(faculties, message.faculties)
                 && Objects.equals(appointmentName, message.appointmentName)
                 && Objects.equals(appointmentDateTime, message.appointmentDateTime);
     }

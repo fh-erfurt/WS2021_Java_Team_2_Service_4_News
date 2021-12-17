@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
@@ -129,21 +130,11 @@ public class JsonMessageParser {
             String appointmentName = jsonObject.has("appointmentName") ? jsonObject.getString("appointmentName") : "Unknown";
             String appointmentDateTime = jsonObject.has("appointmentDateTime") ? jsonObject.getString("appointmentDateTime") : "0000-00-00 00:00";
 
-            Optional<LocalDateTime> appointmentLocalDateTime = convertStringToOptionalLocalDateTime(appointmentDateTime);
+            LocalDateTime appointmentLocalDateTime = LocalDateTime.parse(appointmentDateTime,dateTimeFormatter);
 
             // return new Optional with value
             return Optional.of(
-                    new Message(
-                            author,
-                            title,
-                            description,
-                            url,
-                            urlToImage,
-                            publishedAtLocalDateTime,
-                            content,
-                            topic,
-                            appointmentName,
-                            appointmentLocalDateTime)
+                    new Message(author, title, description, url, urlToImage, publishedAtLocalDateTime, content, topic, appointmentName, appointmentLocalDateTime)
             );
         }
     }
@@ -156,8 +147,8 @@ public class JsonMessageParser {
      *
      * author: Antonia Geschke
      */
-    public static ArrayList<Message> parseMessages(JSONArray messageArray) {
-        ArrayList<Message> messages = new ArrayList<Message>();
+    public static List<Message> parseMessages(JSONArray messageArray) {
+        List<Message> messages = new ArrayList<Message>();
 
         if (messageArray != null) {
             messageArray.forEach((item)->{
@@ -171,13 +162,13 @@ public class JsonMessageParser {
         return messages;
     }
 
-    public static ArrayList<Message> parseJsonFile(JSONObject jsonFile) {
-        ArrayList<Message> messages = new ArrayList<Message>();
+    public static List<Message> parseJsonFile(JSONObject jsonFile) {
+        List<Message> messages = new ArrayList<Message>();
 
         if (jsonFile.has("Messages")) {
             JSONArray jsonMessages = jsonFile.getJSONArray("Messages");
 
-            ArrayList<Message> extractedMessages = parseMessages(jsonMessages);
+            List<Message> extractedMessages = parseMessages(jsonMessages);
 
             messages.addAll(extractedMessages);
         }
