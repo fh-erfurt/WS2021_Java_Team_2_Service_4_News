@@ -1,63 +1,33 @@
 package de.fherfurt.fetcher;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import javax.sound.midi.SysexMessage;
-import java.io.Console;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        String jsonContent = "{\n" +
-                "  \"Messages\": [\n" +
-                "    {\n" +
-                "      \"author\": \"Max Müller\",\n" +
-                "      \"title\": \"Tolle Neuigkeiten\",\n" +
-                "      \"description\": \"Wir haben tolle Neuigkeiten\",\n" +
-                "      \"url\": \"https://www.fh-erfurt.de/news/detailansicht/fh-erfurt-macht-mobil\",\n" +
-                "      \"urlToImage\": \"https://www.fh-erfurt.de/news/detailansicht/fh-erfurt-macht-mobil\",\n" +
-                "      \"publishedAt\": \"2022-12-03 10:30\",\n" +
-                "      \"content\": \"Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.\",\n" +
-                "      \"topic\": \"Veranstaltungen\",\n" +
-                "      \"appointmentName\": \"Tag der Mobilität\",\n" +
-                "      \"appointmentDateTime\": \"2022-07-30 10:30\"\n" +
-                "    }\n" +
-                "  ]\n" +
-                "}\n";
+        // Initializing
+        Sort sort = new Sort();
+        Filter filter = new Filter();
+        Feed feed = new Feed(new URL("https://cdn.discordapp.com/attachments/870984798359924788/921411063864520744/messages.json"));
 
-        JSONObject jsonMessages = new JSONObject(jsonContent);
-
-        JSONArray messages = jsonMessages.getJSONArray("Messages");
-
-        Feed feed = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/916683041127141386/news.json"));
+        // Creating the feed
         feed.fetch();
         feed.buildFeed();
 
-        Feed feed2 = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/920660153483800586/messages.json"));
-        feed2.fetch();
-        feed2.buildFeed();
+        // Sorting the feed
 
-        feed2.sortByDate();
-        feed2.buildFeed();
+        //sort.sortByDateAsc(feed.entries);
+        //sort.sortByAppointmentDesc(feed.entries);
 
+        //sort.sortByAppointmentAsc(feed.entries);
+        //sort.sortByAppointmentDesc(feed.entries);
 
+        //sort.sortByAuthorAZ(feed.entries);
+        //sort.sortByAuthorZA(feed.entries);
 
-        /*
-        JSONObject jsonMessages = new JSONObject(jsonContent);
+        // Filtering the feed
 
-        JSONArray messages = jsonMessages.getJSONArray("Messages");
-
-        Feed feed = new Feed(jsonMessages);
-
-
-        feed.printHashCodes();
-
-        JsonMessageParser jsonMessageParserFromURL = new JsonMessageParser(new URL("https://cdn.discordapp.com/attachments/906109518142918688/916348549011218462/messages.json"));
-        */
-
-
+        //filter.filterByAuthor(feed.entries,"Insert necessary Author");
+        //filter.blacklistAuthor(feed.entries,"Enter blacklisted Author");
     }
 }
