@@ -5,63 +5,46 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-/**
- * author: Lucian Gerasch
- * comment: All implemented tests are working and return the expected results.
- *          Tests regarding faculties are still WIP due to possible interfaces.
- */
-
-class FilterTest {
-
+public class FilterTest {
     @Test
-    void filterByAuthor() throws IOException {
-        //given
-        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/870984798359924788/921411063864520744/messages.json"));
-        given.fetch();
+    void filterByAuthorTest() {
+        Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
+        feed.fetch();
+
         Filter filter = new Filter();
-        List<Message> filteredFeed = new ArrayList<Message>();
 
-        //when
-        filteredFeed = filter.filterByAuthor(given.entries, "Max Mustermann");
+        List<Message> messages = feed.getEntries();
 
-        //then
-        Assertions.assertThat(filteredFeed)
+        List<Message> filteredMessages = filter.filterByAuthor(messages, 1);
+
+        Assertions.assertThat(filteredMessages)
                 .isNotEmpty()
                 .hasSize(1);
-        filteredFeed.forEach(entry -> {assertTrue(entry.hasAuthor("Max Mustermann"));});
+
+        Message message = filteredMessages.get(0);
+
+        org.junit.jupiter.api.Assertions.assertTrue(message.hasAuthor(1));
     }
 
     @Test
-    void blacklistAuthor() throws IOException {
-        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/870984798359924788/921411063864520744/messages.json"));
-        given.fetch();
+    void filterByBlacklistedAuthor() {
+        Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
+        feed.fetch();
+
         Filter filter = new Filter();
-        List<Message> filteredFeed = new ArrayList<Message>();
 
-        //when
-        filteredFeed = filter.blacklistAuthor(given.entries, "Max Mustermann");
+        List<Message> messages = feed.getEntries();
 
-        //then
-        Assertions.assertThat(filteredFeed)
+        List<Message> filteredMessages = filter.filterByBlacklistedAuthor(messages, 1);
+
+        Assertions.assertThat(filteredMessages)
                 .isNotEmpty()
                 .hasSize(4);
-        filteredFeed.forEach(entry -> {assertTrue(!entry.hasAuthor("Max Mustermann"));});
-    }
 
-    // Faculties is still WIP
-
-    /*
-    @Test
-    void filterByFaculty() {
+        for (Message message : filteredMessages) {
+            org.junit.jupiter.api.Assertions.assertFalse(message.hasAuthor(1));
+        }
     }
-
-    @Test
-    void blacklistFaculty() {
-    }
-    */
 }

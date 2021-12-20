@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * authors: Lucian Gerasch & Benjamin Ehnes
+ * authors: Lisa Sluka, Lucian Gerasch & Benjamin Ehnes
  */
 
 public class Filter {
-
-    public List<Message> filterByAuthor(List<Message> messages, String necessaryAuthor){
+    public List<Message> filterByAuthor(List<Message> messages, int necessaryAuthor){
         List<Message> filteredMessages = new ArrayList<Message>();
         messages.forEach(entry->{
             if(entry.hasAuthor(necessaryAuthor)){
@@ -19,7 +18,7 @@ public class Filter {
         return filteredMessages;
     }
 
-    public List<Message> blacklistAuthor(List<Message> messages, String blacklistedAuthor) {
+    public List<Message> filterByBlacklistedAuthor(List<Message> messages, int blacklistedAuthor) {
         List<Message> filteredMessages = new ArrayList<Message>();
         messages.forEach(entry->{
             if(!entry.hasAuthor(blacklistedAuthor)){
@@ -29,6 +28,7 @@ public class Filter {
         return filteredMessages;
     }
 
+        /*
     public List<Message> filterByFaculty(List<Message> messages, String necessaryFaculty){
         List<Message> filteredMessages = new ArrayList<Message>();
         messages.forEach(entry->{
@@ -48,4 +48,5 @@ public class Filter {
         });
         return filteredMessages;
     }
+    */
 }

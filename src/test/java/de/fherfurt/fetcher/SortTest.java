@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 class SortTest {
-
+    /*
     SortTest() {
     }
 
@@ -74,6 +74,8 @@ class SortTest {
                 .isSortedAccordingTo(new MessageAppointmentComparator());
     }
 
+
+
     @Test
     void sortByAppointmentDesc() throws IOException {
         //given
@@ -82,10 +84,10 @@ class SortTest {
         Sort sort = new Sort();
 
         //when
-        sort.sortByAppointmentDesc(given.entries);
+        sort.sortByAppointmentDesc(given.getEntries());
 
         //then
-        Assertions.assertThat(given.entries)
+        Assertions.assertThat(given.getEntries())
                 .isNotEmpty()
                 .hasSize(5)
                 .doesNotHaveDuplicates()
@@ -110,6 +112,8 @@ class SortTest {
                 .isSortedAccordingTo(new MessageAuthorComparator());
     }
 
+
+
     @Test
     void sortByAuthorZA() throws IOException {
         //given
@@ -127,4 +131,28 @@ class SortTest {
                 .doesNotHaveDuplicates()
                 .isSortedAccordingTo(Collections.reverseOrder(new MessageAuthorComparator()));
     }
+
+    */
+
+
+
+    @Test
+
+    void sortByTopic() {
+        //given
+        Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
+        given.fetch();
+        Sort sort = new Sort();
+
+        //when
+        sort.sortByTopicASC(given.getEntries());
+
+        //then
+        Assertions.assertThat(given.getEntries())
+                .isNotEmpty()
+                .hasSize(5)
+                .doesNotHaveDuplicates()
+                .isSortedAccordingTo(new MessageTopicComparator());
+    }
+
 }

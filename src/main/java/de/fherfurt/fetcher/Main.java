@@ -1,5 +1,7 @@
 package de.fherfurt.fetcher;
 
+import org.json.JSONObject;
+
 import java.io.IOException;
 import java.net.URL;
 
@@ -8,11 +10,22 @@ public class Main {
         // Initializing
         Sort sort = new Sort();
         Filter filter = new Filter();
-        Feed feed = new Feed(new URL("https://cdn.discordapp.com/attachments/870984798359924788/921411063864520744/messages.json"));
+
+        DevPersonService personService = new DevPersonService();
+        DevFacultyService facultyService = new DevFacultyService();
+        DevAppointmentService appointmentService = new DevAppointmentService();
+
+        Feed feed = new Feed(
+                new URL("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json"),
+                personService,
+                facultyService,
+                appointmentService);
 
         // Creating the feed
         feed.fetch();
         feed.buildFeed();
+
+        feed.addAppointments();
 
         // Sorting the feed
 
@@ -22,7 +35,9 @@ public class Main {
         //sort.sortByAppointmentAsc(feed.entries);
         //sort.sortByAppointmentDesc(feed.entries);
 
-        //sort.sortByAuthorAZ(feed.entries);
+        sort.sortByAuthorAZ(feed.getEntries(), feed.getPersonService());
+
+        feed.buildFeed();
         //sort.sortByAuthorZA(feed.entries);
 
         // Filtering the feed
