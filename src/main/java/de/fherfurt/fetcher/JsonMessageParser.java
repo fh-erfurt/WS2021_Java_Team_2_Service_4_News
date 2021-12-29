@@ -116,7 +116,7 @@ public class JsonMessageParser {
 
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-                String publishedAt = jsonObject.has("publishedAt") ? jsonObject.getString("publishedAt") : "INVALID_DATE";   // LocalDateTime
+                String publishedAt = jsonObject.getString("publishedAt");   // LocalDateTime
 
                 // if the publishedAt-Date is not in valid format we return an empty
                 if (!hasValidDateTimeFormat(publishedAt)) {

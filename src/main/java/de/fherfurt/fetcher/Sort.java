@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * authors: Lisa Sluka, Lucian Gerasch, Benjamin Ehnes
+ * authors: Lisa Sluka, Lucian Gerasch, Benjamin Ehnes, Antonia Geschke
  */
 
 public class Sort {
@@ -19,9 +19,10 @@ public class Sort {
     public void sortByAuthorAZ(List<Message> messages, IPersonService personService) { Collections.sort(messages,new MessageAuthorComparator(personService)); }
     public void sortByAuthorZA(List<Message> messages, IPersonService personService) { Collections.sort(messages,Collections.reverseOrder(new MessageAuthorComparator(personService))); }
 
-    public void sortByTopicASC(List<Message> messages)
+    public void sortByTopicAsc(List<Message> messages)
     {
         Collections.sort(messages, new MessageTopicComparator());
     }
+    public void sortByTopicDesc(List<Message> messages) { Collections.sort(messages,Collections.reverseOrder(new MessageTopicComparator())); }
 
 }

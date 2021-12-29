@@ -136,16 +136,20 @@ class SortTest {
 
 
 
+    /**
+    * author: Antonia Geschke
+    * */
+
     @Test
 
-    void sortByTopic() {
+    void sortByTopicAsc() {
         //given
         Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
         given.fetch();
         Sort sort = new Sort();
 
         //when
-        sort.sortByTopicASC(given.getEntries());
+        sort.sortByTopicAsc(given.getEntries());
 
         //then
         Assertions.assertThat(given.getEntries())
@@ -153,6 +157,25 @@ class SortTest {
                 .hasSize(5)
                 .doesNotHaveDuplicates()
                 .isSortedAccordingTo(new MessageTopicComparator());
+    }
+
+    @Test
+
+    void sortByTopicDesc() {
+        //given
+        Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
+        given.fetch();
+        Sort sort = new Sort();
+
+        //when
+        sort.sortByTopicDesc(given.getEntries());
+
+        //then
+        Assertions.assertThat(given.getEntries())
+                .isNotEmpty()
+                .hasSize(5)
+                .doesNotHaveDuplicates()
+                .isSortedAccordingTo(Collections.reverseOrder(new MessageTopicComparator()));
     }
 
 }

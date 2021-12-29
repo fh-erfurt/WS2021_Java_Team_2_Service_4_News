@@ -2,6 +2,9 @@ package de.fherfurt.fetcher;
 
 import java.util.Comparator;
 
+/**
+ * author: Antonia Geschke
+ */
 
 public class MessageTopicComparator implements Comparator<Message> {
 
