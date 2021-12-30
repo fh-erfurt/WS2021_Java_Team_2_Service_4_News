@@ -54,11 +54,7 @@ public class JsonMessageParser {
         System.out.println(content);
     }
 
-    // macht das Sinn?!
-    private enum ParserResult {
-        FAILED_TO_PARSE_APPOINTMENT_DATE_TIME,
-        FAILED_TO_PARSE_NECESSARY_FIELD
-    }
+
 
     public static boolean hasValidDateTimeFormat(String value) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

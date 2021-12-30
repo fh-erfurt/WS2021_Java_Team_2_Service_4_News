@@ -40,6 +40,60 @@ public class JsonMessageParserTest {
         Assertions.assertTrue(optionalMessage.isEmpty());
     }
 
+
+    @Test
+    void testParseSingleMessageEmptyContent() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("author", 1);
+        jsonObject.put("title", "title");
+        jsonObject.put("publishedAt", "2021-12-31 23:59");
+
+
+        Optional<Message> optionalMessage = JsonMessageParser.parseSingleMessage(jsonObject);
+
+        Assertions.assertTrue(optionalMessage.isEmpty());
+    }
+
+    @Test
+    void testParseSingleMessageEmptyTitle() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("author", 1);
+        jsonObject.put("content", "content");
+        jsonObject.put("publishedAt", "2021-12-31 23:59");
+
+
+        Optional<Message> optionalMessage = JsonMessageParser.parseSingleMessage(jsonObject);
+
+        Assertions.assertTrue(optionalMessage.isEmpty());
+    }
+
+    @Test
+    void testParseSingleMessageEmptyPublishedAt() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("author", 1);
+        jsonObject.put("content", "content");
+        jsonObject.put("title", "title");
+
+
+        Optional<Message> optionalMessage = JsonMessageParser.parseSingleMessage(jsonObject);
+
+        Assertions.assertTrue(optionalMessage.isEmpty());
+    }
+
+    @Test
+    void testParseSingleMessageWrongPublishedAt() {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("author", 1);
+        jsonObject.put("content", "content");
+        jsonObject.put("title", "title");
+        jsonObject.put("publishedAt", "2021-12-31");
+
+
+        Optional<Message> optionalMessage = JsonMessageParser.parseSingleMessage(jsonObject);
+
+        Assertions.assertTrue(optionalMessage.isEmpty());
+    }
+
     @Test
     void testParseSingleMessageAllSet() {
         JSONObject jsonObject = new JSONObject();
