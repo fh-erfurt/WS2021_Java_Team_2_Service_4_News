@@ -32,12 +32,12 @@ public class Main {
         //sort.sortByDateAsc(feed.entries);
         //sort.sortByAppointmentDesc(feed.entries);
 
-        //sort.sortByAppointmentAsc(feed.entries);
-        //sort.sortByAppointmentDesc(feed.entries);
-
-        sort.sortByAuthorAZ(feed.getEntries(), feed.getPersonService());
-
+        sort.sortByAppointmentAsc(feed.getEntries());
         feed.buildFeed();
+        sort.sortByAppointmentDesc(feed.getEntries());
+        feed.buildFeed();
+
+        //sort.sortByAuthorAZ(feed.getEntries(), feed.getPersonService());
         //sort.sortByAuthorZA(feed.entries);
 
         // Filtering the feed

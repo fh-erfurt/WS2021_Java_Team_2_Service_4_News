@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Collections;
+import java.util.Comparator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -16,22 +17,22 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 class SortTest {
-    /*
+
     SortTest() {
     }
 
     @Test
     void sortByDateAsc() throws IOException {
         //given
-        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/870984798359924788/921411063864520744/messages.json"));
+        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json"));
         given.fetch();
         Sort sort = new Sort();
 
         //when
-        sort.sortByDateAsc(given.entries);
+        sort.sortByDateAsc(given.getEntries());
 
         //then
-        Assertions.assertThat(given.entries)
+        Assertions.assertThat(given.getEntries())
                 .isNotEmpty()
                 .hasSize(5)
                 .doesNotHaveDuplicates()
@@ -41,15 +42,15 @@ class SortTest {
     @Test
     void sortByDateDesc() throws IOException {
         //given
-        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/870984798359924788/921411063864520744/messages.json"));
+        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json"));
         given.fetch();
         Sort sort = new Sort();
 
         //when
-        sort.sortByDateDesc(given.entries);
+        sort.sortByDateDesc(given.getEntries());
 
         //then
-        Assertions.assertThat(given.entries)
+        Assertions.assertThat(given.getEntries())
                 .isNotEmpty()
                 .hasSize(5)
                 .doesNotHaveDuplicates()
@@ -59,19 +60,19 @@ class SortTest {
     @Test
     void sortByAppointmentAsc() throws IOException {
         //given
-        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/870984798359924788/921411063864520744/messages.json"));
+        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json"));
         given.fetch();
         Sort sort = new Sort();
 
         //when
-        sort.sortByAppointmentAsc(given.entries);
+        sort.sortByAppointmentAsc(given.getEntries());
 
         //then
-        Assertions.assertThat(given.entries)
+        Assertions.assertThat(given.getEntries())
                 .isNotEmpty()
                 .hasSize(5)
                 .doesNotHaveDuplicates()
-                .isSortedAccordingTo(new MessageAppointmentComparator());
+                .isSortedAccordingTo(Comparator.nullsLast(new MessageAppointmentComparator()));
     }
 
 
@@ -79,7 +80,7 @@ class SortTest {
     @Test
     void sortByAppointmentDesc() throws IOException {
         //given
-        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/870984798359924788/921411063864520744/messages.json"));
+        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json"));
         given.fetch();
         Sort sort = new Sort();
 
@@ -91,50 +92,44 @@ class SortTest {
                 .isNotEmpty()
                 .hasSize(5)
                 .doesNotHaveDuplicates()
-                .isSortedAccordingTo(Collections.reverseOrder(new MessageAppointmentComparator()));
+                .isSortedAccordingTo(Collections.reverseOrder(Comparator.nullsLast(new MessageAppointmentComparator())));
     }
 
     @Test
     void sortByAuthorAZ() throws IOException {
         //given
-        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/870984798359924788/921411063864520744/messages.json"));
+        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json"));
         given.fetch();
         Sort sort = new Sort();
 
         //when
-        sort.sortByAuthorAZ(given.entries);
+        sort.sortByAuthorAZ(given.getEntries(), given.getPersonService());
 
         //then
-        Assertions.assertThat(given.entries)
+        Assertions.assertThat(given.getEntries())
                 .isNotEmpty()
                 .hasSize(5)
                 .doesNotHaveDuplicates()
-                .isSortedAccordingTo(new MessageAuthorComparator());
+                .isSortedAccordingTo(new MessageAuthorComparator(given.getPersonService()));
     }
-
-
 
     @Test
     void sortByAuthorZA() throws IOException {
         //given
-        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/870984798359924788/921411063864520744/messages.json"));
+        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json"));
         given.fetch();
         Sort sort = new Sort();
 
         //when
-        sort.sortByAuthorZA(given.entries);
+        sort.sortByAuthorZA(given.getEntries(), given.getPersonService());
 
         //then
-        Assertions.assertThat(given.entries)
+        Assertions.assertThat(given.getEntries())
                 .isNotEmpty()
                 .hasSize(5)
                 .doesNotHaveDuplicates()
-                .isSortedAccordingTo(Collections.reverseOrder(new MessageAuthorComparator()));
+                .isSortedAccordingTo(Collections.reverseOrder(new MessageAuthorComparator(given.getPersonService())));
     }
-
-    */
-
-
 
     /**
     * author: Antonia Geschke
