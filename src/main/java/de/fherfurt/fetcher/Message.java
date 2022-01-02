@@ -13,7 +13,7 @@ import java.util.Optional;
  * @author Benjamin Ehnes
  */
 public class Message {
-    private String author;  // Interface?! // String oder Id?!
+    private int author;     // get name by id
     private String title;
     private String description;
     private String url;
@@ -22,18 +22,20 @@ public class Message {
     private String content;
 
     private String topic;
-    private ArrayList<Faculty> faculties;   // Interface?!
+    private String faculty;  // FacultyService: getInformationFromName(String name);
 
     private String appointmentName;     // AppointmentService: createAppointment(String name, LocalDateTime appointDateTime);
     private LocalDateTime appointmentDateTime;
 
-    public boolean hasAuthor(String author) { return this.author.equals(author); }
+    public boolean hasAuthor(int author) {
+        return this.author == author;
+    }
 
-    public String getAuthor() {
+    public int getAuthor() {
         return author;
     }
 
-    public void setAuthor(String author) {
+    public void setAuthor(int author) {
         this.author = author;
     }
 
@@ -93,12 +95,12 @@ public class Message {
         this.topic = topic;
     }
 
-    public ArrayList<Faculty> getFaculties() {
-        return faculties;
+    public String getFaculty() {
+        return faculty;
     }
 
-    public void setFaculties(ArrayList<Faculty> faculties) {
-        this.faculties = faculties;
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
     }
 
     public String getAppointmentName() {
@@ -117,7 +119,7 @@ public class Message {
         this.appointmentDateTime = appointmentDateTime;
     }
 
-    public Message(String author, String title, String description, String url, String urlToImage, LocalDateTime publishedAt, String content, String topic, String appointmentName, LocalDateTime appointmentDateTime) {
+    public Message(int author, String title, String description, String url, String urlToImage, LocalDateTime publishedAt, String content, String topic, String faculty, String appointmentName, LocalDateTime appointmentDateTime) {
         this.author = author;
         this.title = title;
         this.description = description;
@@ -126,12 +128,13 @@ public class Message {
         this.publishedAt = publishedAt;
         this.content = content;
         this.topic = topic;
+        this.faculty = faculty;
         this.appointmentName = appointmentName;
         this.appointmentDateTime = appointmentDateTime;
     }
 
     public boolean hasAppointmentAssociated() {
-        return this.appointmentDateTime!=null;
+        return this.appointmentDateTime != null && this.appointmentName != null;
     }
 
     @Override
@@ -145,7 +148,7 @@ public class Message {
                 ", publishedAt=" + publishedAt.toString() +
                 ", content='" + content + '\'' +
                 ", topic='" + topic + '\'' +
-                ", faculties=" + faculties +
+                ", faculties=" + faculty +
                 ", appointmentName='" + appointmentName + '\'' +
                 ", appointmentDateTime=" + appointmentDateTime.toString() +
                 '}';
@@ -180,7 +183,7 @@ public class Message {
                 publishedAt,
                 content,
                 topic,
-                faculties,
+                faculty,
                 appointmentName,
                 appointmentDateTime);
     }
