@@ -28,25 +28,31 @@ public class Filter {
         return filteredMessages;
     }
 
-        /*
-    public List<Message> filterByFaculty(List<Message> messages, String necessaryFaculty){
+    public List<Message> filterByFacultyAndGlobalNews(List<Message> messages, String necessaryFaculty){
         List<Message> filteredMessages = new ArrayList<Message>();
-        messages.forEach(entry->{
-            if(entry.hasAuthor(necessaryFaculty)){
-                filteredMessages.add(entry);
+
+        for (Message message : messages) {
+            if (message.hasFaculty(necessaryFaculty) || message.hasFaculty("AllFaculties")) {
+                filteredMessages.add(message);
             }
-        });
+        }
+
         return filteredMessages;
     }
 
-    public List<Message> blacklistFaculty(List<Message> messages, String blacklistedFaculty) {
+    public List<Message> filterByFaculty(List<Message> messages, String necessaryFaculty){
         List<Message> filteredMessages = new ArrayList<Message>();
-        messages.forEach(entry->{
-            if(!entry.hasAuthor(blacklistedFaculty)){
-                filteredMessages.add(entry);
+
+        for (Message message : messages) {
+            if (message.hasFaculty(necessaryFaculty)) {
+                filteredMessages.add(message);
             }
-        });
+        }
+
         return filteredMessages;
     }
-    */
+
+    public void removeMessagesFromFaculty(List<Message> messages, String blacklistedFaculty) {
+        messages.removeIf(message -> message.hasFaculty(blacklistedFaculty));
+    }
 }

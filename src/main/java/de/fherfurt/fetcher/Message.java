@@ -1,9 +1,7 @@
 package de.fherfurt.fetcher;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Optional;
 
 // Person getPersonByName(String name)
 
@@ -103,6 +101,10 @@ public class Message {
         this.faculty = faculty;
     }
 
+    public boolean hasFaculty(String faculty) {
+        return this.faculty.equals(faculty);
+    }
+
     public String getAppointmentName() {
         return appointmentName;
     }
@@ -145,12 +147,12 @@ public class Message {
                 ", description: '" + description + '\'' +
                 ", url: '" + url + '\'' +
                 ", urlToImage='" + urlToImage + '\'' +
-                ", publishedAt=" + publishedAt.toString() +
+                ", publishedAt=" + publishedAt +
                 ", content='" + content + '\'' +
                 ", topic='" + topic + '\'' +
                 ", faculties=" + faculty +
                 ", appointmentName='" + appointmentName + '\'' +
-                ", appointmentDateTime=" + appointmentDateTime.toString() +
+                ", appointmentDateTime=" + appointmentDateTime +
                 '}';
     }
 

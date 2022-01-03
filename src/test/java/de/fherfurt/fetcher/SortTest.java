@@ -17,14 +17,10 @@ import static org.junit.jupiter.api.Assertions.*;
  */
 
 class SortTest {
-
-    SortTest() {
-    }
-
     @Test
-    void sortByDateAsc() throws IOException {
+    void sortByDateAsc() {
         //given
-        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json"));
+        Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
         given.fetch();
         Sort sort = new Sort();
 
@@ -40,9 +36,9 @@ class SortTest {
     }
 
     @Test
-    void sortByDateDesc() throws IOException {
+    void sortByDateDesc() {
         //given
-        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json"));
+        Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
         given.fetch();
         Sort sort = new Sort();
 
@@ -58,9 +54,9 @@ class SortTest {
     }
 
     @Test
-    void sortByAppointmentAsc() throws IOException {
+    void sortByAppointmentAsc() {
         //given
-        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json"));
+        Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
         given.fetch();
         Sort sort = new Sort();
 
@@ -75,12 +71,10 @@ class SortTest {
                 .isSortedAccordingTo(Comparator.nullsLast(new MessageAppointmentComparator()));
     }
 
-
-
     @Test
-    void sortByAppointmentDesc() throws IOException {
+    void sortByAppointmentDesc() {
         //given
-        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json"));
+        Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
         given.fetch();
         Sort sort = new Sort();
 
@@ -96,9 +90,9 @@ class SortTest {
     }
 
     @Test
-    void sortByAuthorAZ() throws IOException {
+    void sortByAuthorAZ() {
         //given
-        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json"));
+        Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
         given.fetch();
         Sort sort = new Sort();
 
@@ -114,9 +108,9 @@ class SortTest {
     }
 
     @Test
-    void sortByAuthorZA() throws IOException {
+    void sortByAuthorZA() {
         //given
-        Feed given = new Feed(new URL("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json"));
+        Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
         given.fetch();
         Sort sort = new Sort();
 

@@ -8,10 +8,11 @@ public class DevFacultyService implements IFacultyService{
     DevFacultyService() {
         faculties = new HashMap<String, DevFaculty>();
 
-        faculties.put("Informationstechnologie", new DevFaculty("Informationstechnologie", "Altonaer Str. 25, 99085 Erfurt"));
-        faculties.put("Architektur und Stadtplanung", new DevFaculty("Architektur und Stadtplanung", "Altonaer Str. 25, 99085 Erfurt"));
-        faculties.put("Angewandte Sozialwissenschaften", new DevFaculty("Angewandte Sozialwissenschaften", "Altonaer Str. 25, 99085 Erfurt"));
+        faculties.put("Gebaeudetechnik_und_Informatik", new DevFaculty("Gebaeudetechnik_und_Informatik", "Altonaer Str. 25, 99085 Erfurt"));
+        faculties.put("Architektur_und_Stadtplaung", new DevFaculty("Architektur_und_Stadtplaung", "Altonaer Str. 25, 99085 Erfurt"));
+        faculties.put("Angewandte_Sozialwisschenschaft", new DevFaculty("Angewandte_Sozialwisschenschaft", "Altonaer Str. 25, 99085 Erfurt"));
         faculties.put("AllFaculties", new DevFaculty("AllFaculties", "Altonaer Str. 25, 99085 Erfurt"));
+        faculties.put("Wirtschaft_Logistik_Verkehr", new DevFaculty("Wirtschaft_Logistik_Verkehr", "Altonaer Str. 25, 99085 Erfurt"));
     }
 
     @Override

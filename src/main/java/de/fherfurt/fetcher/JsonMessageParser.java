@@ -27,7 +27,7 @@ public class JsonMessageParser {
     private String content;
 
     private ArrayList<String> topic;
-    private ArrayList<String> faculties;
+    private String faculty;
 
     private String appointmentName;
     private LocalDateTime appointmentDateTime;
@@ -53,8 +53,6 @@ public class JsonMessageParser {
 
         System.out.println(content);
     }
-
-
 
     public static boolean hasValidDateTimeFormat(String value) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");

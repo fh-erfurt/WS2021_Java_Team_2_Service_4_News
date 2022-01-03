@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -15,15 +16,24 @@ public class Main {
         DevFacultyService facultyService = new DevFacultyService();
         DevAppointmentService appointmentService = new DevAppointmentService();
 
+        /*
         Feed feed = new Feed(
                 new URL("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json"),
                 personService,
                 facultyService,
                 appointmentService);
+        */
+
+        Feed feed = new Feed(
+                new URL("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_fac.json"),
+                personService,
+                facultyService,
+                appointmentService);
+
 
         // Creating the feed
         feed.fetch();
-        feed.buildFeed();
+        //feed.buildFeed();
 
         feed.addAppointments();
 
@@ -33,9 +43,15 @@ public class Main {
         //sort.sortByAppointmentDesc(feed.entries);
 
         sort.sortByAppointmentAsc(feed.getEntries());
-        feed.buildFeed();
+        //feed.buildFeed();
         sort.sortByAppointmentDesc(feed.getEntries());
-        feed.buildFeed();
+        //feed.buildFeed();
+
+        List<Message> messages = filter.filterByFaculty(feed.getEntries(), "Gebaeudetechnik_und_Informatik");
+
+        System.out.println(messages);
+
+        //feed.buildFeed();
 
         //sort.sortByAuthorAZ(feed.getEntries(), feed.getPersonService());
         //sort.sortByAuthorZA(feed.entries);

@@ -2,6 +2,7 @@ package de.fherfurt.fetcher;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
 import java.net.URL;
@@ -45,6 +46,73 @@ public class FilterTest {
 
         for (Message message : filteredMessages) {
             org.junit.jupiter.api.Assertions.assertFalse(message.hasAuthor(1));
+        }
+    }
+
+    /**
+     * author: Lisa Sluka
+     */
+
+    @Test
+    void filterByFaculty(){
+        Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_fac.json");
+        feed.fetch();
+
+        Filter filter = new Filter();
+
+        List<Message> messages = feed.getEntries();
+
+        List<Message> filteredMessages = filter.filterByFaculty(messages, "Gebaeudetechnik_und_Informatik");
+
+        Assertions.assertThat(filteredMessages)
+                .isNotEmpty()
+                .hasSize(2);
+
+        for (Message message : filteredMessages) {
+            org.junit.jupiter.api.Assertions.assertTrue(message.hasFaculty("Gebaeudetechnik_und_Informatik"));
+        }
+
+
+    }
+
+    @Test
+    void filterByFacultyAndGlobalNews(){
+        Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_fac.json");
+        feed.fetch();
+
+        Filter filter = new Filter();
+
+        List<Message> messages = feed.getEntries();
+
+        List<Message> filteredMessages = filter.filterByFacultyAndGlobalNews(messages, "Gebaeudetechnik_und_Informatik");
+
+        Assertions.assertThat(filteredMessages)
+                .isNotEmpty()
+                .hasSize(3);
+
+        for (Message message : filteredMessages) {
+            org.junit.jupiter.api.Assertions.assertTrue(message.hasFaculty("Gebaeudetechnik_und_Informatik") || message.hasFaculty("AllFaculties"));
+        }
+    }
+
+    /**
+     * author: Benjamin Ehnes
+     */
+    @Test
+    void removeMessagesFromFaculty() {
+        Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_fac.json");
+        feed.fetch();
+
+        Filter filter = new Filter();
+
+        List<Message> messages = feed.getEntries();
+
+        filter.removeMessagesFromFaculty(messages, "Gebaeudetechnik_und_Informatik");
+
+        Assertions.assertThat(messages).isNotEmpty().hasSize(3);
+
+        for (Message message : messages) {
+            org.junit.jupiter.api.Assertions.assertFalse(message.hasFaculty("Gebaeudetechnik_und_Informatik"));
         }
     }
 }
