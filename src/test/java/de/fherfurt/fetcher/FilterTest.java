@@ -116,3 +116,52 @@ public class FilterTest {
         }
     }
 }
+
+
+/* @Test code snippet
+  /**
+       * author: Celina Ludwigs
+       */
+       /*
+       /*aapointmentName, publishedAt, AppointmentDateTime,Topic*/
+/*
+      void filterBy...(){
+          Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_....json"); //Link überarbeiten
+          feed.fetch();
+
+          Filter filter = new Filter();
+
+          List<Message> messages = feed.getEntries();
+
+          List<Message> filteredMessages = filter.filterBy...(messages, "...");
+
+          Assertions.assertThat(filteredMessages)
+                  .isNotEmpty()
+                  .hasSize(...);
+
+          for (Message message : filteredMessages) {
+              org.junit.jupiter.api.Assertions.assertTrue(message.has...(""));
+          }
+      }
+
+
+      @Test
+      void ...() {
+          Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_....json");
+          feed.fetch();
+
+          Filter filter = new Filter();
+
+          List<Message> messages = feed.getEntries();
+           List<Message> filteredMessages = filter.filterBy...(messages, "...");
+
+
+          Assertions.assertThat(filteredMessages)
+          .isNotEmpty()
+          .hasSize(...);
+
+          for (Message message : filteredMessages) {
+              org.junit.jupiter.api.Assertions.assertFalse(message.has...(""));
+          }
+      }
+  }*/
