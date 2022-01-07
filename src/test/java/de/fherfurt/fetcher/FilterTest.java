@@ -158,7 +158,7 @@ public class FilterTest {
 
           Assertions.assertThat(filteredMessages)
           .isNotEmpty()
-          .hasSize(4);
+          .hasSize(4); // oder 1,da andere messages ohne appointmentName
 
           for (Message message : filteredMessages) {
               org.junit.jupiter.api.Assertions.assertFalse(message.hasAppointmentName("Abschlussveranstaltung des Zertifikatskurses 'Gastechnik und Gasversorgung (FH)'"));
@@ -216,14 +216,14 @@ public class FilterTest {
 
             List<Message> messages = feed.getEntries();
 
-            List<Message> filteredMessages = filter.filterByAppointmentDateTime(messages, "...");
+            List<Message> filteredMessages = filter.filterByAppointmentDateTime(messages, "2021-12-12 14:00");
 
             Assertions.assertThat(filteredMessages)
                     .isNotEmpty()
-                    .hasSize(...);
+                    .hasSize(1);
 
             for (Message message : filteredMessages) {
-                org.junit.jupiter.api.Assertions.assertTrue(message.hasAppointmentDateTime(""));
+                org.junit.jupiter.api.Assertions.assertTrue(message.hasAppointmentDateTime("2021-12-12 14:00"));
             }
         }
 
@@ -236,15 +236,15 @@ public class FilterTest {
             Filter filter = new Filter();
 
             List<Message> messages = feed.getEntries();
-             List<Message> filteredMessages = filter.filterByBlacklistedAppointmentDateTime(messages, "...");
+             List<Message> filteredMessages = filter.filterByBlacklistedAppointmentDateTime(messages, "2021-11-25 17:00");
 
 
             Assertions.assertThat(filteredMessages)
             .isNotEmpty()
-            .hasSize(...);
+            .hasSize(4); //oder 1,da andere messages ohne appointmentDateTime
 
             for (Message message : filteredMessages) {
-                org.junit.jupiter.api.Assertions.assertFalse(message.hasAppointmentDateTime(""));
+                org.junit.jupiter.api.Assertions.assertFalse(message.hasAppointmentDateTime("2021-11-25 17:00"));
             }
         }
     }
