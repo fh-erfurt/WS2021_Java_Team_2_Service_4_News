@@ -174,14 +174,14 @@ public class FilterTest {
 
           List<Message> messages = feed.getEntries();
 
-          List<Message> filteredMessages = filter.filterByPublishedAt(messages, "...");
+          List<Message> filteredMessages = filter.filterByPublishedAt(messages, "2021-12-08 09:30");
 
           Assertions.assertThat(filteredMessages)
                   .isNotEmpty()
-                  .hasSize(...);
+                  .hasSize(1);
 
           for (Message message : filteredMessages) {
-              org.junit.jupiter.api.Assertions.assertTrue(message.hasPublishedAt(""));
+              org.junit.jupiter.api.Assertions.assertTrue(message.hasPublishedAt("2021-12-08 09:30"));
           }
       }
 
@@ -194,15 +194,15 @@ public class FilterTest {
           Filter filter = new Filter();
 
           List<Message> messages = feed.getEntries();
-           List<Message> filteredMessages = filter.filterByBlacklistedPublishedAt(messages, "...");
+           List<Message> filteredMessages = filter.filterByBlacklistedPublishedAt(messages, "2021-10-02 17:42");
 
 
           Assertions.assertThat(filteredMessages)
           .isNotEmpty()
-          .hasSize(...);
+          .hasSize(4);
 
           for (Message message : filteredMessages) {
-              org.junit.jupiter.api.Assertions.assertFalse(message.hasPublishedAt(""));
+              org.junit.jupiter.api.Assertions.assertFalse(message.hasPublishedAt("2021-10-02 17:42"));
           }
       }
   }
