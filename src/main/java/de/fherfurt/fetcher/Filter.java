@@ -56,3 +56,85 @@ public class Filter {
         messages.removeIf(message -> message.hasFaculty(blacklistedFaculty));
     }
 }
+/*
+*author:Celina Ludwigs
+*/
+/* public List<Message> filterByAuthor(List<Message> messages, int necessaryAppointmentName){
+          List<Message> filteredMessages = new ArrayList<Message>();
+          messages.forEach(entry->{
+              if(entry.hasAppointmentName(necessaryAppointmentName)){
+                  filteredMessages.add(entry);
+              }
+          });
+          return filteredMessages;
+      }
+
+      public List<Message> filterByBlacklistedAppointmentName(List<Message> messages, int blacklistedAppointmentName) {
+          List<Message> filteredMessages = new ArrayList<Message>();
+          messages.forEach(entry->{
+              if(!entry.hasAppointmentName(blacklistedAppointmentName)){
+                  filteredMessages.add(entry);
+              }
+          });
+          return filteredMessages;
+      }
+      -----------------------------------------------------------------------------------------------------------------
+ public List<Message> filterByPublishedAt(List<Message> messages, int necessaryPublishedAt){
+        List<Message> filteredMessages = new ArrayList<Message>();
+        messages.forEach(entry->{
+            if(entry.hasPublishedAt(necessaryPublishedAt)){
+                filteredMessages.add(entry);
+            }
+        });
+        return filteredMessages;
+    }
+
+    public List<Message> filterByBlacklistedPublishedAt(List<Message> messages, int blacklistedPublishedAt) {
+        List<Message> filteredMessages = new ArrayList<Message>();
+        messages.forEach(entry->{
+            if(!entry.hasPublishedAt(blacklistedPublishedAt)){
+                filteredMessages.add(entry);
+            }
+        });
+        return filteredMessages;
+    }
+    --------------------------------------------------------------------------------------------------------------------
+     public List<Message> filterByAppointmentDateTime(List<Message> messages, int necessaryAppointmentDateTime){
+            List<Message> filteredMessages = new ArrayList<Message>();
+            messages.forEach(entry->{
+                if(entry.hasAppointmentDateTime(necessaryAppointmentDateTime)){
+                    filteredMessages.add(entry);
+                }
+            });
+            return filteredMessages;
+        }
+
+        public List<Message> filterByBlacklistedAppointmentDateTime(List<Message> messages, int blacklistedAppointmentDateTime) {
+            List<Message> filteredMessages = new ArrayList<Message>();
+            messages.forEach(entry->{
+                if(!entry.hasAppointmentDateTime(blacklistedAppointmentDateTime)){
+                    filteredMessages.add(entry);
+                }
+            });
+            return filteredMessages;
+        }
+        ---------------------------------------------------------------------------------------------------------------
+         public List<Message> filterByTopic(List<Message> messages, int necessaryTopic){
+                List<Message> filteredMessages = new ArrayList<Message>();
+                messages.forEach(entry->{
+                    if(entry.hasTopic(necessaryTopic)){
+                        filteredMessages.add(entry);
+                    }
+                });
+                return filteredMessages;
+            }
+
+            public List<Message> filterByBlacklistedAuthor(List<Message> messages, int blacklistedTopic) {
+                List<Message> filteredMessages = new ArrayList<Message>();
+                messages.forEach(entry->{
+                    if(!entry.hasTopic(blacklistedTopic)){
+                        filteredMessages.add(entry);
+                    }
+                });
+                return filteredMessages;
+            }*/
