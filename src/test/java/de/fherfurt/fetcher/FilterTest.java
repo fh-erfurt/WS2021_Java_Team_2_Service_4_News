@@ -133,14 +133,14 @@ public class FilterTest {
 
           List<Message> messages = feed.getEntries();
 
-          List<Message> filteredMessages = filter.filterByAppointmentName(messages, "...");
+          List<Message> filteredMessages = filter.filterByAppointmentName(messages, "Helden basteln");
 
           Assertions.assertThat(filteredMessages)
                   .isNotEmpty()
-                  .hasSize(...);
+                  .hasSize(1);
 
           for (Message message : filteredMessages) {
-              org.junit.jupiter.api.Assertions.assertTrue(message.hasAppointmentName(""));
+              org.junit.jupiter.api.Assertions.assertTrue(message.hasAppointmentName("Helden basteln"));
           }
       }
 
@@ -153,15 +153,15 @@ public class FilterTest {
           Filter filter = new Filter();
 
           List<Message> messages = feed.getEntries();
-           List<Message> filteredMessages = filter.filterByBlacklistedAppointmentName(messages, "...");
+           List<Message> filteredMessages = filter.filterByBlacklistedAppointmentName(messages, "Abschlussveranstaltung des Zertifikatskurses 'Gastechnik und Gasversorgung (FH)'");
 
 
           Assertions.assertThat(filteredMessages)
           .isNotEmpty()
-          .hasSize(...);
+          .hasSize(4);
 
           for (Message message : filteredMessages) {
-              org.junit.jupiter.api.Assertions.assertFalse(message.hasAppointmentName(""));
+              org.junit.jupiter.api.Assertions.assertFalse(message.hasAppointmentName("Abschlussveranstaltung des Zertifikatskurses 'Gastechnik und Gasversorgung (FH)'"));
           }
       }
   }
