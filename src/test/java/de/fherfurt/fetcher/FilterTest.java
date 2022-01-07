@@ -258,14 +258,14 @@ public class FilterTest {
 
                     List<Message> messages = feed.getEntries();
 
-                    List<Message> filteredMessages = filter.filterByTopic(messages, "...");
+                    List<Message> filteredMessages = filter.filterByTopic(messages, "Wissenschaft und Forschung");
 
                     Assertions.assertThat(filteredMessages)
                             .isNotEmpty()
-                            .hasSize(...);
+                            .hasSize(2);
 
                     for (Message message : filteredMessages) {
-                        org.junit.jupiter.api.Assertions.assertTrue(message.hasTopic(""));
+                        org.junit.jupiter.api.Assertions.assertTrue(message.hasTopic("Wissenschaft und Forschung"));
                     }
                 }
 
@@ -278,15 +278,15 @@ public class FilterTest {
                     Filter filter = new Filter();
 
                     List<Message> messages = feed.getEntries();
-                     List<Message> filteredMessages = filter.filterByBlacklistedTopic(messages, "...");
+                     List<Message> filteredMessages = filter.filterByBlacklistedTopic(messages, "Architektur");
 
 
                     Assertions.assertThat(filteredMessages)
                     .isNotEmpty()
-                    .hasSize(...);
+                    .hasSize(1);
 
                     for (Message message : filteredMessages) {
-                        org.junit.jupiter.api.Assertions.assertFalse(message.hasTopic(""));
+                        org.junit.jupiter.api.Assertions.assertFalse(message.hasTopic("Architektur"));
                     }
                 }
             }
