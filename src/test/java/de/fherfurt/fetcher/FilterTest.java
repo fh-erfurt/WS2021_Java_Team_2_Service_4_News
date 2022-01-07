@@ -126,7 +126,7 @@ public class FilterTest {
        /*appointmentName, publishedAt, AppointmentDateTime,Topic*/
 /*
       void filterByAppointmentName(){
-          Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_....json"); //Link überarbeiten
+          Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
           feed.fetch();
 
           Filter filter = new Filter();
@@ -147,7 +147,7 @@ public class FilterTest {
 
       @Test
       void filterByBlacklistedAppointmentName() {
-          Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_....json");
+          Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
           feed.fetch();
 
           Filter filter = new Filter();
@@ -167,7 +167,7 @@ public class FilterTest {
   }
 -----------------------------------------------------------------------------------------------------------------------
  void filterByPublishedAt(){
-          Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_....json"); //Link überarbeiten
+          Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
           feed.fetch();
 
           Filter filter = new Filter();
@@ -188,7 +188,7 @@ public class FilterTest {
 
       @Test
       void filterByBlacklistedPublishedAt() {
-          Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_....json");
+          Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
           feed.fetch();
 
           Filter filter = new Filter();
@@ -209,7 +209,7 @@ public class FilterTest {
 
   ---------------------------------------------------------------------------------------------------------------------
    void filterByAppointmentDateTime(){
-            Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_....json"); //Link überarbeiten
+            Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
             feed.fetch();
 
             Filter filter = new Filter();
@@ -230,7 +230,7 @@ public class FilterTest {
 
         @Test
         void filterByBlacklistedAppointmentDateTime() {
-            Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_....json");
+            Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
             feed.fetch();
 
             Filter filter = new Filter();
@@ -251,7 +251,7 @@ public class FilterTest {
 
     -------------------------------------------------------------------------------------------------------------------
         void filterByTopic(){
-                    Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_....json"); //Link überarbeiten
+                    Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
                     feed.fetch();
 
                     Filter filter = new Filter();
@@ -272,7 +272,7 @@ public class FilterTest {
 
                 @Test
                 void filterByBlacklistedTopic() {
-                    Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_....json");
+                    Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
                     feed.fetch();
 
                     Filter filter = new Filter();
