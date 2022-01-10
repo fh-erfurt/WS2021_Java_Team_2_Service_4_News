@@ -5,6 +5,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
+import java.util.prefs.Preferences;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -24,11 +25,7 @@ public class Main {
                 appointmentService);
         */
 
-        Feed feed = new Feed(
-                new URL("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_fac.json"),
-                personService,
-                facultyService,
-                appointmentService);
+        Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_fac.json");
 
 
         // Creating the feed
@@ -60,5 +57,7 @@ public class Main {
 
         //filter.filterByAuthor(feed.entries,"Insert necessary Author");
         //filter.blacklistAuthor(feed.entries,"Enter blacklisted Author");
+
+
     }
 }

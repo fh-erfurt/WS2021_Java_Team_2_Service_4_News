@@ -124,11 +124,14 @@ public class FilterTest {
     */
     @Test
     void filterByAppointmentName() {
+        //given
         Filter filter = new Filter();
         List<Message> messages = TestResources.getTestMessageList();
 
+        //when
         List<Message> filteredMessages = filter.filterByAppointmentName(messages, "Helden basteln");
 
+        //then
         Assertions.assertThat(filteredMessages)
                 .isNotEmpty()
                 .hasSize(1);
@@ -140,12 +143,14 @@ public class FilterTest {
 
     @Test
     void filterByBlacklistedAppointmentName() {
-        FilterTest.java
+        //given
+        List<Message> messages = TestResources.getTestMessageList();
         Filter filter = new Filter();
 
-
+        //when
         List<Message> filteredMessages = filter.filterByBlacklistedAppointmentName(messages, "Abschlussveranstaltung des Zertifikatskurses 'Gastechnik und Gasversorgung (FH)'");
 
+        //then
         Assertions.assertThat(filteredMessages)
                 .isNotEmpty()
                 .hasSize(4); // oder 1,da andere messages ohne appointmentName

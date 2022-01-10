@@ -9,10 +9,13 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.prefs.Preferences;
 
 public class Feed {
+    private Preferences preferences;
     private List<Message> entries = new ArrayList<Message>();
     private URL url;
     private IPersonService personService;
@@ -29,23 +32,11 @@ public class Feed {
         this.personService = new DevPersonService();
         this.facultyService = new DevFacultyService();
         this.appointmentService = new DevAppointmentService();
+
+
     }
 
-    public Feed(URL url, IPersonService personService, IFacultyService facultyService, IAppointmentService appointmentService) {
-        this.url = url;
-        this.personService = personService;
-        this.facultyService = facultyService;
-        this.appointmentService = appointmentService;
-    }
-
-    public Feed(URL url) {
-        this.url = url;
-        this.personService = new DevPersonService();
-        this.facultyService = new DevFacultyService();
-        this.appointmentService = new DevAppointmentService();
-    }
-
-    private String readContentFromURL(URL url) throws IOException {
+   private String readContentFromURL(URL url) throws IOException {
         StringBuilder stringBuildeb = new StringBuilder();
         String line;
 
@@ -76,33 +67,6 @@ public class Feed {
         }
     }
 
-
-    /*
-    public void fetch() throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
-
-        InputStream inputStream = url.openStream();
-
-        try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-            while ((line = reader.readLine()) != null) {
-                stringBuilder.append(line).append(System.lineSeparator());
-            }
-        } finally {
-            inputStream.close();
-        }
-
-        String content = stringBuilder.toString();
-
-        // json file could fail
-        JSONObject jsonObject = new JSONObject(content);
-
-        List<Message> messages = JsonMessageParser.parseJsonFile(jsonObject);
-
-        entries = JsonMessageParser.parseJsonFile(jsonObject);
-    }
-    */
     public void buildFeed() {
         int index = 0;
         for (Message entry : entries) {
