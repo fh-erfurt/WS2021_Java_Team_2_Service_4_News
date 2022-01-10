@@ -109,7 +109,7 @@ public class JsonMessageParserTest {
         Assertions.assertEquals(1, message.getAuthor());
         Assertions.assertEquals("title", message.getTitle());
         Assertions.assertEquals("content", message.getContent());
-        Assertions.assertEquals("2021-12-31 23:59", message.getPublishedAt());
+        Assertions.assertEquals("2021-12-31T23:59", message.getPublishedAt().toString());
     }
 
 }

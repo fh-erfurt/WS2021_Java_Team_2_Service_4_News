@@ -5,8 +5,10 @@ import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -20,15 +22,14 @@ class SortTest {
     @Test
     void sortByDateAsc() {
         //given
-        Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-        given.fetch();
+        List<Message> messages = TestResources.getTestMessageList();
         Sort sort = new Sort();
 
         //when
-        sort.sortByDateAsc(given.getEntries());
+        sort.sortByDateAsc(messages);
 
         //then
-        Assertions.assertThat(given.getEntries())
+        Assertions.assertThat(messages)
                 .isNotEmpty()
                 .hasSize(5)
                 .doesNotHaveDuplicates()
@@ -38,15 +39,15 @@ class SortTest {
     @Test
     void sortByDateDesc() {
         //given
-        Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-        given.fetch();
+        List<Message> messages = TestResources.getTestMessageList();
+
         Sort sort = new Sort();
 
         //when
-        sort.sortByDateDesc(given.getEntries());
+        sort.sortByDateDesc(messages);
 
         //then
-        Assertions.assertThat(given.getEntries())
+        Assertions.assertThat(messages)
                 .isNotEmpty()
                 .hasSize(5)
                 .doesNotHaveDuplicates()
@@ -56,15 +57,14 @@ class SortTest {
     @Test
     void sortByAppointmentAsc() {
         //given
-        Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-        given.fetch();
+        List<Message> messages = TestResources.getTestMessageList();
         Sort sort = new Sort();
 
         //when
-        sort.sortByAppointmentAsc(given.getEntries());
+        sort.sortByAppointmentAsc(messages);
 
         //then
-        Assertions.assertThat(given.getEntries())
+        Assertions.assertThat(messages)
                 .isNotEmpty()
                 .hasSize(5)
                 .doesNotHaveDuplicates()
@@ -74,15 +74,14 @@ class SortTest {
     @Test
     void sortByAppointmentDesc() {
         //given
-        Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-        given.fetch();
+        List<Message> messages = TestResources.getTestMessageList();
         Sort sort = new Sort();
 
         //when
-        sort.sortByAppointmentDesc(given.getEntries());
+        sort.sortByAppointmentDesc(messages);
 
         //then
-        Assertions.assertThat(given.getEntries())
+        Assertions.assertThat(messages)
                 .isNotEmpty()
                 .hasSize(5)
                 .doesNotHaveDuplicates()
@@ -92,37 +91,37 @@ class SortTest {
     @Test
     void sortByAuthorAZ() {
         //given
-        Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-        given.fetch();
+        List<Message> messages = TestResources.getTestMessageList();
         Sort sort = new Sort();
+        DevPersonService devPersonService = new DevPersonService();
 
         //when
-        sort.sortByAuthorAZ(given.getEntries(), given.getPersonService());
+        sort.sortByAuthorAZ(messages, devPersonService);
 
         //then
-        Assertions.assertThat(given.getEntries())
+        Assertions.assertThat(messages)
                 .isNotEmpty()
                 .hasSize(5)
                 .doesNotHaveDuplicates()
-                .isSortedAccordingTo(new MessageAuthorComparator(given.getPersonService()));
+                .isSortedAccordingTo(new MessageAuthorComparator(devPersonService));
     }
 
     @Test
     void sortByAuthorZA() {
         //given
-        Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-        given.fetch();
+        List<Message> messages = TestResources.getTestMessageList();
+        DevPersonService devPersonService = new DevPersonService();
         Sort sort = new Sort();
 
         //when
-        sort.sortByAuthorZA(given.getEntries(), given.getPersonService());
+        sort.sortByAuthorZA(messages, devPersonService);
 
         //then
-        Assertions.assertThat(given.getEntries())
+        Assertions.assertThat(messages)
                 .isNotEmpty()
                 .hasSize(5)
                 .doesNotHaveDuplicates()
-                .isSortedAccordingTo(Collections.reverseOrder(new MessageAuthorComparator(given.getPersonService())));
+                .isSortedAccordingTo(Collections.reverseOrder(new MessageAuthorComparator(devPersonService)));
     }
 
     /**
@@ -130,18 +129,16 @@ class SortTest {
     * */
 
     @Test
-
     void sortByTopicAsc() {
         //given
-        Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-        given.fetch();
+        List<Message> messages = TestResources.getTestMessageList();
         Sort sort = new Sort();
 
         //when
-        sort.sortByTopicAsc(given.getEntries());
+        sort.sortByTopicAsc(messages);
 
         //then
-        Assertions.assertThat(given.getEntries())
+        Assertions.assertThat(messages)
                 .isNotEmpty()
                 .hasSize(5)
                 .doesNotHaveDuplicates()
@@ -152,15 +149,14 @@ class SortTest {
 
     void sortByTopicDesc() {
         //given
-        Feed given = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-        given.fetch();
+        List<Message> messages = TestResources.getTestMessageList();
         Sort sort = new Sort();
 
         //when
-        sort.sortByTopicDesc(given.getEntries());
+        sort.sortByTopicDesc(messages);
 
         //then
-        Assertions.assertThat(given.getEntries())
+        Assertions.assertThat(messages)
                 .isNotEmpty()
                 .hasSize(5)
                 .doesNotHaveDuplicates()

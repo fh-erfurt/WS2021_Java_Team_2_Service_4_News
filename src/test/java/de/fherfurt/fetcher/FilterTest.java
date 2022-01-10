@@ -1,25 +1,31 @@
 package de.fherfurt.fetcher;
 
 import org.assertj.core.api.Assertions;
+import org.assertj.core.internal.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.Test;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 import java.io.IOException;
 import java.net.URL;
+import java.security.MessageDigestSpi;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FilterTest {
+
     @Test
     void filterByAuthorTest() {
-        Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-        feed.fetch();
-
+        //given
         Filter filter = new Filter();
+        List<Message> messages = TestResources.getTestMessageList();
 
-        List<Message> messages = feed.getEntries();
-
+        //when
         List<Message> filteredMessages = filter.filterByAuthor(messages, 1);
 
+        //then
         Assertions.assertThat(filteredMessages)
                 .isNotEmpty()
                 .hasSize(1);
@@ -31,15 +37,14 @@ public class FilterTest {
 
     @Test
     void filterByBlacklistedAuthor() {
-        Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-        feed.fetch();
-
+        //given
         Filter filter = new Filter();
+        List<Message> messages = TestResources.getTestMessageList();
 
-        List<Message> messages = feed.getEntries();
-
+        //when
         List<Message> filteredMessages = filter.filterByBlacklistedAuthor(messages, 1);
 
+        //then
         Assertions.assertThat(filteredMessages)
                 .isNotEmpty()
                 .hasSize(4);
@@ -54,16 +59,15 @@ public class FilterTest {
      */
 
     @Test
-    void filterByFaculty(){
-        Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_fac.json");
-        feed.fetch();
-
+    void filterByFaculty() {
+        //given
         Filter filter = new Filter();
+        List<Message> messages = TestResources.getTestMessageList();
 
-        List<Message> messages = feed.getEntries();
-
+        //when
         List<Message> filteredMessages = filter.filterByFaculty(messages, "Gebaeudetechnik_und_Informatik");
 
+        //then
         Assertions.assertThat(filteredMessages)
                 .isNotEmpty()
                 .hasSize(2);
@@ -76,16 +80,15 @@ public class FilterTest {
     }
 
     @Test
-    void filterByFacultyAndGlobalNews(){
-        Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_fac.json");
-        feed.fetch();
-
+    void filterByFacultyAndGlobalNews() {
+        //given
         Filter filter = new Filter();
+        List<Message> messages = TestResources.getTestMessageList();
 
-        List<Message> messages = feed.getEntries();
-
+        //when
         List<Message> filteredMessages = filter.filterByFacultyAndGlobalNews(messages, "Gebaeudetechnik_und_Informatik");
 
+        //then
         Assertions.assertThat(filteredMessages)
                 .isNotEmpty()
                 .hasSize(3);
@@ -100,193 +103,175 @@ public class FilterTest {
      */
     @Test
     void removeMessagesFromFaculty() {
-        Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/927553911387213844/messages_fac.json");
-        feed.fetch();
-
+        //given
         Filter filter = new Filter();
+        List<Message> messages = TestResources.getTestMessageList();
 
-        List<Message> messages = feed.getEntries();
-
+        //when
         filter.removeMessagesFromFaculty(messages, "Gebaeudetechnik_und_Informatik");
 
+        //then
         Assertions.assertThat(messages).isNotEmpty().hasSize(3);
 
         for (Message message : messages) {
             org.junit.jupiter.api.Assertions.assertFalse(message.hasFaculty("Gebaeudetechnik_und_Informatik"));
         }
     }
-}
 
+    /**
+     * author: Celina Ludwigs
+     *
+    */
+    @Test
+    void filterByAppointmentName() {
+        Filter filter = new Filter();
+        List<Message> messages = TestResources.getTestMessageList();
 
-// @Test code snippet
-  /**
-       * author: Celina Ludwigs
-       */
-       /*
-       /*appointmentName, publishedAt, AppointmentDateTime,Topic*/
-//Testanfang
-      void filterByAppointmentName(){
-          Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-          feed.fetch();
+        List<Message> filteredMessages = filter.filterByAppointmentName(messages, "Helden basteln");
 
-          Filter filter = new Filter();
+        Assertions.assertThat(filteredMessages)
+                .isNotEmpty()
+                .hasSize(1);
 
-          List<Message> messages = feed.getEntries();
-
-          List<Message> filteredMessages = filter.filterByAppointmentName(messages, "Helden basteln");
-
-          Assertions.assertThat(filteredMessages)
-                  .isNotEmpty()
-                  .hasSize(1);
-
-          for (Message message : filteredMessages) {
-              org.junit.jupiter.api.Assertions.assertTrue(message.hasAppointmentName("Helden basteln"));
-          }
-      }
-
-
-      @Test
-      void filterByBlacklistedAppointmentName() {
-          Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-          feed.fetch();
-
-          Filter filter = new Filter();
-
-          List<Message> messages = feed.getEntries();
-           List<Message> filteredMessages = filter.filterByBlacklistedAppointmentName(messages, "Abschlussveranstaltung des Zertifikatskurses 'Gastechnik und Gasversorgung (FH)'");
-
-
-          Assertions.assertThat(filteredMessages)
-          .isNotEmpty()
-          .hasSize(4); // oder 1,da andere messages ohne appointmentName
-
-          for (Message message : filteredMessages) {
-              org.junit.jupiter.api.Assertions.assertFalse(message.hasAppointmentName("Abschlussveranstaltung des Zertifikatskurses 'Gastechnik und Gasversorgung (FH)'"));
-          }
-      }
-  }
------------------------------------------------------------------------------------------------------------------------
- void filterByPublishedAt(){
-          Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-          feed.fetch();
-
-          Filter filter = new Filter();
-
-          List<Message> messages = feed.getEntries();
-
-          List<Message> filteredMessages = filter.filterByPublishedAt(messages, "2021-12-08 09:30");
-
-          Assertions.assertThat(filteredMessages)
-                  .isNotEmpty()
-                  .hasSize(1);
-
-          for (Message message : filteredMessages) {
-              org.junit.jupiter.api.Assertions.assertTrue(message.hasPublishedAt("2021-12-08 09:30"));
-          }
-      }
-
-
-      @Test
-      void filterByBlacklistedPublishedAt() {
-          Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-          feed.fetch();
-
-          Filter filter = new Filter();
-
-          List<Message> messages = feed.getEntries();
-           List<Message> filteredMessages = filter.filterByBlacklistedPublishedAt(messages, "2021-10-02 17:42");
-
-
-          Assertions.assertThat(filteredMessages)
-          .isNotEmpty()
-          .hasSize(4);
-
-          for (Message message : filteredMessages) {
-              org.junit.jupiter.api.Assertions.assertFalse(message.hasPublishedAt("2021-10-02 17:42"));
-          }
-      }
-  }
-
-  ---------------------------------------------------------------------------------------------------------------------
-   void filterByAppointmentDateTime(){
-            Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-            feed.fetch();
-
-            Filter filter = new Filter();
-
-            List<Message> messages = feed.getEntries();
-
-            List<Message> filteredMessages = filter.filterByAppointmentDateTime(messages, "2021-12-12 14:00");
-
-            Assertions.assertThat(filteredMessages)
-                    .isNotEmpty()
-                    .hasSize(1);
-
-            for (Message message : filteredMessages) {
-                org.junit.jupiter.api.Assertions.assertTrue(message.hasAppointmentDateTime("2021-12-12 14:00"));
-            }
-        }
-
-
-        @Test
-        void filterByBlacklistedAppointmentDateTime() {
-            Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-            feed.fetch();
-
-            Filter filter = new Filter();
-
-            List<Message> messages = feed.getEntries();
-             List<Message> filteredMessages = filter.filterByBlacklistedAppointmentDateTime(messages, "2021-11-25 17:00");
-
-
-            Assertions.assertThat(filteredMessages)
-            .isNotEmpty()
-            .hasSize(4); //oder 1,da andere messages ohne appointmentDateTime
-
-            for (Message message : filteredMessages) {
-                org.junit.jupiter.api.Assertions.assertFalse(message.hasAppointmentDateTime("2021-11-25 17:00"));
-            }
+        for (Message message : filteredMessages) {
+            org.junit.jupiter.api.Assertions.assertTrue(message.matchesAppointmentName("Helden basteln"));
         }
     }
 
-    -------------------------------------------------------------------------------------------------------------------
-        void filterByTopic(){
-                    Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-                    feed.fetch();
-
-                    Filter filter = new Filter();
-
-                    List<Message> messages = feed.getEntries();
-
-                    List<Message> filteredMessages = filter.filterByTopic(messages, "Wissenschaft und Forschung");
-
-                    Assertions.assertThat(filteredMessages)
-                            .isNotEmpty()
-                            .hasSize(2);
-
-                    for (Message message : filteredMessages) {
-                        org.junit.jupiter.api.Assertions.assertTrue(message.hasTopic("Wissenschaft und Forschung"));
-                    }
-                }
+    @Test
+    void filterByBlacklistedAppointmentName() {
+        FilterTest.java
+        Filter filter = new Filter();
 
 
-                @Test
-                void filterByBlacklistedTopic() {
-                    Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
-                    feed.fetch();
+        List<Message> filteredMessages = filter.filterByBlacklistedAppointmentName(messages, "Abschlussveranstaltung des Zertifikatskurses 'Gastechnik und Gasversorgung (FH)'");
 
-                    Filter filter = new Filter();
+        Assertions.assertThat(filteredMessages)
+                .isNotEmpty()
+                .hasSize(4); // oder 1,da andere messages ohne appointmentName
 
-                    List<Message> messages = feed.getEntries();
-                     List<Message> filteredMessages = filter.filterByBlacklistedTopic(messages, "Architektur");
+        for (Message message : filteredMessages) {
+            org.junit.jupiter.api.Assertions.assertFalse(message.matchesAppointmentName("Abschlussveranstaltung des Zertifikatskurses 'Gastechnik und Gasversorgung (FH)'"));
+        }
+    }
 
 
-                    Assertions.assertThat(filteredMessages)
-                    .isNotEmpty()
-                    .hasSize(1);
+    @Test
+    void filterByPublishedAt() {
+        //given
+        Filter filter = new Filter();
+        List<Message> messages = TestResources.getTestMessageList();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-                    for (Message message : filteredMessages) {
-                        org.junit.jupiter.api.Assertions.assertFalse(message.hasTopic("Architektur"));
-                    }
-                }
-            }
+        //when
+        List<Message> filteredMessages = filter.filterByPublishedAt(messages, LocalDateTime.parse("2021-12-08 09:30", dateTimeFormatter));
+
+        //then
+        Assertions.assertThat(filteredMessages)
+                .isNotEmpty()
+                .hasSize(1);
+
+        for (Message message : filteredMessages) {
+            org.junit.jupiter.api.Assertions.assertTrue(message.wasPublishedAt(LocalDateTime.parse("2021-12-08 09:30", dateTimeFormatter)));
+        }
+    }
+
+
+    @Test
+    void filterByBlacklistedPublishedAt() {
+        //given
+        Filter filter = new Filter();
+        List<Message> messages = TestResources.getTestMessageList();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        //when
+        List<Message> filteredMessages = filter.filterByBlacklistedPublishedAt(messages, LocalDateTime.parse("2021-10-02 17:42", dateTimeFormatter));
+
+        //then
+        Assertions.assertThat(filteredMessages)
+                .isNotEmpty()
+                .hasSize(4);
+
+        for (Message message : filteredMessages) {
+            org.junit.jupiter.api.Assertions.assertFalse(message.wasPublishedAt(LocalDateTime.parse("2021-10-02 17:42", dateTimeFormatter)));
+        }
+    }
+
+    @Test
+    void filterByAppointmentDateTime() {
+        //given
+        Filter filter = new Filter();
+        List<Message> messages = TestResources.getTestMessageList();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        //when
+        List<Message> filteredMessages = filter.filterByAppointmentDateTime(messages, LocalDateTime.parse("2021-12-12 14:00", dateTimeFormatter));
+
+        //then
+        Assertions.assertThat(filteredMessages)
+                .isNotEmpty()
+                .hasSize(1);
+
+        for (Message message : filteredMessages) {
+            org.junit.jupiter.api.Assertions.assertTrue(message.hasAppointmentDateTime(LocalDateTime.parse("2021-12-12 14:00", dateTimeFormatter)));
+        }
+    }
+
+    @Test
+    void filterByBlacklistedAppointmentDateTime() {
+        //given
+        Filter filter = new Filter();
+        List<Message> messages = TestResources.getTestMessageList();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+        //when
+        List<Message> filteredMessages = filter.filterByBlacklistedAppointmentDateTime(messages, LocalDateTime.parse("2021-11-25 17:00", dateTimeFormatter));
+
+        //then
+        Assertions.assertThat(filteredMessages)
+                .isNotEmpty()
+                .hasSize(4); //oder 1,da andere messages ohne appointmentDateTime
+
+        for (Message message : filteredMessages) {
+            org.junit.jupiter.api.Assertions.assertFalse(message.hasAppointmentDateTime(LocalDateTime.parse("2021-11-25 17:00", dateTimeFormatter)));
+        }
+    }
+
+    @Test
+    void filterByTopic() {
+        //given
+        Filter filter = new Filter();
+        List<Message> messages = TestResources.getTestMessageList();
+
+        //when
+        List<Message> filteredMessages = filter.filterByTopic(messages, "Wissenschaft und Forschung");
+
+        //then
+        Assertions.assertThat(filteredMessages)
+                .isNotEmpty()
+                .hasSize(2);
+
+        for (Message message : filteredMessages) {
+            org.junit.jupiter.api.Assertions.assertTrue(message.hasTopic("Wissenschaft und Forschung"));
+        }
+    }
+
+    @Test
+    void filterByBlacklistedTopic() {
+        //given
+        Filter filter = new Filter();
+        List<Message> messages = TestResources.getTestMessageList();
+
+        //when
+        List<Message> filteredMessages = filter.filterByBlacklistedTopic(messages, "Architektur");
+
+        //then
+        Assertions.assertThat(filteredMessages)
+                .isNotEmpty()
+                .hasSize(4);
+
+        for (Message message : filteredMessages) {
+            org.junit.jupiter.api.Assertions.assertFalse(message.hasTopic("Architektur"));
+        }
+    }
+}

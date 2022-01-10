@@ -77,6 +77,8 @@ public class Message {
         this.publishedAt = publishedAt;
     }
 
+    public boolean wasPublishedAt(LocalDateTime publishedAt) { return this.publishedAt.equals(publishedAt); }
+
     public String getContent() {
         return content;
     }
@@ -91,6 +93,10 @@ public class Message {
 
     public void setTopic(String topic) {
         this.topic = topic;
+    }
+
+    public boolean hasTopic(String topic) {
+        return this.topic.equals(topic);
     }
 
     public String getFaculty() {
@@ -119,6 +125,22 @@ public class Message {
 
     public void setAppointmentDateTime(LocalDateTime appointmentDateTime) {
         this.appointmentDateTime = appointmentDateTime;
+    }
+
+    public boolean hasAppointmentDateTime(LocalDateTime appointmentDateTime) {
+        if (this.appointmentDateTime == null) {
+            return false;
+        }
+
+        return this.appointmentDateTime.equals(appointmentDateTime);
+    }
+
+    public boolean matchesAppointmentName(String appointmentName) {
+        if ((this.appointmentName != null) && (this.appointmentName.contains(appointmentName))) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     public Message(int author, String title, String description, String url, String urlToImage, LocalDateTime publishedAt, String content, String topic, String faculty, String appointmentName, LocalDateTime appointmentDateTime) {
@@ -169,7 +191,7 @@ public class Message {
                 && Objects.equals(publishedAt, message.publishedAt)
                 && Objects.equals(content, message.content)
                 && Objects.equals(topic, message.topic)
-                //&& Objects.equals(faculties, message.faculties)
+                && Objects.equals(faculty, message.faculty)
                 && Objects.equals(appointmentName, message.appointmentName)
                 && Objects.equals(appointmentDateTime, message.appointmentDateTime);
     }
