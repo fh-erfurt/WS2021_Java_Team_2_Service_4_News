@@ -118,13 +118,13 @@ public class FilterTest {
 }
 
 
-/* @Test code snippet
+// @Test code snippet
   /**
        * author: Celina Ludwigs
        */
        /*
        /*appointmentName, publishedAt, AppointmentDateTime,Topic*/
-/*
+//Testanfang
       void filterByAppointmentName(){
           Feed feed = new Feed("https://cdn.discordapp.com/attachments/906109518142918688/921751541982052352/messages2.json");
           feed.fetch();
