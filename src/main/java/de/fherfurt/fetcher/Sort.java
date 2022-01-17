@@ -14,7 +14,7 @@ public class Sort {
     }
     public void sortByDateDesc(List<Message> messages) { Collections.sort(messages,Collections.reverseOrder(new MessageDateComparator())); }
 
-    public void sortByAppointmentAsc(List<Message> messages) { Collections.sort(messages,new MessageAppointmentComparator()); }
+    public void sortByAppointmentAsc(List<Message> messages) { Collections.sort(messages, new MessageAppointmentComparator()); }
     public void sortByAppointmentDesc(List<Message> messages) { Collections.sort(messages,Collections.reverseOrder(new MessageAppointmentComparator())); }
 
     public void sortByAuthorAZ(List<Message> messages, IPersonService personService) { Collections.sort(messages,new MessageAuthorComparator(personService)); }

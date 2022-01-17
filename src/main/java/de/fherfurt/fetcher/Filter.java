@@ -3,6 +3,7 @@ package de.fherfurt.fetcher;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * authors: Lisa Sluka, Lucian Gerasch, Celina Ludwigs & Benjamin Ehnes
@@ -10,23 +11,11 @@ import java.util.List;
 
 public class Filter {
     public List<Message> filterByAuthor(List<Message> messages, int necessaryAuthor) {
-        List<Message> filteredMessages = new ArrayList<Message>();
-        messages.forEach(entry -> {
-            if (entry.hasAuthor(necessaryAuthor)) {
-                filteredMessages.add(entry);
-            }
-        });
-        return filteredMessages;
+        return messages.stream().filter(message -> message.hasAuthor(necessaryAuthor)).collect(Collectors.toList());
     }
 
     public List<Message> filterByBlacklistedAuthor(List<Message> messages, int blacklistedAuthor) {
-        List<Message> filteredMessages = new ArrayList<Message>();
-        messages.forEach(entry -> {
-            if (!entry.hasAuthor(blacklistedAuthor)) {
-                filteredMessages.add(entry);
-            }
-        });
-        return filteredMessages;
+        return messages.stream().filter(message -> !message.hasAuthor(blacklistedAuthor)).collect(Collectors.toList());
     }
 
     public List<Message> filterByFacultyAndGlobalNews(List<Message> messages, String necessaryFaculty) {
