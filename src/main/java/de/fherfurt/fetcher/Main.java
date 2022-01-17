@@ -36,17 +36,24 @@ public class Main {
 
         // Sorting the feed
 
-        //sort.sortByDateAsc(feed.entries);
+        System.out.println(feed.getEntries());
+
+
+        //feed.buildFeed();
+
         //sort.sortByAppointmentDesc(feed.entries);
 
-        sort.sortByAppointmentAsc(feed.getEntries());
-        //feed.buildFeed();
-        sort.sortByAppointmentDesc(feed.getEntries());
+        //sort.sortByAppointmentAsc(feed.getEntries());
+
         //feed.buildFeed();
 
-        List<Message> messages = filter.filterByFaculty(feed.getEntries(), "Gebaeudetechnik_und_Informatik");
+        //sort.sortByAppointmentDesc(feed.getEntries());
 
-        System.out.println(messages);
+        //feed.buildFeed();
+
+        //List<Message> messages = filter.filterByFaculty(feed.getEntries(), "Gebaeudetechnik_und_Informatik");
+
+        //System.out.println(messages);
 
         //feed.buildFeed();
 

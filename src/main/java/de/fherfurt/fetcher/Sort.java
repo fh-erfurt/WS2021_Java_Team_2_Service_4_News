@@ -3,6 +3,7 @@ package de.fherfurt.fetcher;
 import java.util.Collections;
 import java.util.List;
 import java.util.Comparator;
+import java.util.stream.Collectors;
 
 /**
  * authors: Lisa Sluka, Lucian Gerasch, Benjamin Ehnes, Antonia Geschke
@@ -10,9 +11,14 @@ import java.util.Comparator;
 
 public class Sort {
     public void sortByDateAsc(List<Message> messages){
-        Collections.sort(messages,new MessageDateComparator());
+        messages.sort(Comparator.comparing(Message::getPublishedAt));
     }
-    public void sortByDateDesc(List<Message> messages) { Collections.sort(messages,Collections.reverseOrder(new MessageDateComparator())); }
+
+    public void sortByDateDesc(List<Message> messages) {
+        //return messages.stream().sorted(Comparator.comparing(Message::getPublishedAt).reversed()).collect(Collectors.toList());
+
+        messages.sort(Comparator.comparing(Message::getPublishedAt).reversed());
+    }
 
     public void sortByAppointmentAsc(List<Message> messages) { Collections.sort(messages, new MessageAppointmentComparator()); }
     public void sortByAppointmentDesc(List<Message> messages) { Collections.sort(messages,Collections.reverseOrder(new MessageAppointmentComparator())); }
