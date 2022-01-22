@@ -5,8 +5,62 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>de.fherfurt</groupId>
-    <artifactId>fetcher</artifactId>
+    <artifactId>news</artifactId>
     <version>1.0.0.0-SNAPSHOT</version>
+
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>news-client</module>
+        <module>faculty-client</module>
+        <module>persons-client</module>
+        <module>appointment-client</module>
+    </modules>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- internal modules dependencies -->
+            <dependency>
+                <groupId>de.fherfurt</groupId>
+                <artifactId>news-client</artifactId>
+                <version>1.0.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.fherfurt</groupId>
+                <artifactId>faculty-client</artifactId>
+                <version>1.0.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.fherfurt</groupId>
+                <artifactId>persons-client</artifactId>
+                <version>1.0.0.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>de.fherfurt</groupId>
+                <artifactId>appointment-client</artifactId>
+                <version>1.0.0.0-SNAPSHOT</version>
+            </dependency>
+
+            <!-- external modules dependencies -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>5.8.2</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.assertj</groupId>
+                <artifactId>assertj-core</artifactId>
+                <version>3.22.0</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.json</groupId>
+                <artifactId>json</artifactId>
+                <version>20210307</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <build>
         <plugins>
             <plugin>
@@ -24,24 +78,4 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
     </properties>
-
-    <dependencies>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.8.1</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.assertj</groupId>
-            <artifactId>assertj-core</artifactId>
-            <version>3.21.0</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.json</groupId>
-            <artifactId>json</artifactId>
-            <version>20210307</version>
-        </dependency>
-    </dependencies>
 </project>
