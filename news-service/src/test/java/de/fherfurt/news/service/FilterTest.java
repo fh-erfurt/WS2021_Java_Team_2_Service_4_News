@@ -1,9 +1,8 @@
-package de.fherfurt.news.client;
+package de.fherfurt.news.service;
 
-import de.fherfurt.news.client.Filter;
-import de.fherfurt.news.client.Message;
+import de.fherfurt.news.service.Filter;
+import de.fherfurt.news.service.Message;
 import org.assertj.core.api.Assertions;
-import org.assertj.core.internal.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;

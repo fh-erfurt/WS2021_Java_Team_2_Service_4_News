@@ -1,4 +1,4 @@
-package de.fherfurt.news.client;
+package de.fherfurt.news.service;
 
 public enum Severity {
     INFORMATIONAL,

@@ -1,4 +1,4 @@
-package de.fherfurt.news.client;
+package de.fherfurt.news.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

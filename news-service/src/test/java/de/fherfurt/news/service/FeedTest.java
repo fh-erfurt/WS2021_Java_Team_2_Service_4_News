@@ -1,6 +1,6 @@
-package de.fherfurt.news.client;
+package de.fherfurt.news.service;
 
-import de.fherfurt.news.client.Feed;
+import de.fherfurt.news.service.Feed;
 
 import org.assertj.core.api.Assertions;
 

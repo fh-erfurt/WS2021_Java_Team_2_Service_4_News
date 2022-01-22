@@ -1,14 +1,15 @@
-package de.fherfurt.news.client;
+package de.fherfurt.news.service;
 
-import de.fherfurt.persons.client.DevPersonService;
+import de.fherfurt.news.service.Message;
+
 import de.fherfurt.persons.client.IPersonService;
 import de.fherfurt.faculty.client.IFacultyService;
 
+import de.fherfurt.persons.client.DevPersonService;
 import de.fherfurt.faculty.client.DevFacultyService;
 
 import de.fherfurt.appointment.client.IAppointmentService;
 import de.fherfurt.appointment.client.DevAppointmentService;
-
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,6 +24,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.prefs.Preferences;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Feed {
     private Preferences preferences;
     private List<Message> entries = new ArrayList<Message>();
@@ -30,6 +34,8 @@ public class Feed {
     private IPersonService personService;
     private IFacultyService facultyService;
     private IAppointmentService appointmentService;
+
+    private static final Logger logger = LoggerFactory.getLogger("FeedLogger");
 
     public Feed(String url) {
         try {
@@ -78,21 +84,22 @@ public class Feed {
 
     public void buildFeed() {
         int index = 0;
+
         for (Message entry : entries) {
-            System.out.println("\n---------- Message " + index++ + " ----------");
-            System.out.println("Author: " + personService.getPersonFromId(entry.getAuthor()).getName());
-            System.out.println("Author-E-Mail: " + personService.getPersonFromId(entry.getAuthor()).getEmail());
-            System.out.println("Title: " + entry.getTitle());
-            System.out.println("Description: " + entry.getDescription());
-            System.out.println("URL: " + entry.getUrl());
-            System.out.println("ImageURL: " + entry.getUrlToImage());
-            System.out.println("Published at: " + entry.getPublishedAt());
-            System.out.println("Content: " + entry.getContent());
-            System.out.println("Topic: " + entry.getTopic());
-            System.out.println("Faculty: " + entry.getFaculty());
-            System.out.println("Faculty-Address: " + facultyService.getFacultyByName(entry.getFaculty()).getAddress());
-            System.out.println("Name of appointment: " + entry.getAppointmentName());
-            System.out.println("Date of appointment: " + entry.getAppointmentDateTime());
+            logger.info("\n---------- Message " + index++ + " ----------");
+            logger.info("Author: " + personService.getPersonFromId(entry.getAuthor()).getName());
+            logger.info("Author-E-Mail: " + personService.getPersonFromId(entry.getAuthor()).getEmail());
+            logger.info("Title: " + entry.getTitle());
+            logger.info("Description: " + entry.getDescription());
+            logger.info("URL: " + entry.getUrl());
+            logger.info("ImageURL: " + entry.getUrlToImage());
+            logger.info("Published at: " + entry.getPublishedAt());
+            logger.info("Content: " + entry.getContent());
+            logger.info("Topic: " + entry.getTopic());
+            logger.info("Faculty: " + entry.getFaculty());
+            logger.info("Faculty-Address: " + facultyService.getFacultyByName(entry.getFaculty()).getAddress());
+            logger.info("Name of appointment: " + entry.getAppointmentName());
+            logger.info("Date of appointment: " + entry.getAppointmentDateTime());
         }
     }
 
@@ -100,6 +107,8 @@ public class Feed {
         for (Message entry : entries) {
             if (entry.hasAppointmentAssociated()) {
                 appointmentService.createAppointment(entry.getAppointmentName(), entry.getAppointmentDateTime());
+
+                logger.info("Created an appointment!");
             }
         }
     }

@@ -1,4 +1,4 @@
-package de.fherfurt.news.client;
+package de.fherfurt.news.service;
 
 import de.fherfurt.persons.client.DevPersonService;
 
@@ -8,6 +8,7 @@ import de.fherfurt.appointment.client.DevAppointmentService;
 
 import java.io.IOException;
 
+@Deprecated
 public class Main {
     public static void main(String[] args) throws IOException {
         // Initializing
@@ -37,7 +38,7 @@ public class Main {
 
         // Sorting the feed
 
-        System.out.println(feed.getEntries());
+        feed.buildFeed();
 
 
         //feed.buildFeed();

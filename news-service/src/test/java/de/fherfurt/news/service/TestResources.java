@@ -1,6 +1,6 @@
-package de.fherfurt.news.client;
+package de.fherfurt.news.service;
 
-import de.fherfurt.news.client.Message;
+import de.fherfurt.news.service.Message;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

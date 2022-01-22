@@ -1,4 +1,4 @@
-package de.fherfurt.news.client.src.test.java.de.fherfurt.fetcher;
+package de.fherfurt.news.service;
 
 import java.util.ArrayList;
 
