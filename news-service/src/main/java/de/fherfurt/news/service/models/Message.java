@@ -1,4 +1,4 @@
-package de.fherfurt.news.service;
+package de.fherfurt.news.service.models;
 
 import lombok.*;
 

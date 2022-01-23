@@ -1,6 +1,6 @@
 package de.fherfurt.news.service;
 
-import de.fherfurt.news.service.Message;
+import de.fherfurt.news.service.models.Message;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

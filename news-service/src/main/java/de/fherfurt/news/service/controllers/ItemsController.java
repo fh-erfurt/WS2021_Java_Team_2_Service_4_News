@@ -1,4 +1,9 @@
-package de.fherfurt.news.service;
+package de.fherfurt.news.service.controllers;
+
+import de.fherfurt.news.service.ActionResult;
+import de.fherfurt.news.service.controllers.IController;
+import de.fherfurt.news.service.persistence.Database;
+import de.fherfurt.news.service.models.Message;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -16,12 +21,24 @@ public class ItemsController implements IController {
                 .withPublishedAt(LocalDateTime.now())
                 .build()
         );
+
+        database.insert(Message.builder()
+                .withAuthor(2)
+                .withContent("Hello")
+                .withPublishedAt(LocalDateTime.now())
+                .build()
+        );
     }
 
     @SuppressWarnings("unchecked")
     @Override
-    public List<Message> getItems(Predicate<Message>... predicates) {
-        return database.getItems(predicates);
+    public List<Message> getItems(Integer amount, Predicate<Message>... predicates) {
+        return database.getItems(amount, predicates);
+    }
+
+    @Override
+    public void insert(Message message) {
+        database.insert(message);
     }
 
     public ActionResult updateItem(UUID uuid, Message message) {

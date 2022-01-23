@@ -1,6 +1,6 @@
 package de.fherfurt.news.service;
 
-import de.fherfurt.news.service.Message;
+import de.fherfurt.news.service.models.Message;
 
 import de.fherfurt.persons.client.IPersonService;
 import de.fherfurt.faculty.client.IFacultyService;

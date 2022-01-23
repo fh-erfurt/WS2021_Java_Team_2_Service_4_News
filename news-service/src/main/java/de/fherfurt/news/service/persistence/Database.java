@@ -1,13 +1,12 @@
-package de.fherfurt.news.service;
+package de.fherfurt.news.service.persistence;
 
+import de.fherfurt.news.service.models.Message;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Database implements IRepository<Message> {
@@ -23,15 +22,22 @@ public class Database implements IRepository<Message> {
         return instance;
     }
 
+    @SafeVarargs
     @Override
-    public List<Message> getItems(Predicate<Message>... predicates) {
+    public final List<Message> getItems(Integer amount, Predicate<Message>... predicates) {
         // unfold all variadic templates
         List<Predicate<Message>> expandedPredicates = Arrays.stream(predicates).toList();
 
         // filter all messages using the templates
-        return cache.values().stream()
+        List<Message> messages = cache.values().stream()
                 .filter(expandedPredicates.stream().reduce(predicate -> true, Predicate::and))
-                .collect(Collectors.toList());
+                .toList();
+
+        if (amount != 0) {
+            return messages.subList(0, amount > messages.size() ? messages.size() : amount);
+        }
+
+        return messages;
     }
 
     @Override
@@ -69,4 +75,6 @@ public class Database implements IRepository<Message> {
     public void clearCache() {
         // TODO: implement!
     }
+
+
 }

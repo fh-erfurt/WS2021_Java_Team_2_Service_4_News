@@ -1,8 +1,7 @@
 
 package de.fherfurt.news.service;
 
-import de.fherfurt.news.service.JsonMessageParser;
-import de.fherfurt.news.service.Message;
+import de.fherfurt.news.service.models.Message;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 

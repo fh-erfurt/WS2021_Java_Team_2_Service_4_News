@@ -1,4 +1,6 @@
-package de.fherfurt.news.service;
+package de.fherfurt.news.service.persistence;
+
+import de.fherfurt.news.service.models.Message;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,7 +16,7 @@ public interface IRepository<T> {
      *
      * @return returns a list of entities.
      */
-    public List<T> getItems(Predicate<Message>... predicates);
+    public List<T> getItems(Integer amount, Predicate<Message>... predicates);
 
     /**
      * Function used to retrieve a single item from the repository.

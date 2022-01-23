@@ -1,5 +1,7 @@
 package de.fherfurt.news.service;
 
+import de.fherfurt.news.service.models.Message;
+
 import java.util.Comparator;
 
 public class MessageAppointmentComparator implements Comparator<Message> {

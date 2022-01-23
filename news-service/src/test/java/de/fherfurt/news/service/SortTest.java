@@ -1,5 +1,6 @@
 package de.fherfurt.news.service;
 
+import de.fherfurt.news.service.models.Message;
 import de.fherfurt.persons.client.DevPersonService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;

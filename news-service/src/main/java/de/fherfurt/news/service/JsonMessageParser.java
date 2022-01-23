@@ -1,5 +1,6 @@
 package de.fherfurt.news.service;
 
+import de.fherfurt.news.service.models.Message;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

@@ -1,5 +1,7 @@
 package de.fherfurt.news.service;
 
+import de.fherfurt.news.service.controllers.ItemsController;
+import de.fherfurt.news.service.models.Message;
 import de.fherfurt.persons.client.DevPersonService;
 
 import de.fherfurt.faculty.client.DevFacultyService;
@@ -7,11 +9,7 @@ import de.fherfurt.faculty.client.DevFacultyService;
 import de.fherfurt.appointment.client.DevAppointmentService;
 
 import java.io.IOException;
-import java.lang.reflect.Array;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Predicate;
 
 @Deprecated
 public class  Main {
@@ -74,7 +72,13 @@ public class  Main {
 
         ItemsController itemsController = new ItemsController();
 
-        List<Message> messages = itemsController.getItems(message -> message.getAuthor() == 1, message -> message.getPublishedAt().isAfter(LocalDateTime.now()));
+        itemsController.insert(Message.builder().withAuthor(1).withContent("Peace").build());
+        itemsController.insert(Message.builder().withAuthor(2).withContent("Peace").build());
+        itemsController.insert(Message.builder().withAuthor(3).withContent("Peace").build());
+        itemsController.insert(Message.builder().withAuthor(4).withContent("Peace").build());
+        itemsController.insert(Message.builder().withAuthor(5).withContent("Peace").build());
+
+        List<Message> messages = itemsController.getItems(10, message -> message.getAuthor() > 1);
 
         for (Message each : messages) {
             System.out.println(each);

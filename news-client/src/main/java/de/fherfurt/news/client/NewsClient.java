@@ -15,7 +15,6 @@ public class NewsClient {
 
     public record Message(
             Integer Author,
-            int author,
             String title,
             String description,
             String url,
@@ -34,6 +33,9 @@ public class NewsClient {
         CompletableFuture.runAsync(() -> {
             // TODO: implement http fetch!
         });
+
+        Message message = new Message(1, null, null, null, null, null, null, null, null, null, null);
+
 
         return new ArrayList<Message>();
     }
