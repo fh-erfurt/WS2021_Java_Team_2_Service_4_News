@@ -7,9 +7,14 @@ import de.fherfurt.faculty.client.DevFacultyService;
 import de.fherfurt.appointment.client.DevAppointmentService;
 
 import java.io.IOException;
+import java.lang.reflect.Array;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
 
 @Deprecated
-public class Main {
+public class  Main {
     public static void main(String[] args) throws IOException {
         // Initializing
         Sort sort = new Sort();
@@ -67,6 +72,12 @@ public class Main {
         //filter.filterByAuthor(feed.entries,"Insert necessary Author");
         //filter.blacklistAuthor(feed.entries,"Enter blacklisted Author");
 
+        ItemsController itemsController = new ItemsController();
 
+        List<Message> messages = itemsController.getItems(message -> message.getAuthor() == 1, message -> message.getPublishedAt().isAfter(LocalDateTime.now()));
+
+        for (Message each : messages) {
+            System.out.println(each);
+        }
     }
 }
