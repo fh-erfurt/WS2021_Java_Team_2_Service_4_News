@@ -5,6 +5,7 @@ import de.fherfurt.news.service.core.models.Message;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 /**
@@ -12,6 +13,32 @@ import java.util.stream.Collectors;
  */
 
 public class Filter {
+    enum FilterType {
+        AND,
+        OR
+    }
+
+    List<Predicate<Message>> predicates = new ArrayList<Predicate<Message>>();
+
+    public void withAuthor(int author) {
+        predicates.add(message -> message.getAuthor() == author);
+    }
+
+    public void withDateBefore(LocalDateTime localDateTime) {
+        predicates.add(message -> message.getPublishedAt().isBefore(localDateTime));
+    }
+
+    public void withTopic(String topic) {
+        predicates.add(message -> message.getTopic().equals(topic));
+    }
+
+    public Predicate<Message> build() {
+        return predicates.stream()
+                .reduce(Predicate::and)
+                .orElse(x -> true);
+    }
+
+
     /*
     public List<Message> filterByAuthor(List<Message> messages, int necessaryAuthor) {
         return messages.stream().filter(message -> message.hasAuthor(necessaryAuthor)).collect(Collectors.toList());

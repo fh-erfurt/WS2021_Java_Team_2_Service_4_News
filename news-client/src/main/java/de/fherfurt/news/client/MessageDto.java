@@ -24,4 +24,21 @@ public class MessageDto {
     private String faculty;
     private String appointmentName;
     private LocalDateTime appointmentDateTime;
+
+    @Override
+    public String toString() {
+        return "MessageDto{" +
+                "id=" + id +
+                ", author=" + author +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", url='" + url + '\'' +
+                ", publishedAt=" + publishedAt +
+                ", content='" + content + '\'' +
+                ", topic='" + topic + '\'' +
+                ", faculty='" + faculty + '\'' +
+                ", appointmentName='" + appointmentName + '\'' +
+                ", appointmentDateTime=" + appointmentDateTime +
+                '}';
+    }
 }

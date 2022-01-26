@@ -14,4 +14,5 @@ public class UserPreferencesDto {
     int id;
     private List<Integer> ignoredAuthors;
     private List<String> preferredFaculty;
+    private boolean sendPushMessages;
 }
