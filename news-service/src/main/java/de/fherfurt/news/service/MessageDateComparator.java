@@ -1,6 +1,6 @@
 package de.fherfurt.news.service;
 
-import de.fherfurt.news.service.models.Message;
+import de.fherfurt.news.service.core.models.Message;
 
 import java.util.Comparator;
 

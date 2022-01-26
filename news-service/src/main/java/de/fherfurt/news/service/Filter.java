@@ -1,6 +1,6 @@
 package de.fherfurt.news.service;
 
-import de.fherfurt.news.service.models.Message;
+import de.fherfurt.news.service.core.models.Message;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
  */
 
 public class Filter {
+    /*
     public List<Message> filterByAuthor(List<Message> messages, int necessaryAuthor) {
         return messages.stream().filter(message -> message.hasAuthor(necessaryAuthor)).collect(Collectors.toList());
     }
@@ -126,4 +127,6 @@ public class Filter {
         });
         return filteredMessages;
     }
+    */
+
 }

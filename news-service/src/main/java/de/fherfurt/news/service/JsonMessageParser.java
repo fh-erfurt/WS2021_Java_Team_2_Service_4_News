@@ -1,6 +1,6 @@
 package de.fherfurt.news.service;
 
-import de.fherfurt.news.service.models.Message;
+import de.fherfurt.news.service.core.models.Message;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -18,6 +18,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class JsonMessageParser {
+    /*
     private String author;
     private String title;
     private String source;
@@ -81,12 +82,12 @@ public class JsonMessageParser {
         }
     }
 
-    /**
+    **
      * Function extracts all necessary fields from a JSON-file and builds a Message.
      *
      * @param jsonObject Represents an Object extracted from a JSON-file
      * @return Returns an Optional of Message. If properly parsed contains a value
-     */
+     *
     public static Optional<Message> parseSingleMessage(JSONObject jsonObject) {
         // necessary objects
         if (!jsonObject.has("author") || !jsonObject.has("title") || !jsonObject.has("content") || !jsonObject.has("publishedAt")) {
@@ -153,10 +154,10 @@ public class JsonMessageParser {
         }
     }
 
-    /**
+    **
      * @param messageArray
      * @return author: Antonia Geschke
-     */
+     *
     public static List<Message> parseMessages(JSONArray messageArray) {
         List<Message> messages = new ArrayList<Message>();
 
@@ -185,4 +186,5 @@ public class JsonMessageParser {
 
         return messages;
     }
+    */
 }

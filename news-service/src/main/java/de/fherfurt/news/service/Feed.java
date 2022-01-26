@@ -1,6 +1,6 @@
 package de.fherfurt.news.service;
 
-import de.fherfurt.news.service.models.Message;
+import de.fherfurt.news.service.core.models.Message;
 
 import de.fherfurt.persons.client.IPersonService;
 import de.fherfurt.faculty.client.IFacultyService;
@@ -28,6 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class Feed {
+    /*
     private Preferences preferences;
     private List<Message> entries = new ArrayList<Message>();
     private URL url;
@@ -132,5 +133,6 @@ public class Feed {
     public IPersonService getPersonService() {
         return personService;
     }
+    */
 }
 

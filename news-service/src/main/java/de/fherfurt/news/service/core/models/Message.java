@@ -1,11 +1,13 @@
-package de.fherfurt.news.service.models;
+package de.fherfurt.news.service.core.models;
+
+import de.fherfurt.news.service.core.models.Image;
+import de.fherfurt.news.service.core.persistence.BaseBusinessEntity;
 
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Objects;
-
-// Person getPersonByName(String name)
 
 /**
  * Represents the basic Message.
@@ -14,24 +16,52 @@ import java.util.Objects;
  */
 @Getter
 @Setter
-@Builder(setterPrefix="with")
 @AllArgsConstructor(access = AccessLevel.PUBLIC)
-@EqualsAndHashCode
-public class Message {
-    private int author;     // get name by id
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true, callSuper = true)
+public class Message extends BaseBusinessEntity {
+    private int author;
     private String title;
     private String description;
     private String url;
-    private String urlToImage;
+    List<Image> images;
     private LocalDateTime publishedAt;
     private String content;
-
     private String topic;
-    private String faculty;  // FacultyService: getInformationFromName(String name);
-
-    private String appointmentName;     // AppointmentService: createAppointment(String name, LocalDateTime appointDateTime);
+    private String faculty;
+    private String appointmentName;
     private LocalDateTime appointmentDateTime;
 
+    @Builder(setterPrefix = "with")
+    public Message(
+            int id,
+            int author,
+            String title,
+            String description,
+            String url,
+            //List<Image> images,
+            LocalDateTime publishedAt,
+            String content,
+            String topic,
+            String faculty,
+            String appointmentName,
+            LocalDateTime appointmentDateTime
+    ) {
+        super(id);
+        this.author = author;
+        this.title = title;
+        this.description = description;
+        this.url = url;
+        //this.images = images;
+        this.publishedAt = publishedAt;
+        this.content = content;
+        this.topic = topic;
+        this.faculty = faculty;
+        this.appointmentName = appointmentName;
+        this.appointmentDateTime = appointmentDateTime;
+    }
+
+    /*
     public boolean hasAuthor(int author) {
         return this.author == author;
     }
@@ -102,4 +132,5 @@ public class Message {
                 ", appointmentDateTime=" + appointmentDateTime +
                 '}';
     }
+    */
 }

@@ -1,6 +1,6 @@
 package de.fherfurt.news.service;
 
-import de.fherfurt.news.service.models.Message;
+import de.fherfurt.news.service.core.models.Message;
 import de.fherfurt.persons.client.IPersonService;
 
 import java.util.Collections;
@@ -12,6 +12,7 @@ import java.util.Comparator;
  */
 
 public class Sort {
+/*
     public void sortByDateAsc(List<Message> messages){
         messages.sort(Comparator.comparing(Message::getPublishedAt));
     }
@@ -30,5 +31,5 @@ public class Sort {
 
     public void sortByTopicAsc(List<Message> messages) { Collections.sort(messages,Comparator.nullsLast(new MessageTopicComparator()));}
     public void sortByTopicDesc(List<Message> messages) { Collections.sort(messages,Comparator.nullsLast(Collections.reverseOrder(new MessageTopicComparator()))); }
-
+*/
 }
