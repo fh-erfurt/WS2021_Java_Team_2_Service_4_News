@@ -39,7 +39,7 @@ public class Message extends BaseBusinessEntity {
             String title,
             String description,
             String url,
-            //List<Image> images,
+            List<Image> images,
             LocalDateTime publishedAt,
             String content,
             String topic,
@@ -52,7 +52,7 @@ public class Message extends BaseBusinessEntity {
         this.title = title;
         this.description = description;
         this.url = url;
-        //this.images = images;
+        this.images = images;
         this.publishedAt = publishedAt;
         this.content = content;
         this.topic = topic;

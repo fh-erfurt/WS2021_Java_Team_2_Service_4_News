@@ -4,39 +4,47 @@ import de.fherfurt.news.service.core.models.Message;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 /**
  * authors: Lisa Sluka, Lucian Gerasch, Celina Ludwigs & Benjamin Ehnes
  */
 
-public class Filter {
+public class FilterPredicateBuilder {
+        public final List<Predicate<Message>> predicates = new ArrayList<Predicate<Message>>();
+
+        public FilterPredicateBuilder withAuthor(Integer... authors) {
+            predicates.add(message -> message.getAuthor() == 1);
+
+            return this;
+        }
+
+        public FilterPredicateBuilder withDateBefore(LocalDateTime localDateTime) {
+            predicates.add(message -> message.getPublishedAt().isBefore(localDateTime));
+
+            return this;
+        }
+
+        public FilterPredicateBuilder withTopic(String topic) {
+            predicates.add(message -> message.getTopic().equals(topic));
+
+            return this;
+        }
+
+        public Predicate<Message> build() {
+            return predicates.stream()
+                    .reduce(Predicate::and)
+                    .orElse(x -> true);
+    }
+
     enum FilterType {
         AND,
         OR
     }
 
-    List<Predicate<Message>> predicates = new ArrayList<Predicate<Message>>();
 
-    public void withAuthor(int author) {
-        predicates.add(message -> message.getAuthor() == author);
-    }
-
-    public void withDateBefore(LocalDateTime localDateTime) {
-        predicates.add(message -> message.getPublishedAt().isBefore(localDateTime));
-    }
-
-    public void withTopic(String topic) {
-        predicates.add(message -> message.getTopic().equals(topic));
-    }
-
-    public Predicate<Message> build() {
-        return predicates.stream()
-                .reduce(Predicate::and)
-                .orElse(x -> true);
-    }
 
 
     /*

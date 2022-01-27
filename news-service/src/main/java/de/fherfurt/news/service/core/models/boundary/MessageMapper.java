@@ -10,6 +10,7 @@ import org.mapstruct.factory.Mappers;
 
 @Mapper(
         builder = @Builder(disableBuilder = true),
+        uses = { ImageMapper.class },
         mappingControl = DeepClone.class
 )
 public interface MessageMapper extends BeanMapper<Message, MessageDto> {
