@@ -26,7 +26,7 @@ public class MessageRepository implements Repository<Message> {
     }
 
     private void init() {
-        database.save(Message.builder().withId(1).withAuthor(1).withTopic("Java").withPublishedAt(LocalDateTime.now()).build());
+        database.save(Message.builder().withId(1).withAuthor(1).withTopic("Hello").withPublishedAt(LocalDateTime.now()).build());
         database.save(Message.builder().withId(2).withAuthor(2).withTopic("Java").withPublishedAt(LocalDateTime.now()).build());
     }
 
@@ -45,7 +45,6 @@ public class MessageRepository implements Repository<Message> {
         database.delete(entity);
     }
 
-    @Override
     public List<Message> findBy(Predicate<Message> predicate) {
         return database.findBy(Message.class, predicate);
     }

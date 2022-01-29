@@ -1,5 +1,6 @@
 package de.fherfurt.news.service;
 
+import de.fherfurt.news.client.MessageDto;
 import de.fherfurt.news.service.core.models.Message;
 
 import java.time.LocalDateTime;
@@ -12,38 +13,19 @@ import java.util.function.Predicate;
  * authors: Lisa Sluka, Lucian Gerasch, Celina Ludwigs & Benjamin Ehnes
  */
 
-public class FilterPredicateBuilder {
-        public final List<Predicate<Message>> predicates = new ArrayList<Predicate<Message>>();
-
-        public FilterPredicateBuilder withAuthor(Integer... authors) {
-            predicates.add(message -> message.getAuthor() == 1);
-
-            return this;
-        }
-
-        public FilterPredicateBuilder withDateBefore(LocalDateTime localDateTime) {
-            predicates.add(message -> message.getPublishedAt().isBefore(localDateTime));
-
-            return this;
-        }
-
-        public FilterPredicateBuilder withTopic(String topic) {
-            predicates.add(message -> message.getTopic().equals(topic));
-
-            return this;
-        }
-
-        public Predicate<Message> build() {
-            return predicates.stream()
-                    .reduce(Predicate::and)
-                    .orElse(x -> true);
+public class Filter {
+    public static Predicate<MessageDto> withDateBefore(LocalDateTime localDateTime) {
+        return message -> message.getPublishedAt().isBefore(localDateTime);
     }
 
-    enum FilterType {
-        AND,
-        OR
+    public static Predicate<MessageDto> withAuthor(Integer... authors) {
+        return message -> Arrays.asList(authors).contains(message.getAuthor());
     }
 
+    public static Predicate<MessageDto> withTopic(String... topics) {
+        // TODO: this could fail
+        return message -> Arrays.asList(topics).contains(message.getTopic());
+    }
 
 
 

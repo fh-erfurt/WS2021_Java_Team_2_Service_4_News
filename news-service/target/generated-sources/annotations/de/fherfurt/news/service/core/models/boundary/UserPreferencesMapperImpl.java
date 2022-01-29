@@ -2,13 +2,13 @@ package de.fherfurt.news.service.core.models.boundary;
 
 import de.fherfurt.news.client.UserPreferencesDto;
 import de.fherfurt.news.service.core.models.UserPreferences;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-01-27T11:00:11+0100",
+    date = "2022-01-28T15:45:37+0100",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 public class UserPreferencesMapperImpl implements UserPreferencesMapper {
@@ -22,6 +22,15 @@ public class UserPreferencesMapperImpl implements UserPreferencesMapper {
         UserPreferencesDto userPreferencesDto = new UserPreferencesDto();
 
         userPreferencesDto.setId( entity.getId() );
+        Set<Integer> set = entity.getIgnoredAuthors();
+        if ( set != null ) {
+            userPreferencesDto.setIgnoredAuthors( new HashSet<Integer>( set ) );
+        }
+        Set<String> set1 = entity.getPreferredFaculty();
+        if ( set1 != null ) {
+            userPreferencesDto.setPreferredFaculty( new HashSet<String>( set1 ) );
+        }
+        userPreferencesDto.setSendPushMessages( entity.isSendPushMessages() );
 
         return userPreferencesDto;
     }
@@ -38,6 +47,16 @@ public class UserPreferencesMapperImpl implements UserPreferencesMapper {
 
         UserPreferences userPreferences = new UserPreferences( id );
 
+        HashSet<Integer> hashSet = dto.getIgnoredAuthors();
+        if ( hashSet != null ) {
+            userPreferences.setIgnoredAuthors( new HashSet<Integer>( hashSet ) );
+        }
+        HashSet<String> hashSet1 = dto.getPreferredFaculty();
+        if ( hashSet1 != null ) {
+            userPreferences.setPreferredFaculty( new HashSet<String>( hashSet1 ) );
+        }
+        userPreferences.setSendPushMessages( dto.isSendPushMessages() );
+
         return userPreferences;
     }
 
@@ -53,6 +72,16 @@ public class UserPreferencesMapperImpl implements UserPreferencesMapper {
 
         UserPreferences userPreferences = new UserPreferences( id );
 
+        Set<Integer> set = toClone.getIgnoredAuthors();
+        if ( set != null ) {
+            userPreferences.setIgnoredAuthors( new HashSet<Integer>( set ) );
+        }
+        Set<String> set1 = toClone.getPreferredFaculty();
+        if ( set1 != null ) {
+            userPreferences.setPreferredFaculty( new HashSet<String>( set1 ) );
+        }
+        userPreferences.setSendPushMessages( toClone.isSendPushMessages() );
+
         return userPreferences;
     }
 
@@ -65,13 +94,13 @@ public class UserPreferencesMapperImpl implements UserPreferencesMapper {
         UserPreferencesDto userPreferencesDto = new UserPreferencesDto();
 
         userPreferencesDto.setId( toClone.getId() );
-        List<Integer> list = toClone.getIgnoredAuthors();
-        if ( list != null ) {
-            userPreferencesDto.setIgnoredAuthors( new ArrayList<Integer>( list ) );
+        HashSet<Integer> hashSet = toClone.getIgnoredAuthors();
+        if ( hashSet != null ) {
+            userPreferencesDto.setIgnoredAuthors( new HashSet<Integer>( hashSet ) );
         }
-        List<String> list1 = toClone.getPreferredFaculty();
-        if ( list1 != null ) {
-            userPreferencesDto.setPreferredFaculty( new ArrayList<String>( list1 ) );
+        HashSet<String> hashSet1 = toClone.getPreferredFaculty();
+        if ( hashSet1 != null ) {
+            userPreferencesDto.setPreferredFaculty( new HashSet<String>( hashSet1 ) );
         }
         userPreferencesDto.setSendPushMessages( toClone.isSendPushMessages() );
 

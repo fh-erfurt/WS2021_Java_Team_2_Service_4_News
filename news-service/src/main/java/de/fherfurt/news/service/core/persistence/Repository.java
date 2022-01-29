@@ -35,12 +35,4 @@ public interface Repository<ENTITY extends BaseBusinessEntity> {
      * @param entity Instance to delete
      */
     void delete(ENTITY entity);
-
-    /**
-     *
-     *
-     * @param predicate
-     * @return
-     */
-    List<ENTITY> findBy(Predicate<ENTITY> predicate);
 }
