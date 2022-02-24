@@ -24,7 +24,7 @@ public class Message extends BaseBusinessEntity {
     private String title;
     private String description;
     private String url;
-    List<Image> images;
+    private List<Image> images;
     private LocalDateTime publishedAt;
     private String content;
     private String topic;
