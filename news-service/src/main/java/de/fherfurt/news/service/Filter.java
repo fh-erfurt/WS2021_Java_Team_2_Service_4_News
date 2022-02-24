@@ -14,15 +14,15 @@ import java.util.function.Predicate;
  */
 
 public class Filter {
-    public static Predicate<MessageDto> withDateBefore(LocalDateTime localDateTime) {
+    public static Predicate<MessageDto> containingDateBefore(LocalDateTime localDateTime) {
         return message -> message.getPublishedAt().isBefore(localDateTime);
     }
 
-    public static Predicate<MessageDto> withAuthor(Integer... authors) {
+    public static Predicate<MessageDto> containingAuthor(Integer... authors) {
         return message -> Arrays.asList(authors).contains(message.getAuthor());
     }
 
-    public static Predicate<MessageDto> withTopic(String... topics) {
+    public static Predicate<MessageDto> containingTopic(String... topics) {
         // TODO: this could fail
         return message -> Arrays.asList(topics).contains(message.getTopic());
     }

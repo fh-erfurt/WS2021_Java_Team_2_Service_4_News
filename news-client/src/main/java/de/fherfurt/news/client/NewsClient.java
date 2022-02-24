@@ -20,4 +20,8 @@ public interface NewsClient {
     public List<ImageDto> loadImagesBy(int ratingId);
 
     public List<MessageDto> findBy(Predicate<MessageDto> predicate);
+
+    public void saveAuthorToUserPreferences(int author, int userId);
+
+    public void deleteAuthorFromUserPreferences(int author, int userId);
 }

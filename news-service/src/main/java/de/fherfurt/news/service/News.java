@@ -36,8 +36,6 @@ public class News implements NewsClient {
         return message.getId();
     }
 
-    // TODO: handle UserPrefs
-
     @Override
     public Optional<MessageDto> findBy(int id) {
 
@@ -52,7 +50,7 @@ public class News implements NewsClient {
     }
 
     @Override
-    public List<ImageDto> loadImagesBy(int ratingId) {
+    public List<ImageDto> loadImagesBy(int messageId) {
         return null;
     }
 
@@ -61,11 +59,13 @@ public class News implements NewsClient {
         return null;
     }
 
-    public void saveAuthorToUserPreferences(Integer author, Integer userId) {
+    @Override
+    public void saveAuthorToUserPreferences(int author, int userId) {
 
     }
 
-    public void deleteAuthorFromUserPreferences(Integer author, Integer userId) {
+    @Override
+    public void deleteAuthorFromUserPreferences(int author, int userId) {
 
     }
 }
