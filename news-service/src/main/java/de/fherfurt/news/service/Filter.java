@@ -23,9 +23,10 @@ public class Filter {
     }
 
     public static Predicate<MessageDto> containingTopic(String... topics) {
-        // TODO: this could fail
         return message -> Arrays.asList(topics).contains(message.getTopic());
     }
+
+
 
 
 

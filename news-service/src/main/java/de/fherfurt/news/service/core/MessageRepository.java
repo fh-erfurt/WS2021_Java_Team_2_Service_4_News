@@ -1,14 +1,18 @@
 package de.fherfurt.news.service.core;
 
+import de.fherfurt.news.service.core.models.Image;
 import de.fherfurt.news.service.core.models.Message;
 import de.fherfurt.news.service.core.persistence.Database;
 import de.fherfurt.news.service.core.persistence.Repository;
+import de.fherfurt.news.service.core.persistence.errors.NoResultException;
+import de.fherfurt.news.service.core.persistence.errors.ToManyResultsException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 import java.util.prefs.PreferenceChangeEvent;
@@ -47,6 +51,20 @@ public class MessageRepository implements Repository<Message> {
 
     public List<Message> findBy(Predicate<Message> predicate) {
         return database.findBy(Message.class, predicate);
+    }
+
+    public Image findImageBy(int imageId) {
+        List<Image> images = database.findBy(Image.class, image -> Objects.equals(image.getId(), imageId));
+
+        if (images.isEmpty()) {
+            throw new NoResultException("Could not found image with id [" + imageId + "]");
+        }
+
+        if (images.size() > 1) {
+            throw new ToManyResultsException("No unique result found for id [" + imageId + "]");
+        }
+
+        return images.get(0);
     }
 
     @SafeVarargs

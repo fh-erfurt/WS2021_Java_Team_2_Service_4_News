@@ -4,7 +4,7 @@ import de.fherfurt.news.client.ImageDto;
 import de.fherfurt.news.client.MessageDto;
 import de.fherfurt.news.client.NewsClient;
 
-import de.fherfurt.news.service.core.FilesystemRepository;
+import de.fherfurt.news.service.core.FileSystemRepository;
 import de.fherfurt.news.service.core.MessageRepository;
 import de.fherfurt.news.service.core.UserPreferenceRepository;
 import de.fherfurt.news.service.core.mappers.BeanMapper;
@@ -20,7 +20,7 @@ import java.util.function.Predicate;
 @Slf4j
 public class News implements NewsClient {
     private final MessageRepository messageRepository = MessageRepository.of();
-    private final FilesystemRepository filesystemRepository = FilesystemRepository.of();
+    private final FileSystemRepository filesystemRepository = FileSystemRepository.of();
     private final UserPreferenceRepository userPreferenceRepository = UserPreferenceRepository.of();
 
     @Override
