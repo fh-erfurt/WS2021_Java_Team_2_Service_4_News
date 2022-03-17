@@ -7,6 +7,7 @@ import de.fherfurt.news.service.core.persistence.errors.TooManyResultsException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.List;
@@ -14,6 +15,10 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+/**
+* This class represents the API for the service to safe the message.
+* Each message is persisted in the database and can be edited or deleted.
+*/
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MessageRepository implements Repository<Message> {
     private final Database database = Database.newInstance();
@@ -36,6 +41,8 @@ public class MessageRepository implements Repository<Message> {
         database.save(entity);
     }
 
+    public void save(Image image) { database.save(image); }
+
     @Override
     public Optional<Message> findBy(int id) {
         return database.findBy(Message.class, id);
@@ -50,6 +57,13 @@ public class MessageRepository implements Repository<Message> {
         return database.findBy(Message.class, predicate);
     }
 
+    /**
+     * Searches the database for the right image using the imageId
+     *
+     * @param imageId
+     * @return The first element of the image-list found
+     * @throws NoResultException if there is no image with the given imageId or if there are too many images with the given imageId
+     */
     public Image findImageBy(int imageId) {
         List<Image> images = database.findBy(Image.class, image -> Objects.equals(image.getId(), imageId));
 
@@ -63,6 +77,13 @@ public class MessageRepository implements Repository<Message> {
 
         return images.get(0);
     }
+
+    /**
+     * Merges all predicates and returns the results found using the merged predicate
+     *
+     * @param predicates multiple predicates or none
+     * @return a list of messages using the merged predicates
+     */
 
     @SafeVarargs
     public final List<Message> findBy(Predicate<Message>... predicates) {

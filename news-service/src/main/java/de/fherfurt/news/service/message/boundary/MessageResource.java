@@ -7,6 +7,9 @@ import de.fherfurt.news.service.message.business.MessageBF;
 import de.fherfurt.news.service.core.errors.FunctionWithException;
 import de.fherfurt.news.service.core.mappers.BeanMapper;
 import de.fherfurt.news.service.message.entity.Message;
+import de.fherfurt.persons.client.DevPersonService;
+import de.fherfurt.persons.client.PersonsClient;
+import de.fherfurt.persons.client.transfer.objects.IPerson;
 
 import java.util.Collections;
 import java.util.List;
@@ -16,12 +19,24 @@ import java.util.stream.Collectors;
 
 import static de.fherfurt.news.service.core.persistence.errors.ConsumerWithException.wrap;
 
+/**
+ * This class implements the API of the news-service.
+ *
+ * It implements the main functionality.
+ */
 public class MessageResource implements NewsClient {
     private final MessageBF messageBF = MessageBF.of();
 
+    private final PersonsClient personService = new DevPersonService();
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int save(MessageDto messageDto) throws Exception {
         final Message message = BeanMapper.mapToEntity(messageDto);
+
+        final IPerson loaded = personService.findPersonUsingIteratorBy(message.getAuthor()).orElseThrow(() -> new Exception("Failed to find user!"));
 
         messageBF.save(message);
 
@@ -32,16 +47,25 @@ public class MessageResource implements NewsClient {
         return message.getId();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<MessageDto> findBy(int messageId) {
         return messageBF.findBy(messageId).map(message -> (MessageDto) BeanMapper.mapToDto(message)).or(Optional::empty);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void delete(int id) {
         messageBF.delete(id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<ImageDto> loadImagesBy(int messageId) {
         return messageBF.findBy(messageId)
@@ -58,6 +82,9 @@ public class MessageResource implements NewsClient {
                 ).orElse(Collections.emptyList());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<MessageDto> findBy(Predicate<MessageDto> predicate) {
         return null;

@@ -9,6 +9,11 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
 
+/**
+* This class represents the images for the messages.
+* It contains the image in byte and its path.
+*/
+
 @Getter
 @Setter
 @AllArgsConstructor(access = AccessLevel.PUBLIC)

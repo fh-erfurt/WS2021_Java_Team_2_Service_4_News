@@ -10,6 +10,10 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * This class was created in preparation for the next semester. It will be expanded in future...
+ */
+
 @Getter
 @Setter
 public class UserPreferences extends BaseBusinessEntity {

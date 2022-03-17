@@ -36,7 +36,7 @@ public class Main {
 
         MessageDto messageDto = MessageDto.builder().withAuthor(1).withContent("Hello :)").withImages(images).withId(3).build();
 
-        // if we don´t set a Id, the program fails.
+        // if we don´t set an Id, the program fails.
 
         int messageId = messageResource.save(messageDto);
 
