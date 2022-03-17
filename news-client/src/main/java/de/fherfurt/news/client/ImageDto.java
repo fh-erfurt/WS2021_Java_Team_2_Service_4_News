@@ -10,4 +10,5 @@ import lombok.*;
 public class ImageDto {
     int id;
     private String path;
+    private byte[] content;
 }

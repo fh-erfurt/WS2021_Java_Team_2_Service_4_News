@@ -10,8 +10,12 @@ import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionException;
 import java.util.function.Predicate;
 
+/**
+ *
+ *
+ */
 public interface NewsClient {
-    public int save(MessageDto messageDto);
+    public int save(MessageDto messageDto) throws Exception;
 
     public Optional<MessageDto> findBy(int id);
 

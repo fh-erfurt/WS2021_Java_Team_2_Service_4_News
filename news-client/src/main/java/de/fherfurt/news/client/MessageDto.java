@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @Builder(setterPrefix = "with")
 public class MessageDto {
-    int id;
     private int author;
     private String title;
     private String description;
@@ -24,4 +23,9 @@ public class MessageDto {
     private String faculty;
     private String appointmentName;
     private LocalDateTime appointmentDateTime;
+    int id;
+
+    public void addImage(ImageDto imageDto) {
+        this.images.add(imageDto);
+    }
 }

@@ -3,8 +3,9 @@ package de.fherfurt.persons.client;
 import de.fherfurt.persons.client.transfer.objects.IPerson;
 
 import java.util.HashMap;
+import java.util.Optional;
 
-public class DevPersonService implements IPersonService {
+public class DevPersonService implements PersonsClient {
     HashMap<Integer, DevPerson> personMap;
 
     public DevPersonService() {
@@ -16,15 +17,14 @@ public class DevPersonService implements IPersonService {
         personMap.put(5, new DevPerson("Maxi", "Musterfrau", "Angewandte Sozialwissenschaften", "maxi.musterfrau@fh-erfurt.de", "Student"));
     }
 
+
     @Override
-    public IPerson getPersonFromId(int id) {
-        return personMap.get(id);
+    public Optional<IPerson> findPersonUsingIteratorBy(int personID) {
+        return Optional.ofNullable(personMap.get(personID));
     }
 
     @Override
-    public String getLastNameFromId(int id) {
-        return personMap.get(id).getLastName();
+    public byte[] findPersonAvatarBy(int PersonID) {
+        return new byte[0];
     }
-
-
 }

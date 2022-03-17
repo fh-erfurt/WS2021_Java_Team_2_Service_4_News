@@ -2,7 +2,7 @@ package de.fherfurt.news.service.core.persistence;
 
 import de.fherfurt.news.service.core.persistence.errors.MissingPrimaryKeyException;
 import de.fherfurt.news.service.core.persistence.errors.PersistenceException;
-import de.fherfurt.news.service.core.persistence.errors.ToManyPrimaryKeysException;
+import de.fherfurt.news.service.core.persistence.errors.TooManyPrimaryKeysException;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 
@@ -124,7 +124,7 @@ public class Database {
         }
 
         if (primaryKeys.size() > 1) {
-            throw ToManyPrimaryKeysException.of(entity.getClass());
+            throw TooManyPrimaryKeysException.of(entity.getClass());
         }
 
         return primaryKeys.get(0);

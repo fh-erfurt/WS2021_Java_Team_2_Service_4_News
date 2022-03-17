@@ -1,12 +1,9 @@
 package de.fherfurt.news.service;
 
 import de.fherfurt.news.client.MessageDto;
-import de.fherfurt.news.service.core.models.Message;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.function.Predicate;
 
 /**

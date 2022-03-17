@@ -1,40 +1,47 @@
 package de.fherfurt.news.service;
 
+import de.fherfurt.news.client.ImageDto;
 import de.fherfurt.news.client.MessageDto;
-import de.fherfurt.news.service.business.MessageBF;
-import de.fherfurt.news.service.core.FileSystemRepository;
-import de.fherfurt.news.service.core.MessageRepository;
-import de.fherfurt.news.service.core.UserPreferenceRepository;
-import de.fherfurt.news.service.core.mappers.BeanMapper;
-import de.fherfurt.news.service.core.models.Image;
-import de.fherfurt.news.service.core.models.Message;
-import de.fherfurt.news.service.core.models.UserPreferences;
+import de.fherfurt.news.service.message.boundary.MessageResource;
 
-import javax.persistence.criteria.CriteriaQuery;
-import java.awt.desktop.SystemSleepEvent;
-import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Predicate;
 
 @Deprecated
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws Exception {
+        /*
         MessageBF messageBF = MessageBF.of();
+
+        Message message = Message.builder().withAuthor(1).withId(1).withContent("Hallo Lisa! :)").build();
+
         Image image = new Image(1, "test.png");
-
-        List<Image> images = new ArrayList<>();
-        images.add(image);
-
         byte[] imageData = new byte[]{1, 5, 9, 6};
 
-        Message message = Message.builder().withAuthor(1).withId(1).withContent("Hallo Lisa! :)").withImages(images).build();
+        message.addImage(image);
 
         messageBF.save(message);
         messageBF.saveImage(image, imageData);
         messageBF.delete(1);
+         */
+
+        MessageResource messageResource = new MessageResource();
+
+        ImageDto imageDtoFirst = new ImageDto(1, "image.png", new byte[]{0, 1, 2});
+        ImageDto imageDtoSecond = new ImageDto(2, "image2.png", new byte[]{2, 1, 0});
+
+        ArrayList<ImageDto> images = new ArrayList<>();
+        images.add(imageDtoFirst);
+        images.add(imageDtoSecond);
+
+        MessageDto messageDto = MessageDto.builder().withAuthor(1).withContent("Hello :)").withImages(images).withId(3).build();
+
+        // if we don´t set a Id, the program fails.
+
+        int messageId = messageResource.save(messageDto);
+
+        List<ImageDto> imagesFromResource = messageResource.loadImagesBy(messageId);
+
+        messageResource.delete(messageId);
     }
 }
