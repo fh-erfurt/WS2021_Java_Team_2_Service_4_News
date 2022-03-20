@@ -1,6 +1,5 @@
 package de.fherfurt.news.service.message.entity;
 
-import de.fherfurt.news.service.message.entity.Image;
 import de.fherfurt.news.service.core.persistence.BaseBusinessEntity;
 
 import lombok.*;
@@ -24,7 +23,7 @@ public class Message extends BaseBusinessEntity {
     private String title;
     private String description;
     private String url;
-    private List<Image> images;
+    private List<String> images;
     private LocalDateTime publishedAt;
     private String content;
     private String topic;
@@ -39,7 +38,7 @@ public class Message extends BaseBusinessEntity {
             String title,
             String description,
             String url,
-            List<Image> images,
+            List<String> images,
             LocalDateTime publishedAt,
             String content,
             String topic,
@@ -61,7 +60,7 @@ public class Message extends BaseBusinessEntity {
         this.appointmentDateTime = appointmentDateTime;
     }
 
-    public void addImage(final Image image) {
+    public void addImage(final String image) {
         if (images == null) {
             this.images = new ArrayList<>();
         }

@@ -1,14 +1,10 @@
 package de.fherfurt.news.service.message.business;
 
 import de.fherfurt.news.service.message.entity.MessageRepository;
-import de.fherfurt.news.service.message.entity.Image;
 import de.fherfurt.news.service.message.entity.Message;
 import de.fherfurt.news.service.message.entity.FileSystemRepository.FileTypes;
 
 import de.fherfurt.news.service.core.persistence.errors.ConsumerWithException;
-import de.fherfurt.persons.client.DevPersonService;
-import de.fherfurt.persons.client.PersonsClient;
-import de.fherfurt.persons.client.transfer.objects.IPerson;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -52,15 +48,8 @@ public class MessageBF {
      * @param content
      * @throws IOException
      */
-    public void saveImage(final Image image, byte[] content) throws IOException {
-        final boolean isNewImage = image.getId() < 1;
-
-        // this sort of fixes it... but it still doesn´t feel good
-
-        // should save the image?!
-        messageRepository.save(image);
-
-        filesBF.save(FileTypes.IMAGE, image.getPath(), content, isNewImage);
+    public void saveImage(final String path,  final byte[] content) throws IOException {
+        filesBF.save(FileTypes.IMAGE, path, content, true);
     }
 
     /**
@@ -68,13 +57,11 @@ public class MessageBF {
      * @param imageId
      * @return optional array of bytes representing the image
      */
-    public Optional<byte[]> loadImage(final int imageId) {
-        final Image image = messageRepository.findImageBy(imageId);
-
+    public Optional<byte[]> loadImage(final String path) throws IOException {
         try {
-            return filesBF.findBy(FileTypes.IMAGE, image.getPath());
+            return filesBF.findBy(FileTypes.IMAGE, path);
         } catch (IOException e) {
-            LOGGER.error("Could not find image for ID '" + imageId + "'", e);
+            LOGGER.error("Could not find image for Path '" + path + "'", e);
             return Optional.empty();
         }
     }
@@ -98,7 +85,7 @@ public class MessageBF {
 
         toDelete.get()
                 .getImages()
-                .forEach(ConsumerWithException.wrap(image -> filesBF.delete(FileTypes.IMAGE, image.getPath())));
+                .forEach(ConsumerWithException.wrap(image -> filesBF.delete(FileTypes.IMAGE, image)));
 
         messageRepository.delete(toDelete.get());
     }

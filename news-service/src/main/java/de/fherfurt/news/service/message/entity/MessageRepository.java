@@ -41,8 +41,6 @@ public class MessageRepository implements Repository<Message> {
         database.save(entity);
     }
 
-    public void save(Image image) { database.save(image); }
-
     @Override
     public Optional<Message> findBy(int id) {
         return database.findBy(Message.class, id);
@@ -64,7 +62,8 @@ public class MessageRepository implements Repository<Message> {
      * @return The first element of the image-list found
      * @throws NoResultException if there is no image with the given imageId or if there are too many images with the given imageId
      */
-    public Image findImageBy(int imageId) {
+    /*
+    public Image findImageBy(final String path) {
         List<Image> images = database.findBy(Image.class, image -> Objects.equals(image.getId(), imageId));
 
         if (images.isEmpty()) {
@@ -77,6 +76,7 @@ public class MessageRepository implements Repository<Message> {
 
         return images.get(0);
     }
+     */
 
     /**
      * Merges all predicates and returns the results found using the merged predicate

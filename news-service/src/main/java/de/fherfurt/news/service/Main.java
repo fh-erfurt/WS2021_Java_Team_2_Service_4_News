@@ -27,8 +27,8 @@ public class Main {
 
         MessageResource messageResource = new MessageResource();
 
-        ImageDto imageDtoFirst = new ImageDto(1, "image.png", new byte[]{0, 1, 2});
-        ImageDto imageDtoSecond = new ImageDto(2, "image2.png", new byte[]{2, 1, 0});
+        ImageDto imageDtoFirst = new ImageDto("image.png", new byte[]{0, 1, 2});
+        ImageDto imageDtoSecond = new ImageDto("image2.png", new byte[]{2, 1, 0});
 
         ArrayList<ImageDto> images = new ArrayList<>();
         images.add(imageDtoFirst);
