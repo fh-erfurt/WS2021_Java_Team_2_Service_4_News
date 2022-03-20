@@ -5,6 +5,7 @@ import de.fherfurt.news.client.MessageDto;
 import de.fherfurt.news.service.message.boundary.MessageResource;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Deprecated
@@ -36,11 +37,14 @@ public class Main {
 
         MessageDto messageDto = MessageDto.builder().withAuthor(1).withContent("Hello :)").withImages(images).withId(3).build();
 
-        // if we don´t set an Id, the program fails.
-
         int messageId = messageResource.save(messageDto);
 
         List<ImageDto> imagesFromResource = messageResource.loadImagesBy(messageId);
+
+        for (ImageDto each : imagesFromResource) {
+            System.out.print(each.getPath());
+            System.out.println(Arrays.toString(each.getContent()));
+        }
 
         messageResource.delete(messageId);
     }

@@ -54,8 +54,10 @@ public class MessageBF {
 
     /**
      * This function loads an image from the message repository.
-     * @param imageId
-     * @return optional array of bytes representing the image
+     *
+     * @param path the specified path of the image in our filesystem
+     * @return optional array of bytes representing the content of the image
+     * @throws IOException
      */
     public Optional<byte[]> loadImage(final String path) throws IOException {
         try {
@@ -70,7 +72,7 @@ public class MessageBF {
      * This method deletes a message from the message repository.
      * @param id
      */
-    public void delete(final int id){
+    public void delete(final int id) {
         final Optional<Message> toDelete = findBy(id);
 
         if (toDelete.isEmpty()) {

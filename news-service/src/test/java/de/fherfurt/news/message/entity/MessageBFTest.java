@@ -1,11 +1,16 @@
 package de.fherfurt.news.message.entity;
 
+import de.fherfurt.news.client.ImageDto;
+import de.fherfurt.news.client.MessageDto;
+import de.fherfurt.news.service.core.mappers.BeanMapper;
 import de.fherfurt.news.service.message.business.MessageBF;
 import de.fherfurt.news.service.message.entity.Message;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 public class MessageBFTest {
@@ -57,30 +62,27 @@ public class MessageBFTest {
         // GIVEN
         int messageId = 1;
         int imageId = 1;
-        /*
+
         MessageBF messageBF = MessageBF.of();
 
-        Message message = Message.builder().withAuthor(1).withId(messageId).withContent("Hallo! :)").build();
+        String imagePath = "image.png";
 
-        final Image image = Image.builder().withId(imageId).withPath("image.png").build();
+        List<String> imagePaths = new ArrayList<>();
+        imagePaths.add(imagePath);
 
-        final byte[] content = new byte[] { 1, 2, 3 };
+        Message message = Message.builder().withId(1).withAuthor(1).withImages(imagePaths).build();
 
         // WHEN
-        message.addImage(image);
-
         messageBF.save(message);
 
-        messageBF.saveImage(image, content);
+        messageBF.saveImage(imagePath, new byte[]{2, 1, 0});
 
         messageBF.delete(messageId);
 
         // THEN
-        Optional<byte[]> imageNotFound = messageBF.loadImage(imageId);
+        Optional<byte[]> imageNotFound = messageBF.loadImage(imagePath);
 
         Assertions.assertTrue(imageNotFound.isEmpty());
-
-         */
     }
 
 

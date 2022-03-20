@@ -60,14 +60,6 @@ public class Message extends BaseBusinessEntity {
         this.appointmentDateTime = appointmentDateTime;
     }
 
-    public void addImage(final String image) {
-        if (images == null) {
-            this.images = new ArrayList<>();
-        }
-
-        this.images.add(image);
-    }
-
     /*
     public boolean hasAuthor(int author) {
         return this.author == author;

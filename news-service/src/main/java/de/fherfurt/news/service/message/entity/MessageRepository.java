@@ -56,35 +56,11 @@ public class MessageRepository implements Repository<Message> {
     }
 
     /**
-     * Searches the database for the right image using the imageId
-     *
-     * @param imageId
-     * @return The first element of the image-list found
-     * @throws NoResultException if there is no image with the given imageId or if there are too many images with the given imageId
-     */
-    /*
-    public Image findImageBy(final String path) {
-        List<Image> images = database.findBy(Image.class, image -> Objects.equals(image.getId(), imageId));
-
-        if (images.isEmpty()) {
-            throw new NoResultException("Could not find image with id [" + imageId + "]");
-        }
-
-        if (images.size() > 1) {
-            throw new TooManyResultsException("No unique result found for id [" + imageId + "]");
-        }
-
-        return images.get(0);
-    }
-     */
-
-    /**
      * Merges all predicates and returns the results found using the merged predicate
      *
      * @param predicates multiple predicates or none
      * @return a list of messages using the merged predicates
      */
-
     @SafeVarargs
     public final List<Message> findBy(Predicate<Message>... predicates) {
         Predicate<Message> mergedPredicate = Arrays
