@@ -1,1 +1,9 @@
-de.fherfurt.fetcher
+de.fherfurt.news.message.entity
+de.fherfurt.news.service
+de.fherfurt.news.service.core.errors
+de.fherfurt.news.service.core.mappers
+de.fherfurt.news.service.core.persistence
+de.fherfurt.news.service.core.persistence.errors
+de.fherfurt.news.service.message.boundary
+de.fherfurt.news.service.message.business
+de.fherfurt.news.service.message.entity

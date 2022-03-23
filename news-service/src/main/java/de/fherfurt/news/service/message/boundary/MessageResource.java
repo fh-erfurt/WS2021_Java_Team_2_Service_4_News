@@ -10,6 +10,7 @@ import de.fherfurt.news.service.message.entity.Message;
 import de.fherfurt.persons.client.DevPersonService;
 import de.fherfurt.persons.client.PersonsClient;
 import de.fherfurt.persons.client.transfer.objects.IPerson;
+import org.modelmapper.ModelMapper;
 
 import java.util.Collections;
 import java.util.List;
@@ -35,13 +36,20 @@ public class MessageResource implements NewsClient {
     @Override
     public int save(MessageDto messageDto) throws Exception {
         final Message message = BeanMapper.mapToEntity(messageDto);
+        //final Message message = new ModelMapper().map(messageDto, Message.class);
 
-        final IPerson loaded = personService.findPersonUsingIteratorBy(message.getAuthor()).orElseThrow(() -> new Exception("Failed to find user!"));
+        Optional<IPerson> person = personService.findPersonUsingIteratorBy(message.getAuthor());
 
+        if (person.isEmpty()) {
+            return 0;
+        }
+
+        // save the message in the database
         messageBF.save(message);
 
+        // for each image, save the image in the filesystem
         messageDto.getImages().forEach(wrap(
-                image -> messageBF.saveImage(message.getImages().get(messageDto.getImages().indexOf(image)), image.getContent())
+                image -> messageBF.saveImage(image.getPath(), image.getContent())
         ));
 
         return message.getId();
@@ -71,10 +79,9 @@ public class MessageResource implements NewsClient {
         return messageBF.findBy(messageId)
                 .map(message -> message.getImages().stream()
                         .map(FunctionWithException.wrap(
-                                        image -> ImageDto.builder()
-                                                .withId(image.getId())
-                                                .withPath(image.getPath())
-                                                .withContent(messageBF.loadImage(image.getId()).orElse(null))
+                                        imagePath -> ImageDto.builder()
+                                                .withPath(imagePath)
+                                                .withContent(messageBF.loadImage(imagePath).orElse(null))
                                                 .build()
                                 )
                         )
@@ -86,10 +93,14 @@ public class MessageResource implements NewsClient {
      * {@inheritDoc}
      */
     @Override
-    public List<MessageDto> findBy(Predicate<MessageDto> predicate) {
-        return null;
+    public List<MessageDto> findBy(String facultyName) {
+        return messageBF.findBy(item -> item.getFaculty().equals(facultyName)).stream().map(message -> (MessageDto) BeanMapper.mapToDto(message)).toList();
     }
 
+
+    // These will be maybe implemented next semester :)
+
+    /*
     @Override
     public void saveAuthorToUserPreferences(int author, int userId) {
 
@@ -99,4 +110,5 @@ public class MessageResource implements NewsClient {
     public void deleteAuthorFromUserPreferences(int author, int userId) {
 
     }
+     */
 }

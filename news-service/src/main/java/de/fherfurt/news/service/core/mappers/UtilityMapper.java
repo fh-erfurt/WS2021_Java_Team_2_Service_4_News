@@ -1,10 +1,7 @@
 package de.fherfurt.news.service.core.mappers;
 
-import de.fherfurt.news.client.ImageDto;
 import de.fherfurt.news.client.MessageDto;
-import de.fherfurt.news.service.message.entity.Image;
 import de.fherfurt.news.service.message.entity.Message;
-import de.fherfurt.news.service.message.boundary.ImageMapper;
 import de.fherfurt.news.service.message.boundary.MessageMapper;
 import de.fherfurt.news.service.core.persistence.BaseBusinessEntity;
 import lombok.AccessLevel;
@@ -22,8 +19,7 @@ public class UtilityMapper {
     }
 
     private static final List<Triple<Class<?>, Class<?>, BeanMapper<?, ?>>> MAPPERS = List.of(
-        Triple.of(Message.class, MessageDto.class, MessageMapper.INSTANCE),
-            Triple.of(Image.class, ImageDto.class, ImageMapper.INSTANCE)
+        Triple.of(Message.class, MessageDto.class, MessageMapper.INSTANCE)
     );
 
     @SuppressWarnings("unchecked")

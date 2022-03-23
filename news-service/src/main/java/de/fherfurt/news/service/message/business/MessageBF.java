@@ -1,19 +1,17 @@
 package de.fherfurt.news.service.message.business;
 
 import de.fherfurt.news.service.message.entity.MessageRepository;
-import de.fherfurt.news.service.message.entity.Image;
 import de.fherfurt.news.service.message.entity.Message;
 import de.fherfurt.news.service.message.entity.FileSystemRepository.FileTypes;
 
 import de.fherfurt.news.service.core.persistence.errors.ConsumerWithException;
-import de.fherfurt.persons.client.DevPersonService;
-import de.fherfurt.persons.client.PersonsClient;
-import de.fherfurt.persons.client.transfer.objects.IPerson;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 /**
  * This class represents the business facade of the massage class.
@@ -52,29 +50,22 @@ public class MessageBF {
      * @param content
      * @throws IOException
      */
-    public void saveImage(final Image image, byte[] content) throws IOException {
-        final boolean isNewImage = image.getId() < 1;
-
-        // this sort of fixes it... but it still doesn´t feel good
-
-        // should save the image?!
-        messageRepository.save(image);
-
-        filesBF.save(FileTypes.IMAGE, image.getPath(), content, isNewImage);
+    public void saveImage(final String path,  final byte[] content) throws IOException {
+        filesBF.save(FileTypes.IMAGE, path, content, true);
     }
 
     /**
      * This function loads an image from the message repository.
-     * @param imageId
-     * @return optional array of bytes representing the image
+     *
+     * @param path the specified path of the image in our filesystem
+     * @return optional array of bytes representing the content of the image
+     * @throws IOException
      */
-    public Optional<byte[]> loadImage(final int imageId) {
-        final Image image = messageRepository.findImageBy(imageId);
-
+    public Optional<byte[]> loadImage(final String path) throws IOException {
         try {
-            return filesBF.findBy(FileTypes.IMAGE, image.getPath());
+            return filesBF.findBy(FileTypes.IMAGE, path);
         } catch (IOException e) {
-            LOGGER.error("Could not find image for ID '" + imageId + "'", e);
+            LOGGER.error("Could not find image for Path '" + path + "'", e);
             return Optional.empty();
         }
     }
@@ -83,7 +74,7 @@ public class MessageBF {
      * This method deletes a message from the message repository.
      * @param id
      */
-    public void delete(final int id){
+    public void delete(final int id) {
         final Optional<Message> toDelete = findBy(id);
 
         if (toDelete.isEmpty()) {
@@ -98,8 +89,13 @@ public class MessageBF {
 
         toDelete.get()
                 .getImages()
-                .forEach(ConsumerWithException.wrap(image -> filesBF.delete(FileTypes.IMAGE, image.getPath())));
+                .forEach(ConsumerWithException.wrap(image -> filesBF.delete(FileTypes.IMAGE, image)));
 
         messageRepository.delete(toDelete.get());
+    }
+
+    // TODO: interface
+    public List<Message> findBy(Predicate<Message> messagePredicate) {
+        return messageRepository.findBy(messagePredicate);
     }
 }

@@ -33,23 +33,31 @@ public interface NewsClient {
     public Optional<MessageDto> findBy(int messageId);
 
     /**
-     *
+     * Deletes a given rating and it´s matching images
      *
      * @param id
      */
     public void delete(int id);
 
     /**
-     *
+     * Load images matching a certain rating
      *
      * @param ratingId
-     * @return
+     * @return returns a list of images
      */
     public List<ImageDto> loadImagesBy(int ratingId);
 
-    public List<MessageDto> findBy(Predicate<MessageDto> predicate);
+    /**
+     * Returns a list of message, matching the given faculty
+     *
+     * @param facultyName Name of the faculty
+     * @return returns a list of messages
+     */
+    public List<MessageDto> findBy(String facultyName);
 
+    /*
     public void saveAuthorToUserPreferences(int author, int userId);
 
     public void deleteAuthorFromUserPreferences(int author, int userId);
+     */
 }

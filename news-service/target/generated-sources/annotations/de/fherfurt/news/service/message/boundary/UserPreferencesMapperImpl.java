@@ -8,101 +8,101 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-03-17T14:51:55+0100",
+    date = "2022-03-20T12:44:23+0100",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 public class UserPreferencesMapperImpl implements UserPreferencesMapper {
 
     @Override
-    public UserPreferencesDto toDto(UserPreferences arg0) {
-        if ( arg0 == null ) {
+    public UserPreferencesDto toDto(UserPreferences entity) {
+        if ( entity == null ) {
             return null;
         }
 
         UserPreferencesDto userPreferencesDto = new UserPreferencesDto();
 
-        userPreferencesDto.setId( arg0.getId() );
-        Set<Integer> set = arg0.getIgnoredAuthors();
+        userPreferencesDto.setId( entity.getId() );
+        Set<Integer> set = entity.getIgnoredAuthors();
         if ( set != null ) {
             userPreferencesDto.setIgnoredAuthors( new HashSet<Integer>( set ) );
         }
-        Set<String> set1 = arg0.getPreferredFaculty();
+        Set<String> set1 = entity.getPreferredFaculty();
         if ( set1 != null ) {
             userPreferencesDto.setPreferredFaculty( new HashSet<String>( set1 ) );
         }
-        userPreferencesDto.setSendPushMessages( arg0.isSendPushMessages() );
+        userPreferencesDto.setSendPushMessages( entity.isSendPushMessages() );
 
         return userPreferencesDto;
     }
 
     @Override
-    public UserPreferences fromDto(UserPreferencesDto arg0) {
-        if ( arg0 == null ) {
+    public UserPreferences fromDto(UserPreferencesDto dto) {
+        if ( dto == null ) {
             return null;
         }
 
         int id = 0;
 
-        id = arg0.getId();
+        id = dto.getId();
 
         UserPreferences userPreferences = new UserPreferences( id );
 
-        HashSet<Integer> hashSet = arg0.getIgnoredAuthors();
+        HashSet<Integer> hashSet = dto.getIgnoredAuthors();
         if ( hashSet != null ) {
             userPreferences.setIgnoredAuthors( new HashSet<Integer>( hashSet ) );
         }
-        HashSet<String> hashSet1 = arg0.getPreferredFaculty();
+        HashSet<String> hashSet1 = dto.getPreferredFaculty();
         if ( hashSet1 != null ) {
             userPreferences.setPreferredFaculty( new HashSet<String>( hashSet1 ) );
         }
-        userPreferences.setSendPushMessages( arg0.isSendPushMessages() );
+        userPreferences.setSendPushMessages( dto.isSendPushMessages() );
 
         return userPreferences;
     }
 
     @Override
-    public UserPreferences clone(UserPreferences arg0) {
-        if ( arg0 == null ) {
+    public UserPreferences clone(UserPreferences toClone) {
+        if ( toClone == null ) {
             return null;
         }
 
         int id = 0;
 
-        id = arg0.getId();
+        id = toClone.getId();
 
         UserPreferences userPreferences = new UserPreferences( id );
 
-        Set<Integer> set = arg0.getIgnoredAuthors();
+        Set<Integer> set = toClone.getIgnoredAuthors();
         if ( set != null ) {
             userPreferences.setIgnoredAuthors( new HashSet<Integer>( set ) );
         }
-        Set<String> set1 = arg0.getPreferredFaculty();
+        Set<String> set1 = toClone.getPreferredFaculty();
         if ( set1 != null ) {
             userPreferences.setPreferredFaculty( new HashSet<String>( set1 ) );
         }
-        userPreferences.setSendPushMessages( arg0.isSendPushMessages() );
+        userPreferences.setSendPushMessages( toClone.isSendPushMessages() );
 
         return userPreferences;
     }
 
     @Override
-    public UserPreferencesDto clone(UserPreferencesDto arg0) {
-        if ( arg0 == null ) {
+    public UserPreferencesDto clone(UserPreferencesDto toClone) {
+        if ( toClone == null ) {
             return null;
         }
 
         UserPreferencesDto userPreferencesDto = new UserPreferencesDto();
 
-        userPreferencesDto.setId( arg0.getId() );
-        HashSet<Integer> hashSet = arg0.getIgnoredAuthors();
+        userPreferencesDto.setId( toClone.getId() );
+        HashSet<Integer> hashSet = toClone.getIgnoredAuthors();
         if ( hashSet != null ) {
             userPreferencesDto.setIgnoredAuthors( new HashSet<Integer>( hashSet ) );
         }
-        HashSet<String> hashSet1 = arg0.getPreferredFaculty();
+        HashSet<String> hashSet1 = toClone.getPreferredFaculty();
         if ( hashSet1 != null ) {
             userPreferencesDto.setPreferredFaculty( new HashSet<String>( hashSet1 ) );
         }
-        userPreferencesDto.setSendPushMessages( arg0.isSendPushMessages() );
+        userPreferencesDto.setSendPushMessages( toClone.isSendPushMessages() );
 
         return userPreferencesDto;
     }
