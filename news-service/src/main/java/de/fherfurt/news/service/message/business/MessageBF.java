@@ -9,7 +9,9 @@ import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 /**
  * This class represents the business facade of the massage class.
@@ -90,5 +92,10 @@ public class MessageBF {
                 .forEach(ConsumerWithException.wrap(image -> filesBF.delete(FileTypes.IMAGE, image)));
 
         messageRepository.delete(toDelete.get());
+    }
+
+    // TODO: interface
+    public List<Message> findBy(Predicate<Message> messagePredicate) {
+        return messageRepository.findBy(messagePredicate);
     }
 }

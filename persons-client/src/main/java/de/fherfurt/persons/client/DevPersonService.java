@@ -17,7 +17,6 @@ public class DevPersonService implements PersonsClient {
         personMap.put(5, new DevPerson("Maxi", "Musterfrau", "Angewandte Sozialwissenschaften", "maxi.musterfrau@fh-erfurt.de", "Student"));
     }
 
-
     @Override
     public Optional<IPerson> findPersonUsingIteratorBy(int personID) {
         return Optional.ofNullable(personMap.get(personID));

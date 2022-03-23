@@ -11,21 +11,6 @@ import java.util.List;
 @Deprecated
 public class Main {
     public static void main(String[] args) throws Exception {
-        /*
-        MessageBF messageBF = MessageBF.of();
-
-        Message message = Message.builder().withAuthor(1).withId(1).withContent("Hallo Lisa! :)").build();
-
-        Image image = new Image(1, "test.png");
-        byte[] imageData = new byte[]{1, 5, 9, 6};
-
-        message.addImage(image);
-
-        messageBF.save(message);
-        messageBF.saveImage(image, imageData);
-        messageBF.delete(1);
-         */
-
         MessageResource messageResource = new MessageResource();
 
         ImageDto imageDtoFirst = new ImageDto("image.png", new byte[]{0, 1, 2});

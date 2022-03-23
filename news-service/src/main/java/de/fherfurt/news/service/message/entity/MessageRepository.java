@@ -27,31 +27,39 @@ public class MessageRepository implements Repository<Message> {
     public static MessageRepository of() {
         MessageRepository result = new MessageRepository();
 
-        result.init();
-
         return result;
     }
 
-    private void init() {
-        database.save(Message.builder().withId(1).withAuthor(1).withTopic("Hello").withPublishedAt(LocalDateTime.now()).build());
-        database.save(Message.builder().withId(2).withAuthor(2).withTopic("Java").withPublishedAt(LocalDateTime.now()).build());
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void save(Message entity) {
         database.save(entity);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<Message> findBy(int id) {
         return database.findBy(Message.class, id);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void delete(Message entity) {
         database.delete(entity);
     }
 
+    /**
+     * Returns a list of messages (under the condition of matching the predicate)
+     *
+     * @param predicate
+     * @return List of messages, matching the predicate
+     */
     public List<Message> findBy(Predicate<Message> predicate) {
         return database.findBy(Message.class, predicate);
     }

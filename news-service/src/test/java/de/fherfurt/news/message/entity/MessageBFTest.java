@@ -15,24 +15,6 @@ import java.util.Optional;
 
 public class MessageBFTest {
     @Test
-    void validateImageSaving() throws IOException {
-        /*
-        MessageBF messageBF = MessageBF.of();
-
-        Message message = Message.builder().withAuthor(1).withId(1).withContent("Hallo! :)").build();
-
-        Image image = new Image(1, "test.png");
-        byte[] imageData = new byte[]{1, 5, 9, 6};
-
-        message.addImage(image);
-
-        messageBF.save(message);
-        messageBF.saveImage(image, imageData);
-        messageBF.delete(1);
-         */
-    }
-
-    @Test
     void validateMessageSavedAndDeletedWithNoImages() {
         //GIVEN
         int messageId = 1;
@@ -84,6 +66,4 @@ public class MessageBFTest {
 
         Assertions.assertTrue(imageNotFound.isEmpty());
     }
-
-
 }

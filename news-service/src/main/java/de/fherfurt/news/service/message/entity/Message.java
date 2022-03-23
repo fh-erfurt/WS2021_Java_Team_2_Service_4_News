@@ -31,6 +31,10 @@ public class Message extends BaseBusinessEntity {
     private String appointmentName;
     private LocalDateTime appointmentDateTime;
 
+    // private String fieldOfStudy
+    // private String faculty
+    // private String university
+
     @Builder(setterPrefix = "with")
     public Message(
             int id,

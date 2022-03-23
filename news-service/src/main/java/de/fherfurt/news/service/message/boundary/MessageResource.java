@@ -38,7 +38,11 @@ public class MessageResource implements NewsClient {
         final Message message = BeanMapper.mapToEntity(messageDto);
         //final Message message = new ModelMapper().map(messageDto, Message.class);
 
-        final IPerson loaded = personService.findPersonUsingIteratorBy(message.getAuthor()).orElseThrow(() -> new Exception("Failed to find user!"));
+        Optional<IPerson> person = personService.findPersonUsingIteratorBy(message.getAuthor());
+
+        if (person.isEmpty()) {
+            return 0;
+        }
 
         // save the message in the database
         messageBF.save(message);
@@ -89,10 +93,14 @@ public class MessageResource implements NewsClient {
      * {@inheritDoc}
      */
     @Override
-    public List<MessageDto> findBy(Predicate<MessageDto> predicate) {
-        return null;
+    public List<MessageDto> findBy(String facultyName) {
+        return messageBF.findBy(item -> item.getFaculty().equals(facultyName)).stream().map(message -> (MessageDto) BeanMapper.mapToDto(message)).toList();
     }
 
+
+    // These will be maybe implemented next semester :)
+
+    /*
     @Override
     public void saveAuthorToUserPreferences(int author, int userId) {
 
@@ -102,4 +110,5 @@ public class MessageResource implements NewsClient {
     public void deleteAuthorFromUserPreferences(int author, int userId) {
 
     }
+     */
 }
