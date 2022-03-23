@@ -19,6 +19,7 @@ import java.util.function.Predicate;
 * This class represents the API for the service to safe the message.
 * Each message is persisted in the database and can be edited or deleted.
 */
+
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class MessageRepository implements Repository<Message> {
     private final Database database = Database.newInstance();
