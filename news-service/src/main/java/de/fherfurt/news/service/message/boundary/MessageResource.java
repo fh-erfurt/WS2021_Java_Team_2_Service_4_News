@@ -14,9 +14,7 @@ import de.fherfurt.persons.client.PersonsClient;
 import de.fherfurt.persons.client.transfer.objects.IPerson;
 import org.modelmapper.ModelMapper;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -51,10 +49,12 @@ public class MessageResource implements NewsClient {
         // save the message in the database
         messageBF.save(message);
 
-        // for each image, save the image in the filesystem
-        messageDto.getImages().forEach(wrap(
-                image -> messageBF.saveImage(image.getPath(), image.getContent())
-        ));
+        if (message.getImages() != null) {
+            // for each image, save the image in the filesystem
+            messageDto.getImages().forEach(wrap(
+                    image -> messageBF.saveImage(image.getPath(), image.getContent())
+            ));
+        }
 
         return message.getId();
     }
@@ -97,8 +97,26 @@ public class MessageResource implements NewsClient {
      * {@inheritDoc}
      */
     @Override
-    public List<MessageDto> findBy(String faculty) {
-        return messageBF.findBy(item -> item.getFaculty().equals(faculty)).stream().map(message -> (MessageDto) BeanMapper.mapToDto(message)).toList();
+    public List<MessageDto> findBy(String topic, String university, String faculty, String fieldOfStudy) {
+        List<Predicate<Message>> predicates = new ArrayList<>();
+
+        if (university != null && !university.isBlank()) {
+            predicates.add(message -> message.getUniversity().equals(university));
+        }
+
+        if (faculty != null && !faculty.isBlank()) {
+            predicates.add(message -> message.getFaculty().equals(faculty));
+        }
+
+        if (fieldOfStudy != null && !fieldOfStudy.isBlank()) {
+            predicates.add(message -> message.getFieldOfStudy().equals(fieldOfStudy));
+        }
+
+        if (topic != null && !topic.isBlank()) {
+            predicates.add(message -> message.getTopic().equals(topic));
+        }
+
+        return messageBF.findBy(predicates.stream().reduce(x -> true, Predicate::and)).stream().map(message -> (MessageDto) BeanMapper.mapToDto(message)).toList();
     }
 
     /**
@@ -120,6 +138,8 @@ public class MessageResource implements NewsClient {
 
         return false;
     }
+
+    // These might be implemented next semester.
 
     /*
     @Override

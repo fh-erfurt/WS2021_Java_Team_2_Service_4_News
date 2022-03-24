@@ -45,7 +45,7 @@ public class MessageRepositoryTest {
 
         //THEN
         Assertions.assertFalse(result.isEmpty());
-        Assertions.assertTrue(result.size()==1);
+        Assertions.assertEquals(1, result.size());
     }
 
     @Test

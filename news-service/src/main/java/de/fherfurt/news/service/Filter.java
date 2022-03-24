@@ -27,6 +27,7 @@ public class Filter {
 
 
 
+
     /*
     public List<Message> filterByAuthor(List<Message> messages, int necessaryAuthor) {
         return messages.stream().filter(message -> message.hasAuthor(necessaryAuthor)).collect(Collectors.toList());

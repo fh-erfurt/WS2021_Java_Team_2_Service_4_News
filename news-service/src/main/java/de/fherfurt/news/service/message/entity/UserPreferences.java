@@ -20,8 +20,6 @@ public class UserPreferences extends BaseBusinessEntity {
     private Set<Integer> ignoredAuthors;
     private Set<String> preferredFaculty;
     private boolean sendPushMessages;
-    // ignorierte Themen
-    // Semester
 
     @Builder(setterPrefix = "with")
     public UserPreferences(int id) {
@@ -30,12 +28,6 @@ public class UserPreferences extends BaseBusinessEntity {
         this.preferredFaculty = new HashSet<>();
         this.sendPushMessages = true;
     }
-
-    // TODO: add author, when already exists dont add
-    // TODO: be able to remove author
-
-    // TODO: be able to set faculties
-    // TODO: be able to remove faculties
 
     @Override
     public String toString() {

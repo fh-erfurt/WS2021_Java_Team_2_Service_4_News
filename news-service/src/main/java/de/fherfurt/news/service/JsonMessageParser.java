@@ -1,5 +1,6 @@
 package de.fherfurt.news.service;
 
+@Deprecated
 public class JsonMessageParser {
     /*
     private String author;

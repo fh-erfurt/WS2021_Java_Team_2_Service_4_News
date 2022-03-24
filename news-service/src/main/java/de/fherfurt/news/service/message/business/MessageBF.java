@@ -46,8 +46,8 @@ public class MessageBF {
 
     /**
      * This method saves an image to the message repository.
-     * @param image
-     * @param content
+     * @param path The specified path for the image.
+     * @param content The actual content of the image. (most likely a byte representation)
      * @throws IOException
      */
     public void saveImage(final String path,  final byte[] content) throws IOException {

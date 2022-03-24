@@ -10,8 +10,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-03-24T14:04:45+0100",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
+    date = "2022-03-24T15:34:41+0100",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17 (Homebrew)"
 )
 public class MessageMapperImpl implements MessageMapper {
 
@@ -56,9 +56,9 @@ public class MessageMapperImpl implements MessageMapper {
         message.setPublishedAt( arg0.getPublishedAt() );
         message.setContent( arg0.getContent() );
         message.setTopic( arg0.getTopic() );
-        message.setFaculty( arg0.getFaculty() );
         message.setAppointmentName( arg0.getAppointmentName() );
         message.setAppointmentDateTime( arg0.getAppointmentDateTime() );
+        message.setFaculty( arg0.getFaculty() );
 
         return message;
     }
@@ -83,9 +83,11 @@ public class MessageMapperImpl implements MessageMapper {
         message.setPublishedAt( arg0.getPublishedAt() );
         message.setContent( arg0.getContent() );
         message.setTopic( arg0.getTopic() );
-        message.setFaculty( arg0.getFaculty() );
         message.setAppointmentName( arg0.getAppointmentName() );
         message.setAppointmentDateTime( arg0.getAppointmentDateTime() );
+        message.setFieldOfStudy( arg0.getFieldOfStudy() );
+        message.setFaculty( arg0.getFaculty() );
+        message.setUniversity( arg0.getUniversity() );
 
         return message;
     }

@@ -1,6 +1,5 @@
 package de.fherfurt.news.client;
 
-
 import java.lang.reflect.Parameter;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,7 +11,6 @@ import java.util.function.Predicate;
 
 /**
  * This class represents the public API of the service.
- *
  */
 public interface NewsClient {
     /**
@@ -42,20 +40,21 @@ public interface NewsClient {
     /**
      * Load images matching a certain rating
      *
-     * @param ratingId
+     * @param messageId a certain if of a message
      * @return returns a list of images
      */
-    public List<ImageDto> loadImagesBy(int ratingId);
+    public List<ImageDto> loadImagesBy(int messageId);
 
     /**
-     * Returns a list of message, matching the given faculty
+     * Finds a list of messages using these conditions. If certain conditions are not given, they might be skipped.
      *
-     * After talking to the faculty-team, we got assured every faculty would be unambiguous.
-     *
-     * @param facultyName Name of the faculty
-     * @return returns a list of messages
+     * @param topic
+     * @param university
+     * @param faculty
+     * @param fieldOfStudy
+     * @return
      */
-    public List<MessageDto> findBy(String facultyName);
+    public List<MessageDto> findBy(String topic, String university, String faculty, String fieldOfStudy);
 
     /**
      * Uses the appointment-service to create an appointment
@@ -63,6 +62,8 @@ public interface NewsClient {
      * @param messageId
      */
     public boolean createAppointmentEntry(int messageId);
+
+    // These might be implemented next semester.
 
     /*
     public void saveAuthorToUserPreferences(int author, int userId);
