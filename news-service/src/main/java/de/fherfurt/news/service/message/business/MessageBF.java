@@ -94,7 +94,6 @@ public class MessageBF {
         messageRepository.delete(toDelete.get());
     }
 
-    // TODO: interface
     public List<Message> findBy(Predicate<Message> messagePredicate) {
         return messageRepository.findBy(messagePredicate);
     }

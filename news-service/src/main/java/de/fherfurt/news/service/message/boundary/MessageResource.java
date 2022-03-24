@@ -1,5 +1,7 @@
 package de.fherfurt.news.service.message.boundary;
 
+import de.fherfurt.appointment.client.DevAppointmentService;
+import de.fherfurt.appointment.client.IAppointmentService;
 import de.fherfurt.news.client.ImageDto;
 import de.fherfurt.news.client.MessageDto;
 import de.fherfurt.news.client.NewsClient;
@@ -29,6 +31,8 @@ public class MessageResource implements NewsClient {
     private final MessageBF messageBF = MessageBF.of();
 
     private final PersonsClient personService = new DevPersonService();
+
+    private final IAppointmentService appointmentService = new DevAppointmentService();
 
     /**
      * {@inheritDoc}
@@ -93,12 +97,29 @@ public class MessageResource implements NewsClient {
      * {@inheritDoc}
      */
     @Override
-    public List<MessageDto> findBy(String facultyName) {
-        return messageBF.findBy(item -> item.getFaculty().equals(facultyName)).stream().map(message -> (MessageDto) BeanMapper.mapToDto(message)).toList();
+    public List<MessageDto> findBy(String faculty) {
+        return messageBF.findBy(item -> item.getFaculty().equals(faculty)).stream().map(message -> (MessageDto) BeanMapper.mapToDto(message)).toList();
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean createAppointmentEntry(int messageId) {
+        Optional<Message> message = messageBF.findBy(messageId);
 
-    // These will be maybe implemented next semester :)
+        if (message.isEmpty()) {
+            return false;
+        }
+
+        if (message.get().getAppointmentName() != null && message.get().getAppointmentDateTime() != null) {
+            appointmentService.createAppointment(message.get().getAppointmentName(), message.get().getAppointmentDateTime());
+
+            return true;
+        }
+
+        return false;
+    }
 
     /*
     @Override

@@ -50,10 +50,19 @@ public interface NewsClient {
     /**
      * Returns a list of message, matching the given faculty
      *
+     * After talking to the faculty-team, we got assured every faculty would be unambiguous.
+     *
      * @param facultyName Name of the faculty
      * @return returns a list of messages
      */
     public List<MessageDto> findBy(String facultyName);
+
+    /**
+     * Uses the appointment-service to create an appointment
+     *
+     * @param messageId
+     */
+    public boolean createAppointmentEntry(int messageId);
 
     /*
     public void saveAuthorToUserPreferences(int author, int userId);

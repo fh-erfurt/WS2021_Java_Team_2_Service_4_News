@@ -10,106 +10,106 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-03-20T12:44:24+0100",
+    date = "2022-03-24T14:04:45+0100",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 public class MessageMapperImpl implements MessageMapper {
 
     @Override
-    public MessageDto toDto(Message entity) {
-        if ( entity == null ) {
+    public MessageDto toDto(Message arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
         MessageDto messageDto = new MessageDto();
 
-        messageDto.setAuthor( entity.getAuthor() );
-        messageDto.setTitle( entity.getTitle() );
-        messageDto.setDescription( entity.getDescription() );
-        messageDto.setUrl( entity.getUrl() );
-        messageDto.setImages( stringListToImageDtoList( entity.getImages() ) );
-        messageDto.setPublishedAt( entity.getPublishedAt() );
-        messageDto.setContent( entity.getContent() );
-        messageDto.setTopic( entity.getTopic() );
-        messageDto.setFaculty( entity.getFaculty() );
-        messageDto.setAppointmentName( entity.getAppointmentName() );
-        messageDto.setAppointmentDateTime( entity.getAppointmentDateTime() );
-        messageDto.setId( entity.getId() );
+        messageDto.setAuthor( arg0.getAuthor() );
+        messageDto.setTitle( arg0.getTitle() );
+        messageDto.setDescription( arg0.getDescription() );
+        messageDto.setUrl( arg0.getUrl() );
+        messageDto.setImages( stringListToImageDtoList( arg0.getImages() ) );
+        messageDto.setPublishedAt( arg0.getPublishedAt() );
+        messageDto.setContent( arg0.getContent() );
+        messageDto.setTopic( arg0.getTopic() );
+        messageDto.setFaculty( arg0.getFaculty() );
+        messageDto.setAppointmentName( arg0.getAppointmentName() );
+        messageDto.setAppointmentDateTime( arg0.getAppointmentDateTime() );
+        messageDto.setId( arg0.getId() );
 
         return messageDto;
     }
 
     @Override
-    public Message fromDto(MessageDto dto) {
-        if ( dto == null ) {
+    public Message fromDto(MessageDto arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
         Message message = new Message();
 
-        message.setId( dto.getId() );
-        message.setAuthor( dto.getAuthor() );
-        message.setTitle( dto.getTitle() );
-        message.setDescription( dto.getDescription() );
-        message.setUrl( dto.getUrl() );
-        message.setImages( imageDtoListToStringList( dto.getImages() ) );
-        message.setPublishedAt( dto.getPublishedAt() );
-        message.setContent( dto.getContent() );
-        message.setTopic( dto.getTopic() );
-        message.setFaculty( dto.getFaculty() );
-        message.setAppointmentName( dto.getAppointmentName() );
-        message.setAppointmentDateTime( dto.getAppointmentDateTime() );
+        message.setId( arg0.getId() );
+        message.setAuthor( arg0.getAuthor() );
+        message.setTitle( arg0.getTitle() );
+        message.setDescription( arg0.getDescription() );
+        message.setUrl( arg0.getUrl() );
+        message.setImages( imageDtoListToStringList( arg0.getImages() ) );
+        message.setPublishedAt( arg0.getPublishedAt() );
+        message.setContent( arg0.getContent() );
+        message.setTopic( arg0.getTopic() );
+        message.setFaculty( arg0.getFaculty() );
+        message.setAppointmentName( arg0.getAppointmentName() );
+        message.setAppointmentDateTime( arg0.getAppointmentDateTime() );
 
         return message;
     }
 
     @Override
-    public Message clone(Message toClone) {
-        if ( toClone == null ) {
+    public Message clone(Message arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
         Message message = new Message();
 
-        message.setId( toClone.getId() );
-        message.setAuthor( toClone.getAuthor() );
-        message.setTitle( toClone.getTitle() );
-        message.setDescription( toClone.getDescription() );
-        message.setUrl( toClone.getUrl() );
-        List<String> list = toClone.getImages();
+        message.setId( arg0.getId() );
+        message.setAuthor( arg0.getAuthor() );
+        message.setTitle( arg0.getTitle() );
+        message.setDescription( arg0.getDescription() );
+        message.setUrl( arg0.getUrl() );
+        List<String> list = arg0.getImages();
         if ( list != null ) {
             message.setImages( new ArrayList<String>( list ) );
         }
-        message.setPublishedAt( toClone.getPublishedAt() );
-        message.setContent( toClone.getContent() );
-        message.setTopic( toClone.getTopic() );
-        message.setFaculty( toClone.getFaculty() );
-        message.setAppointmentName( toClone.getAppointmentName() );
-        message.setAppointmentDateTime( toClone.getAppointmentDateTime() );
+        message.setPublishedAt( arg0.getPublishedAt() );
+        message.setContent( arg0.getContent() );
+        message.setTopic( arg0.getTopic() );
+        message.setFaculty( arg0.getFaculty() );
+        message.setAppointmentName( arg0.getAppointmentName() );
+        message.setAppointmentDateTime( arg0.getAppointmentDateTime() );
 
         return message;
     }
 
     @Override
-    public MessageDto clone(MessageDto toClone) {
-        if ( toClone == null ) {
+    public MessageDto clone(MessageDto arg0) {
+        if ( arg0 == null ) {
             return null;
         }
 
         MessageDto messageDto = new MessageDto();
 
-        messageDto.setAuthor( toClone.getAuthor() );
-        messageDto.setTitle( toClone.getTitle() );
-        messageDto.setDescription( toClone.getDescription() );
-        messageDto.setUrl( toClone.getUrl() );
-        messageDto.setImages( imageDtoListToImageDtoList( toClone.getImages() ) );
-        messageDto.setPublishedAt( toClone.getPublishedAt() );
-        messageDto.setContent( toClone.getContent() );
-        messageDto.setTopic( toClone.getTopic() );
-        messageDto.setFaculty( toClone.getFaculty() );
-        messageDto.setAppointmentName( toClone.getAppointmentName() );
-        messageDto.setAppointmentDateTime( toClone.getAppointmentDateTime() );
-        messageDto.setId( toClone.getId() );
+        messageDto.setAuthor( arg0.getAuthor() );
+        messageDto.setTitle( arg0.getTitle() );
+        messageDto.setDescription( arg0.getDescription() );
+        messageDto.setUrl( arg0.getUrl() );
+        messageDto.setImages( imageDtoListToImageDtoList( arg0.getImages() ) );
+        messageDto.setPublishedAt( arg0.getPublishedAt() );
+        messageDto.setContent( arg0.getContent() );
+        messageDto.setTopic( arg0.getTopic() );
+        messageDto.setFaculty( arg0.getFaculty() );
+        messageDto.setAppointmentName( arg0.getAppointmentName() );
+        messageDto.setAppointmentDateTime( arg0.getAppointmentDateTime() );
+        messageDto.setId( arg0.getId() );
 
         return messageDto;
     }
