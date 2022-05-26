@@ -5,7 +5,8 @@ import de.fherfurt.news.service.core.persistence.Repository;
 
 import java.util.Optional;
 
-public class UserPreferenceRepository implements Repository<UserPreferences> {
+public class UserPreferenceRepository  {
+/*
     private final Database database = Database.newInstance();
 
     public static UserPreferenceRepository of() {
@@ -18,7 +19,7 @@ public class UserPreferenceRepository implements Repository<UserPreferences> {
     }
 
     @Override
-    public Optional<UserPreferences> findBy(int id) {
+    public Optional<UserPreferences> findBy(Long id) {
         return database.findBy(UserPreferences.class, id);
     }
 
@@ -26,4 +27,5 @@ public class UserPreferenceRepository implements Repository<UserPreferences> {
     public void delete(UserPreferences entity) {
 
     }
+ */
 }

@@ -1,0 +1,7 @@
+de\fherfurt\news\client\NewsClient.class
+de\fherfurt\news\client\UserPreferencesDto$UserPreferencesDtoBuilder.class
+de\fherfurt\news\client\ImageDto$ImageDtoBuilder.class
+de\fherfurt\news\client\MessageDto$MessageDtoBuilder.class
+de\fherfurt\news\client\UserPreferencesDto.class
+de\fherfurt\news\client\MessageDto.class
+de\fherfurt\news\client\ImageDto.class

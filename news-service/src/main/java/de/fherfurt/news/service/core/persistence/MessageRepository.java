@@ -4,34 +4,23 @@ import de.fherfurt.news.service.JPA;
 import de.fherfurt.news.service.message.entity.Message;
 
 import javax.persistence.EntityManager;
-import java.lang.reflect.ParameterizedType;
 import java.util.Optional;
 
-public class Repository<ENTITY> implements IRepository<ENTITY> {
+public class MessageRepository implements IRepository<Message> {
+    private final Class<Message> type = Message.class;
     private final EntityManager entityManager = JPA.getEntityManagerFactory().createEntityManager();
-    private final Class<ENTITY> type;
 
-    public Repository(Class<ENTITY> type) {
-        this.type = type;
-    }
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public void save(ENTITY entity) {
+    public void save(Message message) {
         entityManager.getTransaction().begin();
-        entityManager.persist(entity);
+        entityManager.persist(message);
         entityManager.getTransaction().commit();
     }
 
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public Optional<ENTITY> findBy(Long id) {
+    public Optional<Message> findBy(Long id) {
         try {
-            ENTITY entity = entityManager.find(this.type, id);
+            Message entity = this.entityManager.find(this.type, id);
 
             return Optional.of(entity);
         } catch (Exception exception) {
@@ -40,7 +29,13 @@ public class Repository<ENTITY> implements IRepository<ENTITY> {
     }
 
     @Override
-    public void delete(ENTITY entity) {
+    public void delete(Message message) {
+        this.entityManager.getTransaction().begin();
+        this.entityManager.remove(message);
+        this.entityManager.getTransaction().commit();
+    }
+
+    public void deleteById(Long id) {
 
     }
 }

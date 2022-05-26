@@ -14,6 +14,7 @@ import de.fherfurt.persons.client.PersonsClient;
 import de.fherfurt.persons.client.transfer.objects.IPerson;
 import org.modelmapper.ModelMapper;
 
+import javax.enterprise.inject.Model;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -26,6 +27,7 @@ import static de.fherfurt.news.service.core.persistence.errors.ConsumerWithExcep
  * It implements the main functionality.
  */
 public class MessageResource implements NewsClient {
+    private final ModelMapper modelMapper = new ModelMapper();
     private final MessageBF messageBF = MessageBF.of();
 
     private final PersonsClient personService = new DevPersonService();
@@ -36,25 +38,30 @@ public class MessageResource implements NewsClient {
      * {@inheritDoc}
      */
     @Override
-    public int save(MessageDto messageDto) throws Exception {
-        final Message message = BeanMapper.mapToEntity(messageDto);
+    public Long save(MessageDto messageDto) throws Exception {
+
+        final Message message = modelMapper.map(messageDto, Message.class);
+
+        //final Message message = BeanMapper.mapToEntity(messageDto);
         //final Message message = new ModelMapper().map(messageDto, Message.class);
 
         Optional<IPerson> person = personService.findPersonUsingIteratorBy(message.getAuthor());
 
         if (person.isEmpty()) {
-            return 0;
+            return 0L;
         }
 
         // save the message in the database
         messageBF.save(message);
 
+        /*
         if (message.getImages() != null) {
             // for each image, save the image in the filesystem
             messageDto.getImages().forEach(wrap(
                     image -> messageBF.saveImage(image.getPath(), image.getContent())
             ));
         }
+         */
 
         return message.getId();
     }
@@ -63,8 +70,8 @@ public class MessageResource implements NewsClient {
      * {@inheritDoc}
      */
     @Override
-    public Optional<MessageDto> findBy(int messageId) {
-        return messageBF.findBy(messageId).map(message -> (MessageDto) BeanMapper.mapToDto(message)).or(Optional::empty);
+    public Optional<MessageDto> findBy(Long messageId) {
+        return messageBF.findBy(messageId).map(message -> (MessageDto) modelMapper.map(message, MessageDto.class)).or(Optional::empty);
     }
 
     /**
@@ -72,14 +79,16 @@ public class MessageResource implements NewsClient {
      */
     @Override
     public void delete(int id) {
-        messageBF.delete(id);
+        // messageBF.delete(id);
     }
 
     /**
      * {@inheritDoc}
      */
-    @Override
+        @Override
+
     public List<ImageDto> loadImagesBy(int messageId) {
+            /*
         return messageBF.findBy(messageId)
                 .map(message -> message.getImages().stream()
                         .map(FunctionWithException.wrap(
@@ -91,6 +100,8 @@ public class MessageResource implements NewsClient {
                         )
                         .collect(Collectors.toList())
                 ).orElse(Collections.emptyList());
+                */
+        return new ArrayList<>();
     }
 
     /**
@@ -100,6 +111,7 @@ public class MessageResource implements NewsClient {
     public List<MessageDto> findBy(String topic, String university, String faculty, String fieldOfStudy) {
         List<Predicate<Message>> predicates = new ArrayList<>();
 
+        /*
         if (university != null && !university.isBlank()) {
             predicates.add(message -> message.getUniversity().equals(university));
         }
@@ -115,8 +127,9 @@ public class MessageResource implements NewsClient {
         if (topic != null && !topic.isBlank()) {
             predicates.add(message -> message.getTopic().equals(topic));
         }
+        */
 
-        return messageBF.findBy(predicates.stream().reduce(x -> true, Predicate::and)).stream().map(message -> (MessageDto) BeanMapper.mapToDto(message)).toList();
+        return new ArrayList<>(); //messageBF.findBy(predicates.stream().reduce(x -> true, Predicate::and)).stream().map(message -> (MessageDto) modelMapper.map(message, MessageDto.class)).toList();
     }
 
     /**
@@ -124,17 +137,19 @@ public class MessageResource implements NewsClient {
      */
     @Override
     public boolean createAppointmentEntry(int messageId) {
+        /*
+
         Optional<Message> message = messageBF.findBy(messageId);
 
         if (message.isEmpty()) {
             return false;
         }
-
         if (message.get().getAppointmentName() != null && message.get().getAppointmentDateTime() != null) {
             appointmentService.createAppointment(message.get().getAppointmentName(), message.get().getAppointmentDateTime());
 
             return true;
         }
+         */
 
         return false;
     }

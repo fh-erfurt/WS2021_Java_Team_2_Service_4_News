@@ -1,10 +1,9 @@
 package de.fherfurt.news.service.message.business;
 
-import de.fherfurt.news.service.message.entity.MessageRepository;
+import de.fherfurt.news.service.core.persistence.Repository;
 import de.fherfurt.news.service.message.entity.Message;
 import de.fherfurt.news.service.message.entity.FileSystemRepository.FileTypes;
 
-import de.fherfurt.news.service.core.persistence.errors.ConsumerWithException;
 import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,7 +21,7 @@ import java.util.function.Predicate;
 @Slf4j
 @NoArgsConstructor(staticName = "of")
 public class MessageBF {
-    private final MessageRepository messageRepository = MessageRepository.of();
+    private final Repository messageRepository = new Repository<Message>(Message.class);
     private final FilesBF filesBF = FilesBF.of();
 
     /**
@@ -40,7 +39,7 @@ public class MessageBF {
      * @param id
      * @return optional Message
      */
-    public Optional<Message> findBy(final int id) {
+    public Optional<Message> findBy(final Long id) {
         return messageRepository.findBy(id);
     }
 
@@ -74,13 +73,14 @@ public class MessageBF {
      * This method deletes a message from the message repository.
      * @param id
      */
-    public void delete(final int id) {
+    public void delete(final Long id) {
         final Optional<Message> toDelete = findBy(id);
 
         if (toDelete.isEmpty()) {
             return;
         }
 
+        /*
         if (toDelete.get().getImages() == null) {
             messageRepository.delete(toDelete.get());
 
@@ -91,10 +91,7 @@ public class MessageBF {
                 .getImages()
                 .forEach(ConsumerWithException.wrap(image -> filesBF.delete(FileTypes.IMAGE, image)));
 
+        */
         messageRepository.delete(toDelete.get());
-    }
-
-    public List<Message> findBy(Predicate<Message> messagePredicate) {
-        return messageRepository.findBy(messagePredicate);
     }
 }

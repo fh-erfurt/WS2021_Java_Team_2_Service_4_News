@@ -8,8 +8,8 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-03-20T12:44:23+0100",
-    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
+    date = "2022-05-26T14:03:19+0200",
+    comments = "version: 1.4.2.Final, compiler: javac, environment: Java 18.0.1.1 (Oracle Corporation)"
 )
 public class UserPreferencesMapperImpl implements UserPreferencesMapper {
 
@@ -58,52 +58,5 @@ public class UserPreferencesMapperImpl implements UserPreferencesMapper {
         userPreferences.setSendPushMessages( dto.isSendPushMessages() );
 
         return userPreferences;
-    }
-
-    @Override
-    public UserPreferences clone(UserPreferences toClone) {
-        if ( toClone == null ) {
-            return null;
-        }
-
-        int id = 0;
-
-        id = toClone.getId();
-
-        UserPreferences userPreferences = new UserPreferences( id );
-
-        Set<Integer> set = toClone.getIgnoredAuthors();
-        if ( set != null ) {
-            userPreferences.setIgnoredAuthors( new HashSet<Integer>( set ) );
-        }
-        Set<String> set1 = toClone.getPreferredFaculty();
-        if ( set1 != null ) {
-            userPreferences.setPreferredFaculty( new HashSet<String>( set1 ) );
-        }
-        userPreferences.setSendPushMessages( toClone.isSendPushMessages() );
-
-        return userPreferences;
-    }
-
-    @Override
-    public UserPreferencesDto clone(UserPreferencesDto toClone) {
-        if ( toClone == null ) {
-            return null;
-        }
-
-        UserPreferencesDto userPreferencesDto = new UserPreferencesDto();
-
-        userPreferencesDto.setId( toClone.getId() );
-        HashSet<Integer> hashSet = toClone.getIgnoredAuthors();
-        if ( hashSet != null ) {
-            userPreferencesDto.setIgnoredAuthors( new HashSet<Integer>( hashSet ) );
-        }
-        HashSet<String> hashSet1 = toClone.getPreferredFaculty();
-        if ( hashSet1 != null ) {
-            userPreferencesDto.setPreferredFaculty( new HashSet<String>( hashSet1 ) );
-        }
-        userPreferencesDto.setSendPushMessages( toClone.isSendPushMessages() );
-
-        return userPreferencesDto;
     }
 }

@@ -1,15 +1,12 @@
 package de.fherfurt.news.message.entity;
 
-import de.fherfurt.news.service.message.entity.Message;
-import de.fherfurt.news.service.message.entity.MessageRepository;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-
-import java.util.List;
-
 /**
  * @author Antonia Geschke
  * */
+
+
+
+/*
 public class MessageRepositoryTest {
     @Test
     void validateFindByPredicate() {
@@ -86,3 +83,6 @@ public class MessageRepositoryTest {
         Assertions.assertTrue(result.size()==2);
     }
 }
+
+ */
+

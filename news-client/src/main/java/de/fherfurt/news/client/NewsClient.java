@@ -20,7 +20,7 @@ public interface NewsClient {
      * @return Returns the id of the persisted entity.
      * @throws Exception This function might throw an exception.
      */
-    public int save(MessageDto messageDto) throws Exception;
+    public Long save(MessageDto messageDto) throws Exception;
     
     /**
      * This method returns an optional of a message. If the database is able to find an entity matching the id, it will return it.
@@ -28,7 +28,7 @@ public interface NewsClient {
      * @param messageId Value used to identify the message.
      * @return Optional of Message. If a message is found the optional contains a value.
      */
-    public Optional<MessageDto> findBy(int messageId);
+    public Optional<MessageDto> findBy(Long messageId);
 
     /**
      * Deletes a given rating and it´s matching images

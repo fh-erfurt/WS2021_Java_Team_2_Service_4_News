@@ -23,9 +23,27 @@ public class MessageDto {
     private String faculty;
     private String appointmentName;
     private LocalDateTime appointmentDateTime;
-    int id;
+    private Long id;
 
     public void addImage(ImageDto imageDto) {
         this.images.add(imageDto);
+    }
+
+    @Override
+    public String toString() {
+        return "MessageDto{" +
+                "author=" + author +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", url='" + url + '\'' +
+                ", images=" + images +
+                ", publishedAt=" + publishedAt +
+                ", content='" + content + '\'' +
+                ", topic='" + topic + '\'' +
+                ", faculty='" + faculty + '\'' +
+                ", appointmentName='" + appointmentName + '\'' +
+                ", appointmentDateTime=" + appointmentDateTime +
+                ", id=" + id +
+                '}';
     }
 }

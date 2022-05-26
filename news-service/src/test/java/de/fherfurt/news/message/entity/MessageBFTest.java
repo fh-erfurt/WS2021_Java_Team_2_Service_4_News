@@ -12,9 +12,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+/*
+
+
 
 public class MessageBFTest {
-    @Test
+   @Test
     void validateMessageSavedAndDeletedWithNoImages() {
         //GIVEN
         int messageId = 1;
@@ -67,3 +70,5 @@ public class MessageBFTest {
         Assertions.assertTrue(imageNotFound.isEmpty());
     }
 }
+ */
+

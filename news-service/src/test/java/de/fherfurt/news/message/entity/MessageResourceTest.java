@@ -15,6 +15,7 @@ import java.util.Optional;
  * @author Lisa Sluka, Benjamin Ehnes
  * */
 
+/*
 public class MessageResourceTest {
 
     @Test
@@ -113,3 +114,4 @@ public class MessageResourceTest {
 
 
 }
+*/
