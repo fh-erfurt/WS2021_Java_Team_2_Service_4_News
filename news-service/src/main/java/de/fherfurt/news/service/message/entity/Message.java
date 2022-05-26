@@ -18,24 +18,15 @@ import java.util.List;
 @Setter
 @Entity
 @Table(name = "Message")
-public class Message {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id")
-    private Long id;
-
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PUBLIC)
+@Builder(setterPrefix = "with")
+public class Message extends BaseBusinessEntity {
     private int author;
 
 
-
-    // @Column(name="Author", length = 50, nullable = false, unique = false)
     // private List<String> images = new ArrayList<>();
 
-    public Message(int author) {
-        this.author = author;
-    }
-
-    /*
     private String title;
     private String description;
     private String url;
@@ -51,24 +42,4 @@ public class Message {
     private String fieldOfStudy;
     private String faculty;
     private String university;
-    */
-
-    /*
-    @Builder(setterPrefix = "with")
-    public Message(int author, String title, String description, String url, List<String> images, LocalDateTime publishedAt, String content, String topic, String appointmentName, LocalDateTime appointmentDateTime, String fieldOfStudy, String faculty, String university) {
-        this.author = author;
-        this.title = title;
-        this.description = description;
-        this.url = url;
-        this.images = images;
-        this.publishedAt = publishedAt;
-        this.content = content;
-        this.topic = topic;
-        this.appointmentName = appointmentName;
-        this.appointmentDateTime = appointmentDateTime;
-        this.fieldOfStudy = fieldOfStudy;
-        this.faculty = faculty;
-        this.university = university;
-    }
-    */
 }

@@ -1,4 +1,4 @@
-package de.fherfurt.news.service;
+package de.fherfurt.news.service.utils;
 
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

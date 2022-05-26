@@ -8,7 +8,6 @@ import java.util.function.Function;
  * @param <PARAM> Generic type of the parameter
  * @param <RESULT> Generic type of the returned result
  * @param <EXCEPTION> Generic exception type
- * @author Michael Rhoese <michael.rhoese@fh-erfurt.de>
  */
 @FunctionalInterface
 public interface FunctionWithException<PARAM, RESULT, EXCEPTION extends Exception> {

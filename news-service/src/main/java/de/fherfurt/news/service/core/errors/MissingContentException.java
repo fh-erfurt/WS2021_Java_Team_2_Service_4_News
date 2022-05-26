@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 /**
  * Thrown if the content (byte array of a file) is missing but required.
  *
- * @author Michael Rhoese <michael.rhoese@fh-erfurt.de>
  */
 @NoArgsConstructor
 public class MissingContentException extends PersistenceException {

@@ -1,5 +1,7 @@
 package de.fherfurt.news.service.core.persistence;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -7,10 +9,8 @@ import java.util.Optional;
  * defined and implemented in the explicit repository.
  *
  * @param <ENTITY> Generic type of entity
- * @author Michael Rhoese <michael.rhoese@fh-erfurt.de>
  */
 public interface IRepository<ENTITY> {
-
     /**
      * Save an entity to the underlying storage. It doesn't matter, if the entity is new or already saved. In case of update
      * the changes are written too.
@@ -20,6 +20,12 @@ public interface IRepository<ENTITY> {
     void save(ENTITY entity);
 
     /**
+     * Saves all entities to the underlying storage.
+     *
+     * @param newEntities
+     */
+    void saveAll(Collection<ENTITY> newEntities);
+    /**
      * Find an entity by its id. If no entity is available, an empty {@link Optional} is returned.
      *
      * @param id Id of the searched entity
@@ -27,10 +33,18 @@ public interface IRepository<ENTITY> {
      */
     Optional<ENTITY> findBy(Long id);
 
+
+    Collection<ENTITY> findAll();
+
     /**
      * Deletes a given entity.
      *
      * @param entity Instance to delete
      */
+
+    Optional<ENTITY> update(ENTITY entity);
+
+    void delete(Long id);
     void delete(ENTITY entity);
+    void delete(List<ENTITY> entries);
 }

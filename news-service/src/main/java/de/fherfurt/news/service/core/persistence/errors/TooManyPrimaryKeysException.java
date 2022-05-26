@@ -1,6 +1,5 @@
 package de.fherfurt.news.service.core.persistence.errors;
 
-import de.fherfurt.news.service.core.persistence.Id;
 import lombok.RequiredArgsConstructor;
 
 import java.util.Objects;
@@ -8,7 +7,6 @@ import java.util.Objects;
 /**
  * Thrown if an entity has multiple fields that are annotated with{@link Id}.
  *
- * @author Michael Rhoese <michael.rhoese@fh-erfurt.de>
  */
 @RequiredArgsConstructor
 public class TooManyPrimaryKeysException extends RuntimeException {

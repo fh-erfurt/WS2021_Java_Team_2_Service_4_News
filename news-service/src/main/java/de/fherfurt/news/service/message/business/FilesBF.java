@@ -12,7 +12,6 @@ import java.util.Optional;
  * This business facade encapsulates the handling of files from the whole core functionality. It allows the storing and
  * loading of files.
  *
- * @author Michael Rhoese <michael.rhoese@fh-erfurt.de>
  */
 @NoArgsConstructor(staticName = "of")
 public class FilesBF {

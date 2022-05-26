@@ -7,7 +7,6 @@ import java.util.function.Consumer;
  *
  * @param <PARAM>     Generic type of the parameter
  * @param <EXCEPTION> Generic exception type
- * @author Michael Rhoese <michael.rhoese@fh-erfurt.de>
  */
 @FunctionalInterface
 public interface ConsumerWithException<PARAM, EXCEPTION extends Exception> {

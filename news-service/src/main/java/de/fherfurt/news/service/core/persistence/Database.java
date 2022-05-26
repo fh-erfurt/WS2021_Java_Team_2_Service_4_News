@@ -23,9 +23,10 @@ import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+@Deprecated
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class Database {
-
+/*
     private static Database instance;
 
     private final Map<String, CollectionContainer> cache = new ConcurrentHashMap<>();
@@ -231,4 +232,5 @@ public class Database {
     private enum MapperTypes {
         INSERT, UPDATE, DELETE
     }
+ */
 }

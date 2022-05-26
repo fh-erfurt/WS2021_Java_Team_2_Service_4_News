@@ -1,11 +1,20 @@
 package de.fherfurt.news.service;
 
 import de.fherfurt.news.client.MessageDto;
+import de.fherfurt.news.service.core.mappers.BeanMapper;
+import de.fherfurt.news.service.core.mappers.UtilityMapper;
 import de.fherfurt.news.service.core.persistence.Repository;
+import de.fherfurt.news.service.message.boundary.MessageMapper;
+import de.fherfurt.news.service.message.boundary.MessageResource;
+import de.fherfurt.news.service.message.business.MessageBF;
 import de.fherfurt.news.service.message.entity.Message;
+import de.fherfurt.news.service.message.entity.Message.MessageBuilder;
+import de.fherfurt.news.service.utils.DataProvider;
+import de.fherfurt.news.service.utils.JPA;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.EntityManager;
+import java.util.List;
 import java.util.Optional;
 
 @Deprecated
@@ -13,17 +22,29 @@ public class Main {
     public static void main(String[] args) throws Exception {
         EntityManager entityManager = JPA.getEntityManagerFactory().createEntityManager();
 
-        Message message = new Message(1);
-        Repository<Message> messageRepository = new Repository<Message>(Message.class);
-        messageRepository.save(message);
-
-        Optional<Message> messageFound = messageRepository.findBy(1L);
+        Message message = DataProvider.createTestMessage();
 
         ModelMapper modelMapper = new ModelMapper();
+
+        MessageDto messageDto = modelMapper.map(message, MessageDto.class);
+
+        MessageResource messageResource = new MessageResource();
+        messageResource.save(messageDto);
+
+        Optional<MessageDto> messageDtoFound = messageResource.findBy(1L);
+
+        System.out.println(messageDtoFound.get());
+
+        /*
+        Optional<Message> messageFound = messageRepository.findBy(1L);
+
 
         MessageDto messageDto = modelMapper.map(messageFound.get(), MessageDto.class);
 
         System.out.println(messageDto.toString());
+        */
+
+
 
         JPA.shutdown();
 

@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 /**
  * Generic exception that is thrown if any unexpected thing happened while database operations.
  *
- * @author Michael Rhoese <michael.rhoese@fh-erfurt.de>
  */
 @NoArgsConstructor
 public class PersistenceException extends RuntimeException {

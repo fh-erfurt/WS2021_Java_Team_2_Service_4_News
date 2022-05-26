@@ -8,7 +8,7 @@ import javax.annotation.processing.Generated;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-05-26T14:03:19+0200",
+    date = "2022-05-26T14:51:48+0200",
     comments = "version: 1.4.2.Final, compiler: javac, environment: Java 18.0.1.1 (Oracle Corporation)"
 )
 public class UserPreferencesMapperImpl implements UserPreferencesMapper {
@@ -21,7 +21,6 @@ public class UserPreferencesMapperImpl implements UserPreferencesMapper {
 
         UserPreferencesDto userPreferencesDto = new UserPreferencesDto();
 
-        userPreferencesDto.setId( entity.getId() );
         Set<Integer> set = entity.getIgnoredAuthors();
         if ( set != null ) {
             userPreferencesDto.setIgnoredAuthors( new HashSet<Integer>( set ) );
@@ -41,11 +40,7 @@ public class UserPreferencesMapperImpl implements UserPreferencesMapper {
             return null;
         }
 
-        int id = 0;
-
-        id = dto.getId();
-
-        UserPreferences userPreferences = new UserPreferences( id );
+        UserPreferences userPreferences = new UserPreferences();
 
         HashSet<Integer> hashSet = dto.getIgnoredAuthors();
         if ( hashSet != null ) {

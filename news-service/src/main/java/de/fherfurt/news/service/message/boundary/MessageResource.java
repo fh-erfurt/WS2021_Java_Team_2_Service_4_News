@@ -63,7 +63,7 @@ public class MessageResource implements NewsClient {
         }
          */
 
-        return message.getId();
+        return 0L;
     }
 
     /**

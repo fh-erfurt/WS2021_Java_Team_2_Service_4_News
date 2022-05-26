@@ -22,8 +22,7 @@ public class UserPreferences extends BaseBusinessEntity {
     private boolean sendPushMessages;
 
     @Builder(setterPrefix = "with")
-    public UserPreferences(int id) {
-        super(id);
+    public UserPreferences() {
         this.ignoredAuthors = new HashSet<>();
         this.preferredFaculty = new HashSet<>();
         this.sendPushMessages = true;
