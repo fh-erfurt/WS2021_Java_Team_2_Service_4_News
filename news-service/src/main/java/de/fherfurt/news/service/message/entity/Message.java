@@ -7,6 +7,7 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -24,8 +25,8 @@ import java.util.List;
 public class Message extends BaseBusinessEntity {
     private int author;
 
-
-    // private List<String> images = new ArrayList<>();
+    @OneToMany
+    private Collection<Image> images;
 
     private String title;
     private String description;
@@ -42,4 +43,23 @@ public class Message extends BaseBusinessEntity {
     private String fieldOfStudy;
     private String faculty;
     private String university;
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "author=" + author +
+                ", images=" + images +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", url='" + url + '\'' +
+                ", publishedAt=" + publishedAt +
+                ", content='" + content + '\'' +
+                ", topic='" + topic + '\'' +
+                ", appointmentName='" + appointmentName + '\'' +
+                ", appointmentDateTime=" + appointmentDateTime +
+                ", fieldOfStudy='" + fieldOfStudy + '\'' +
+                ", faculty='" + faculty + '\'' +
+                ", university='" + university + '\'' +
+                '}';
+    }
 }

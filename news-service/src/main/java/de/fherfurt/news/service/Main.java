@@ -1,5 +1,6 @@
 package de.fherfurt.news.service;
 
+import de.fherfurt.news.client.ImageDto;
 import de.fherfurt.news.client.MessageDto;
 import de.fherfurt.news.service.core.mappers.BeanMapper;
 import de.fherfurt.news.service.core.mappers.UtilityMapper;
@@ -14,6 +15,7 @@ import de.fherfurt.news.service.utils.JPA;
 import org.modelmapper.ModelMapper;
 
 import javax.persistence.EntityManager;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,18 +24,25 @@ public class Main {
     public static void main(String[] args) throws Exception {
         EntityManager entityManager = JPA.getEntityManagerFactory().createEntityManager();
 
-        Message message = DataProvider.createTestMessage();
+        ImageDto imageDtoFirst = new ImageDto(1L, "image.png" , new byte[]{0, 1, 2});
+        ImageDto imageDtoSecond = new ImageDto(2L ,"image2.png", new byte[]{2, 1, 0});
+
+        ArrayList<ImageDto> images = new ArrayList<>();
+        images.add(imageDtoFirst);
+        images.add(imageDtoSecond);
 
         ModelMapper modelMapper = new ModelMapper();
 
-        MessageDto messageDto = modelMapper.map(message, MessageDto.class);
+        MessageDto messageDto = MessageDto.builder().withAuthor(1).withContent("Hallo").withImages(images).build();
+
+        System.out.println(messageDto);
 
         MessageResource messageResource = new MessageResource();
         messageResource.save(messageDto);
 
-        Optional<MessageDto> messageDtoFound = messageResource.findBy(1L);
+        // Optional<MessageDto> messageDtoFound = messageResource.findBy(1L);
 
-        System.out.println(messageDtoFound.get());
+        // System.out.println(messageDtoFound.get());
 
         /*
         Optional<Message> messageFound = messageRepository.findBy(1L);

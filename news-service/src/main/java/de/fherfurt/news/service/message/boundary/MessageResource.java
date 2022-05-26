@@ -8,6 +8,7 @@ import de.fherfurt.news.client.NewsClient;
 import de.fherfurt.news.service.message.business.MessageBF;
 import de.fherfurt.news.service.core.errors.FunctionWithException;
 import de.fherfurt.news.service.core.mappers.BeanMapper;
+import de.fherfurt.news.service.message.entity.Image;
 import de.fherfurt.news.service.message.entity.Message;
 import de.fherfurt.persons.client.DevPersonService;
 import de.fherfurt.persons.client.PersonsClient;
@@ -27,7 +28,6 @@ import static de.fherfurt.news.service.core.persistence.errors.ConsumerWithExcep
  * It implements the main functionality.
  */
 public class MessageResource implements NewsClient {
-    private final ModelMapper modelMapper = new ModelMapper();
     private final MessageBF messageBF = MessageBF.of();
 
     private final PersonsClient personService = new DevPersonService();
@@ -39,29 +39,26 @@ public class MessageResource implements NewsClient {
      */
     @Override
     public Long save(MessageDto messageDto) throws Exception {
-
-        final Message message = modelMapper.map(messageDto, Message.class);
-
-        //final Message message = BeanMapper.mapToEntity(messageDto);
-        //final Message message = new ModelMapper().map(messageDto, Message.class);
-
-        Optional<IPerson> person = personService.findPersonUsingIteratorBy(message.getAuthor());
+        Optional<IPerson> person = personService.findPersonUsingIteratorBy(messageDto.getAuthor());
 
         if (person.isEmpty()) {
             return 0L;
         }
 
-        // save the message in the database
-        messageBF.save(message);
+        final Message message = BeanMapper.mapToEntity(messageDto);
 
-        /*
-        if (message.getImages() != null) {
+        System.out.println(message.getImages());
+
+        if (messageDto.getImages() != null) {
+
+
             // for each image, save the image in the filesystem
             messageDto.getImages().forEach(wrap(
-                    image -> messageBF.saveImage(image.getPath(), image.getContent())
+                    image -> messageBF.saveImage(image.getFilePath(), image.getContent())
             ));
         }
-         */
+
+        messageBF.save(message);
 
         return 0L;
     }
@@ -71,7 +68,7 @@ public class MessageResource implements NewsClient {
      */
     @Override
     public Optional<MessageDto> findBy(Long messageId) {
-        return messageBF.findBy(messageId).map(message -> (MessageDto) modelMapper.map(message, MessageDto.class)).or(Optional::empty);
+        return messageBF.findBy(messageId).map(message -> (MessageDto) BeanMapper.mapToDto(message)).or(Optional::empty);
     }
 
     /**

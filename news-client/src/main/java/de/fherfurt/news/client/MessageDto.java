@@ -5,6 +5,7 @@ import lombok.*;
 import java.awt.*;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -45,5 +46,18 @@ public class MessageDto {
                 ", appointmentDateTime=" + appointmentDateTime +
                 ", id=" + id +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        MessageDto that = (MessageDto) o;
+        return author == that.author && Objects.equals(title, that.title) && Objects.equals(description, that.description) && Objects.equals(url, that.url) && Objects.equals(images, that.images) && Objects.equals(publishedAt, that.publishedAt) && Objects.equals(content, that.content) && Objects.equals(topic, that.topic) && Objects.equals(faculty, that.faculty) && Objects.equals(appointmentName, that.appointmentName) && Objects.equals(appointmentDateTime, that.appointmentDateTime) && Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(author, title, description, url, images, publishedAt, content, topic, faculty, appointmentName, appointmentDateTime, id);
     }
 }

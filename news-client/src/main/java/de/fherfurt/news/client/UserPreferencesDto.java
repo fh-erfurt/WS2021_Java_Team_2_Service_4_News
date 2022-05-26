@@ -12,7 +12,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder(setterPrefix = "with")
 public class UserPreferencesDto {
-    int id;
+    Long id;
     private HashSet<Integer> ignoredAuthors;
     private HashSet<String> preferredFaculty;
     private boolean sendPushMessages;

@@ -3,6 +3,7 @@ package de.fherfurt.news.service.message.boundary;
 import de.fherfurt.news.client.ImageDto;
 import de.fherfurt.news.client.MessageDto;
 import de.fherfurt.news.service.core.mappers.BeanMapper;
+import de.fherfurt.news.service.message.entity.Image;
 import de.fherfurt.news.service.message.entity.Message;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
@@ -16,11 +17,11 @@ import org.mapstruct.factory.Mappers;
 public interface MessageMapper extends BeanMapper<Message, MessageDto> {
     MessageMapper INSTANCE = Mappers.getMapper(MessageMapper.class);
 
-    default String mapImageDtoToString(ImageDto imageDto) {
-        return imageDto.getPath();
+    default Image mapImageDtoToString(ImageDto imageDto) {
+        return new Image(imageDto.getFilePath());
     }
 
-    default ImageDto mapStringToImageDto(String path) {
-        return ImageDto.builder().withPath(path).build();
+    default ImageDto mapStringToImageDto(Image image) {
+        return ImageDto.builder().withFilePath(image.getFilePath()).build();
     }
 }

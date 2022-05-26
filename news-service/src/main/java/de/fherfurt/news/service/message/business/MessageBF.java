@@ -2,6 +2,7 @@ package de.fherfurt.news.service.message.business;
 
 import de.fherfurt.news.service.core.persistence.Repository;
 import de.fherfurt.news.service.core.persistence.errors.ConsumerWithException;
+import de.fherfurt.news.service.message.entity.Image;
 import de.fherfurt.news.service.message.entity.Message;
 import de.fherfurt.news.service.message.entity.FileSystemRepository.FileTypes;
 
@@ -10,6 +11,8 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.util.Optional;
+
+import static de.fherfurt.news.service.core.persistence.errors.ConsumerWithException.wrap;
 
 /**
  * This class represents the business facade of the massage class.
@@ -21,6 +24,7 @@ import java.util.Optional;
 @NoArgsConstructor(staticName = "of")
 public class MessageBF {
     private final Repository<Message> messageRepository = new Repository<Message>(Message.class);
+    private final Repository<Image> imageRepository = new Repository<Image>(Image.class);
     private final FilesBF filesBF = FilesBF.of();
 
     /**
@@ -28,6 +32,12 @@ public class MessageBF {
      * @param message
      */
     public void save(final Message message) {
+        if (!message.getImages().isEmpty()) {
+            message.getImages().forEach(wrap(
+                    image -> imageRepository.save(image)
+            ));
+        }
+
         messageRepository.save(message);
     }
 

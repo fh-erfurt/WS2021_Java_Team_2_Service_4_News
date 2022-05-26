@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @Builder(setterPrefix = "with")
 public class ImageDto {
-    private String path;
+    private Long id;
+    private String filePath;
     private byte[] content;
 }
